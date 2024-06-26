@@ -1,6 +1,109 @@
-body {
-  margin: 0,auto;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+:root {
+  --white: #ffffff;
 
+  --primary-color: #9e6b84;
+  --secondary-color: #7b5267;
+
+  --text-color-1: #303030;
+  --text-color-2: rgba(48, 48, 48, 0.75);
+  --text-color-3: #fbfafa;
+  --text-color-4: rgba(251, 250, 250, 0.75);
+
+  --background-1: #f3f3f3;
+  --background-2: #fbfafa;
+  --background-3: #303030;
+  --background-4: #474747;
+
+  --font-family: "Roboto", sans-serif;
+  --spacing-unit: 8px;
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: 1.5;
+  color: var(--text-color-1);
+  background-color: var(--background-1);
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  margin-bottom: var(--spacing-unit);
+}
+
+p {
+  margin-bottom: var(--spacing-unit);
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 23px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+}
+
+section {
+  width: 100%;
+  padding: 0 16px;
+}
+
+body {
+  font-size: 14px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  section {
+    max-width: 720px;
+    padding: 0 32px;
+  }
+  button {
+    padding: 10px 16px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  body {
+    font-size: 18px;
+  }
+
+  section {
+    max-width: 960px;
+    padding: 0 48px;
+  }
+  button {
+    padding: 14px 16px;
+  }
+}
+@media (min-width: 1440px) {
+  section {
+    max-width: 1320px;
+  }
+}
