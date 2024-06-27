@@ -1,16 +1,18 @@
 
 import { Outlet } from "react-router-dom";
 
+import { Header } from "../Header/Header";
+
 export const ShareedLayout = () => {
 
     return(
         <>
-        <p>this is sharedlayout</p>
+   <Header/>
 
         <Outlet/>
  
 
-        <p>this is footer </p>
+        <p>this is footer rendered in sharedlayout </p>
         </>
         
     )
