@@ -21,11 +21,9 @@ export const Header = () => {
           <StyleLogo>
             <LogoHeader />
           </StyleLogo>
+
         </NavLink>
 
-
-
-        {/* <GiHamburgerMenu onClick={toggleBurgerMenu} /> */}
         <HamburgerMenu
           openState={isMenuOpen}
           handleCloseMenu={toggleBurgerMenu}

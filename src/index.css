@@ -1,5 +1,5 @@
 * {
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -30,6 +30,7 @@ body {
   color: var(--text-color-1);
   background-color: var(--background-1);
   padding: 0;
+  margin: 0 auto;
 }
 
 h1,
@@ -106,4 +107,18 @@ body {
   section {
     max-width: 1320px;
   }
+}
+
+
+
+.cls-1 {
+  fill: #7b5267;
+}
+
+.cls-1, .cls-2 {
+  stroke-width: 0px;
+}
+
+.cls-2 {
+  fill: #9e6b84;
 }
