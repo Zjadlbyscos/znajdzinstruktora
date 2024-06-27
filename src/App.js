@@ -1,9 +1,25 @@
+import { Routes, Route } from "react-router-dom";
 
+import { Main } from "./pages/Main";
+import { ShareedLayout } from "./components/SharedLayout/SharedLayout";
 
 function App() {
   return (
-    <div className="App">
-<p>Znajdzinstruktora.com  App.js</p>
+    <div>
+
+
+<Routes>
+<Route path="/" element={<ShareedLayout />}>
+
+<Route path="/" element={<Main />} />
+
+
+</Route>
+</Routes>
+
+
+
+
     </div>
   );
 }
