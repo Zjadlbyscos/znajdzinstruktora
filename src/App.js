@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import { Main } from "./pages/Main";
-import { ShareedLayout } from "./components/SharedLayout";
+import { ShareedLayout } from "./components/SharedLayout/SharedLayout";
 
 function App() {
   return (
