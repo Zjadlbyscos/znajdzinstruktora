@@ -2,6 +2,7 @@ import React from "react";
 import { stack as Menu } from 'react-burger-menu'
 import { CgClose } from "react-icons/cg";
 import { HamburgerContainer } from "./Hamburger.styled";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
 
@@ -12,7 +13,7 @@ export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
         bodyClassName={"modal-show"}
         width={"80%"}
         itemListElement="div"
-        customBurgerIcon={false}
+        customBurgerIcon={<GiHamburgerMenu/>}
         isOpen={openState}
       >
         <HamburgerContainer>
