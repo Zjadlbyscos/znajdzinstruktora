@@ -16,3 +16,27 @@ export const StyleLogo = styled.div`
     width: 50px;
   }
 `;
+
+export const NavStyle= styled.div`
+    display: none;
+    @media (min-width: 768px) {
+    display: flex;
+   & div{
+    flex-direction: row;
+    gap:25px;
+
+   } 
+   & a{
+    color:var(  --text-color-3)
+   }
+}
+
+`
+export const HamburgerStyle=styled.div`
+position: absolute;
+right: 21px;
+z-index: 2000;
+@media (min-width: 768px) {
+    display: none;
+}
+`
