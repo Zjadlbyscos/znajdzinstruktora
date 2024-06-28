@@ -1,30 +1,30 @@
-import React from "react";
-import { stack as Menu } from 'react-burger-menu'
-import { CgClose } from "react-icons/cg";
+import React, { useEffect, useRef } from "react";
+import { slide as Menu } from "react-burger-menu";
+
+
+import { Nav } from "../../Nav/Nav";
 import { HamburgerContainer } from "./Hamburger.styled";
+import useOutsideClick from "../../../hooks/useOutsideClick";
 
 export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
+  const menuRef = useRef();
+  useOutsideClick(menuRef, handleCloseMenu, openState);
 
-      
-    return (
-      <Menu
-        right
-        bodyClassName={"modal-show"}
-        width={"80%"}
-        itemListElement="div"
-        customBurgerIcon={false}
-        isOpen={openState}
-      >
-        <HamburgerContainer>
-        <CgClose onClick={handleCloseMenu} />
-     
-  <p>hamburger content</p>
-  <a>Instruktorzy  </a>
-  <a> Obiekty </a>
-  <a>Zaloguj</a>
-  <a>Zarejestruj</a>
+  return (
+    <Menu
+      right
+      bodyClassName={"modal-show"}
+      itemListElement="div"
+      customBurgerIcon={false} 
+      isOpen={openState}
+      onStateChange={({ isOpen }) => !isOpen && handleCloseMenu()}
+    >
+      <HamburgerContainer ref={menuRef}>
 
-        </HamburgerContainer>
-      </Menu>
-    );
-  };
+        <Nav/>
+        <div className="line"/>
+   <Nav/>
+      </HamburgerContainer>
+    </Menu>
+  );
+};

@@ -1,5 +1,5 @@
 * {
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -20,7 +20,7 @@
   --background-3: #303030;
   --background-4: #474747;
 
-  --font-family: "Roboto", sans-serif;
+  --font-family: "Nunito Sans", sans-serif;
   --spacing-unit: 8px;
 }
 
@@ -29,7 +29,7 @@ body {
   line-height: 1.5;
   color: var(--text-color-1);
   background-color: var(--background-1);
-  padding: 0;
+  margin: 0 auto;
 }
 
 h1,
@@ -66,12 +66,9 @@ button:hover {
 
 section {
   width: 100%;
-  padding: 8px 16px;
+  padding: 16px 32px;
 }
 
-body {
-  font-size: 14px;
-}
 
 /* Tablet */
 @media (min-width: 768px) {
@@ -80,7 +77,7 @@ body {
   }
 
   section {
-    max-width: 720px;
+
     padding: 16px 32px;
   }
   button {
@@ -94,9 +91,9 @@ body {
     font-size: 18px;
   }
 
-  section {
-    max-width: 960px;
-    padding: 24px 48px;
+   section{
+    padding: 24px 64px;
+
   }
   button {
     padding: 14px 16px;
@@ -104,6 +101,33 @@ body {
 }
 @media (min-width: 1440px) {
   section {
-    max-width: 1320px;
+    padding: 32px 100px;
   }
+}
+
+
+
+.cls-1 {
+  fill: #7b5267;
+}
+
+.cls-1, .cls-2 {
+  stroke-width: 0px;
+}
+
+.cls-2 {
+  fill: #9e6b84;
+}
+
+.bm-menu-wrap{
+  top:0px;
+}
+
+.header{
+  background: linear-gradient(0deg, rgba(243,243,243,1) 0%, rgba(158,107,132,0.36738445378151263) 74%);
+}
+.line{
+  border-bottom:  1.5px solid var(--background-4);
+  width: 80%;
+  margin: auto;
 }

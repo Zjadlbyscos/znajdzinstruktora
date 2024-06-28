@@ -1,34 +1,35 @@
 import { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
+import { Fade as Hamburger } from "hamburger-react";
 
 import { HamburgerMenu } from "./Hamburger/Hamburger";
 import { LogoHeader } from "../RenderSvg/RenderSvg";
+import { Nav } from "../Nav/Nav";
 
-import { HeaderContainer, StyleLogo } from "./Header.styled";
+import { HeaderContainer, StyleLogo, NavStyle, HamburgerStyle } from "./Header.styled";
 
 export const Header = () => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
-
-  const toggleBurgerMenu = () => {
-    setMenuOpen(!isMenuOpen);
-  };
+  const [isOpen, setOpen] = useState(false);
 
   return (
-    <section>
+    <section className="header">
       <HeaderContainer>
-        <NavLink to="/">
+        <NavLink to="/main">
           <StyleLogo>
             <LogoHeader />
           </StyleLogo>
         </NavLink>
-
-        
-
-        <GiHamburgerMenu onClick={toggleBurgerMenu} />
+<NavStyle>
+<Nav />
+</NavStyle>
+      
+<HamburgerStyle>
+<Hamburger toggled={isOpen} toggle={setOpen} direction="right" />
+</HamburgerStyle>
+    
         <HamburgerMenu
-          openState={isMenuOpen}
-          handleCloseMenu={toggleBurgerMenu}
+          openState={isOpen}
+          handleCloseMenu={() => setOpen(false)}
         />
       </HeaderContainer>
     </section>
