@@ -4,7 +4,7 @@ import { NavContainer } from "./Nav.styled";
 
 export const Nav = ({ isMobile }) => {
   return (
-    <NavContainer isMobile={isMobile}>
+    <NavContainer >
       <NavLink to="/link1">Instruktorzy</NavLink>
       <NavLink to="/link2">Obiekty</NavLink>
 
