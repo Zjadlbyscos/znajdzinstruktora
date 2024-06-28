@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
+import { Spin as Hamburger } from 'hamburger-react';
 
 import { HamburgerMenu } from "./Hamburger/Hamburger";
 import { LogoHeader } from "../RenderSvg/RenderSvg";
@@ -8,26 +8,16 @@ import { LogoHeader } from "../RenderSvg/RenderSvg";
 import { HeaderContainer, StyleLogo } from "./Header.styled";
 
 export const Header = () => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
-
-  const toggleBurgerMenu = () => {
-    setMenuOpen(!isMenuOpen);
-  };
+  const [isOpen, setOpen] = useState(false);
 
   return (
-    <section>
+    <section className="header">
       <HeaderContainer>
-        <NavLink to="/">
-          <StyleLogo>
-            <LogoHeader />
-          </StyleLogo>
-
+        <NavLink to="/main">
+<StyleLogo><LogoHeader/></StyleLogo>
         </NavLink>
-
-        <HamburgerMenu
-          openState={isMenuOpen}
-          handleCloseMenu={toggleBurgerMenu}
-        />
+        <Hamburger toggled={isOpen} toggle={setOpen} direction="right" />
+        <HamburgerMenu openState={isOpen} handleCloseMenu={() => setOpen(false)} />
       </HeaderContainer>
     </section>
   );
