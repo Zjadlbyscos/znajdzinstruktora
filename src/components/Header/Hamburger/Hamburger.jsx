@@ -1,10 +1,15 @@
-import React from "react";
-import { slide as Menu } from 'react-burger-menu';
-import { CgClose } from "react-icons/cg";
+import React, { useEffect, useRef } from "react";
+import { slide as Menu } from "react-burger-menu";
 
+
+import { Nav } from "../../Nav/Nav";
 import { HamburgerContainer } from "./Hamburger.styled";
+import useOutsideClick from "../../../hooks/useOutsideClick";
 
 export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
+  const menuRef = useRef();
+  useOutsideClick(menuRef, handleCloseMenu, openState);
+
   return (
     <Menu
       right
@@ -14,9 +19,11 @@ export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
       isOpen={openState}
       onStateChange={({ isOpen }) => !isOpen && handleCloseMenu()}
     >
-      <HamburgerContainer>
-        <CgClose onClick={handleCloseMenu} />
-        <p> NAV content </p>
+      <HamburgerContainer ref={menuRef}>
+
+        <Nav/>
+        <div className="line"/>
+   <Nav/>
       </HamburgerContainer>
     </Menu>
   );
