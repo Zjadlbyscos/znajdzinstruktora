@@ -1,7 +1,9 @@
+import RegistrationForm from "../components/Register/Register"
+
 export const Register = ()=>{
     return(
         <section>
-            <p>This is Register.jsx</p>
+         <RegistrationForm/>
         </section>
     )
    }
