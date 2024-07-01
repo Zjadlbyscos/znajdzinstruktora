@@ -40,3 +40,7 @@ z-index: 2000;
     display: none;
 }
 `
+
+export const UserInfo =styled.div`
+  cursor: pointer;
+`
