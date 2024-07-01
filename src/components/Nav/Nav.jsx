@@ -5,8 +5,8 @@ import { NavContainer } from "./Nav.styled";
 export const Nav = ({ isMobile }) => {
   return (
     <NavContainer >
-      <NavLink to="/link1">Instruktorzy</NavLink>
-      <NavLink to="/link2">Obiekty</NavLink>
+      <NavLink to="/instruktorzy">Instruktorzy</NavLink>
+      <NavLink to="/obiekty">Obiekty</NavLink>
 
     </NavContainer>
   );
