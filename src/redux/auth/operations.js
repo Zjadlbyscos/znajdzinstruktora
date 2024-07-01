@@ -12,13 +12,13 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = "";
 };
 
-export const register = createAsyncThunk(
+export const registerUser = createAsyncThunk(
   "auth/register",
-  async (credentials, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      const response = await axios.post("/auth/register", credentials);
-      console.log(response);
-      return response.data.ResponseBody;
+      const response = await axios.post("/auth/register", data);
+      console.log(response.data.ResponseBody.newUser);
+      return response.data.ResponseBody.newUser;
     } catch (error) {
       if (error.response && error.response.status === 409) {
         Notiflix.Notify.failure("Podany użytkownik już istnieje");

@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import {
-  register,
   login,
   logout,
   currentUser,
   changePassword,
   resetPassword,
+  registerUser,
 } from "./operations";
 
 const isPendingAction = (action) => {
@@ -28,8 +28,11 @@ const handleRejected = (state, action) => {
 
 const initialState = {
   user: {
-    name: null,
+    firstName: null,
+    lastName: null,
     email: null,
+    city: null,
+    discipline: null,
   },
   token: "",
   isLoggedIn: false,
@@ -41,7 +44,7 @@ const authSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
       })
@@ -51,7 +54,13 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(logout.fulfilled, (state) => {
-        state.user = { name: null, email: null };
+        state.user = {
+          firstName: null,
+          lastName: null,
+          email: null,
+          city: null,
+          discipline: null,
+        };
         state.token = null;
         state.isLoggedIn = false;
       })
