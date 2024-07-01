@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
 import { slide as Menu } from "react-burger-menu";
-
+import { NavLink } from "react-router-dom";
 
 import { Nav } from "../../Nav/Nav";
 import { HamburgerContainer } from "./Hamburger.styled";
 import useOutsideClick from "../../../hooks/useOutsideClick";
+import { UserModal } from "../UserModal/UserModal";
 
 export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
   const menuRef = useRef();
@@ -23,7 +24,13 @@ export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
 
         <Nav/>
         <div className="line"/>
-   <Nav/>
+        <div>
+        <NavLink to="/zarejestruj">Zarejestruj</NavLink>
+      <NavLink to="/zaloguj">Zaloguj</NavLink>
+
+        </div>
+     
+
       </HamburgerContainer>
     </Menu>
   );

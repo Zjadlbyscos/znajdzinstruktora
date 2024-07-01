@@ -133,5 +133,6 @@ section {
 .line{
   border-bottom:  1.5px solid var(--background-4);
   width: 80%;
-  margin: auto;
+  margin: 0px auto 12px;
+
 }
