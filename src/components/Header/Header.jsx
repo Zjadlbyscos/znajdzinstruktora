@@ -21,7 +21,7 @@ export const Header = () => {
   return (
     <section className="header">
       <HeaderContainer>
-        <NavLink to="/main">
+        <NavLink to="/">
           <StyleLogo>
             <LogoHeader />
           </StyleLogo>

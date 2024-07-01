@@ -13,7 +13,9 @@ width: 100%;
 export const StyleLogo = styled.div`
 
   svg {
-    width: 50px;
+    width: 100%;
+   max-width: 40px;
+   padding-top: 8px;
   }
 `;
 
