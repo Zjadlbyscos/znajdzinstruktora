@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Fade as Hamburger } from "hamburger-react";
-import { PiUserFill } from "react-icons/pi";
+import { FaRegUser } from "react-icons/fa";
 
 import { HamburgerMenu } from "./Hamburger/Hamburger";
 import { LogoHeader } from "../RenderSvg/RenderSvg";
@@ -20,19 +20,20 @@ export const Header = () => {
 
   return (
     <section className="header">
-      <HeaderContainer>
-        <NavLink to="/">
+       <NavLink to="/">
           <StyleLogo>
             <LogoHeader />
           </StyleLogo>
         </NavLink>
+      <HeaderContainer>
+       
 <NavStyle>
 <Nav />
 </NavStyle>
 
 
 <UserInfo onClick={toggleUserModal}>
-<PiUserFill />
+<FaRegUser />
 
 </UserInfo >
 {isUserModalOpen && <UserModal closeModal={toggleUserModal} />}
