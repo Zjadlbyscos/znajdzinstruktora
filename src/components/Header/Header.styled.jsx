@@ -8,14 +8,29 @@ width: 100%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+    gap:36px;
+    height: 50px;
+  }
+  @media (min-width: 1024px) {
+    gap:70px;
+  }
 `
 export const StyleLogo = styled.div`
+@media (min-width: 768px) {
+position: absolute;
+top: 0px;
+left: 0px;
+width: 48px;
+
+  }
 
   svg {
     width: 100%;
    max-width: 40px;
    padding-top: 8px;
+   @media (min-width: 768px) {   padding-top: 5px;}
   }
 `;
 
@@ -25,11 +40,15 @@ export const NavStyle= styled.div`
     display: flex;
    & div{
     flex-direction: row;
-    gap:25px;
-
+    gap:36px;
+    @media (min-width: 1024px) {
+    gap:70px;
+  }
    } 
+
    & a{
     color:var(  --text-color-3)
+
    }
 }
 
@@ -43,6 +62,21 @@ z-index: 2000;
 }
 `
 
-export const UserInfo =styled.div`
-  cursor: pointer;
+export const UserInfo =styled.a`
+
+  display: none;
+  @media (min-width: 768px) {
+display: flex;
+cursor: pointer;
+svg{
+
+color: var(  --text-color-3);
+
+
+&:hover , &:focus{
+
+color: var(  --primary-color);
+}
+}
+}
 `
