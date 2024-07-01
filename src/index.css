@@ -47,8 +47,12 @@ p {
 }
 
 a {
+  color: var(--text-color-1);
   text-decoration: none;
+  /* position: relative; */
+
 }
+
 
 button {
   padding: 7px 14px;
@@ -129,5 +133,6 @@ section {
 .line{
   border-bottom:  1.5px solid var(--background-4);
   width: 80%;
-  margin: auto;
+  margin: 0px auto 12px;
+
 }
