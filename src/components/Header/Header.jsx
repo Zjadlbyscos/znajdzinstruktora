@@ -8,7 +8,13 @@ import { LogoHeader } from "../RenderSvg/RenderSvg";
 import { Nav } from "../Nav/Nav";
 import { UserModal } from "./UserModal/UserModal";
 
-import { HeaderContainer, StyleLogo, NavStyle, HamburgerStyle,UserInfo } from "./Header.styled";
+import {
+  HeaderContainer,
+  StyleLogo,
+  NavStyle,
+  HamburgerStyle,
+  UserInfo,
+} from "./Header.styled";
 
 export const Header = () => {
   const [isOpen, setOpen] = useState(false);
@@ -20,33 +26,30 @@ export const Header = () => {
 
   return (
     <section className="header">
-       <NavLink to="/">
-          <StyleLogo>
-            <LogoHeader />
-          </StyleLogo>
-        </NavLink>
-      <HeaderContainer>
-       
-<NavStyle>
-<Nav />
-</NavStyle>
-
-
-<UserInfo onClick={toggleUserModal}>
-<FaRegUser />
-
-</UserInfo >
-{isUserModalOpen && <UserModal closeModal={toggleUserModal} />}
-
-<HamburgerStyle>
-<Hamburger toggled={isOpen} toggle={setOpen} direction="right" />
-</HamburgerStyle>
     
+      <HeaderContainer>
+      <NavLink to="/">
+        <StyleLogo>
+          <LogoHeader />
+        </StyleLogo>
+      </NavLink>
+        <NavStyle>
+          <Nav />
+        </NavStyle>
+
+        <UserInfo onClick={toggleUserModal}>
+          <FaRegUser />
+        </UserInfo>
+        {isUserModalOpen && <UserModal closeModal={toggleUserModal} />}
+
+        <HamburgerStyle>
+          <Hamburger toggled={isOpen} toggle={setOpen} direction="right" />
+        </HamburgerStyle>
+
         <HamburgerMenu
           openState={isOpen}
           handleCloseMenu={() => setOpen(false)}
         />
-        
       </HeaderContainer>
     </section>
   );
