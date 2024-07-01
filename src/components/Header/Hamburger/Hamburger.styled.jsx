@@ -6,7 +6,7 @@ export const HamburgerContainer = styled.div`
    min-height: 100%;
    padding: 75px 26px;
 & div{
-padding: 12px 0;
+padding: 12px 32px;
      display: flex;
    flex-direction: column;
   align-items: flex-end;
