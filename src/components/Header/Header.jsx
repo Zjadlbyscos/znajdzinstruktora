@@ -26,13 +26,12 @@ export const Header = () => {
 
   return (
     <section className="header">
-    
       <HeaderContainer>
-      <NavLink to="/">
-        <StyleLogo>
-          <LogoHeader />
-        </StyleLogo>
-      </NavLink>
+        <NavLink to="/">
+          <StyleLogo>
+            <LogoHeader />
+          </StyleLogo>
+        </NavLink>
         <NavStyle>
           <Nav />
         </NavStyle>

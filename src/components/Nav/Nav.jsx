@@ -4,10 +4,9 @@ import { NavContainer } from "./Nav.styled";
 
 export const Nav = ({ isMobile }) => {
   return (
-    <NavContainer >
+    <NavContainer>
       <NavLink to="/instruktorzy">Instruktorzy</NavLink>
       <NavLink to="/obiekty">Obiekty</NavLink>
-
     </NavContainer>
   );
 };

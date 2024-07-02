@@ -16,21 +16,17 @@ export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
       right
       bodyClassName={"modal-show"}
       itemListElement="div"
-      customBurgerIcon={false} 
+      customBurgerIcon={false}
       isOpen={openState}
       onStateChange={({ isOpen }) => !isOpen && handleCloseMenu()}
     >
       <HamburgerContainer ref={menuRef}>
-
-        <Nav/>
-        <div className="line"/>
+        <Nav />
+        <div className="line" />
         <div>
-        <NavLink to="/zarejestruj">Zarejestruj</NavLink>
-      <NavLink to="/zaloguj">Zaloguj</NavLink>
-
+          <NavLink to="/zarejestruj">Zarejestruj</NavLink>
+          <NavLink to="/zaloguj">Zaloguj</NavLink>
         </div>
-     
-
       </HamburgerContainer>
     </Menu>
   );

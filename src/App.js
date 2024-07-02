@@ -7,20 +7,12 @@ import { ShareedLayout } from "./components/SharedLayout/SharedLayout";
 function App() {
   return (
     <div>
-
-
-<Routes>
-<Route path="/" element={<ShareedLayout />}>
-
-<Route path="/" element={<Main />} />
-<Route path="/zarejestruj" element={<Register/>} />
-
-</Route>
-</Routes>
-
-
-
-
+      <Routes>
+        <Route path="/" element={<ShareedLayout />}>
+          <Route path="/" element={<Main />} />
+          <Route path="/zarejestruj" element={<Register />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
