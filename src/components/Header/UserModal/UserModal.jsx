@@ -1,32 +1,15 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-
+import { UserMenu } from "../UserMenu/UserMenu";
 import { ProfieleModalContainer } from "./UserModal.styled";
-export const UserModal = ()=>{
-   
 
-// handle logout 
+export const UserModal = ({ closeModal }) => {
+  const handleClick = () => {
+    closeModal();
+  };
 
-
-return(
-<ProfieleModalContainer>
-<NavLink to="/zarejestruj">Zarejestruj</NavLink>
-      <NavLink to="/zaloguj">Zaloguj</NavLink>
-</ProfieleModalContainer>
-
-)
-}
-
-//<ProfieleModalContainer>
-// {isAuthenticated ? (
-//     <>
-//       <button onClick={() => navigate('/profile/edit')}>Edytuj profil</button>
-//       <button onClick={handleLogout}>Wyloguj</button>
-//     </>
-//   ) : (
-//     <>
-//       <button onClick={() => navigate('/register')}>Zarejestruj</button>
-//       <button onClick={() => navigate('/login')}>Zaloguj</button>
-//     </>
-//   )}
-//</ProfieleModalContainer>
+  return (
+    <ProfieleModalContainer onClick={handleClick}>
+      <UserMenu />
+    </ProfieleModalContainer>
+  );
+};
