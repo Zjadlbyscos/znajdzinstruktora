@@ -17,7 +17,6 @@ export const registerUser = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.post("/auth/register", data);
-      console.log(response.data.ResponseBody.newUser);
       return response.data.ResponseBody.newUser;
     } catch (error) {
       if (error.response && error.response.status === 409) {
@@ -29,22 +28,22 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const login = createAsyncThunk(
-  "auth/login",
-  async (credentials, thunkAPI) => {
-    try {
-      const response = await axios.post("/auth/login", credentials);
-      const responseBody = response.data.RequestBody;
-      const user = responseBody.user;
-      const token = responseBody["Current token"];
-      setAuthHeader(token);
-      return { user, token };
-    } catch (error) {
-      Notiflix.Notify.failure("Niepoprawny email lub hasło");
-      return thunkAPI.rejectWithValue(error.message);
-    }
+export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
+  try {
+    const response = await axios.post("/auth/login", data);
+    const { user, token } = response.data.RequestBody;
+
+    setAuthHeader(token);
+    console.log(response.data.RequestBody);
+
+    return { user, token };
+  } catch (error) {
+    Notiflix.Notify.failure("Niepoprawny email lub hasło");
+    return thunkAPI.rejectWithValue(
+      error.response.data.message || error.message
+    );
   }
-);
+});
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {

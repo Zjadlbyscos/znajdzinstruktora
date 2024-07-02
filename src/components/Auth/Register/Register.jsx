@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useFormConfig } from "../../hooks/useFormConfig";
 import { useDispatch } from "react-redux";
-import { registerUser } from "../../redux/auth/operations";
+import { useFormConfig } from "../../../hooks/useFormConfig";
+import { registerUser } from "../../../redux/auth/operations";
 const RegistrationForm = () => {
   const {
     register,
