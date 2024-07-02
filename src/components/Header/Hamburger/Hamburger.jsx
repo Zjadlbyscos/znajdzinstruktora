@@ -24,10 +24,10 @@ export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
       onStateChange={({ isOpen }) => !isOpen && handleCloseMenu()}
     >
       <HamburgerContainer ref={menuRef} onClick={handleClick}>
-        <Nav  handleCloseMenu={handleCloseMenu} />
+        <Nav handleCloseMenu={handleCloseMenu} />
         <div className="line" />
         <div>
-          <UserMenu  handleCloseMenu={handleCloseMenu}  />
+          <UserMenu handleCloseMenu={handleCloseMenu} />
         </div>
         <LogoDown>
           <LogoText />
