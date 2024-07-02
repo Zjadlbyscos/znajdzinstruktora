@@ -1,9 +1,9 @@
-import RegistrationForm from "../components/Register/Register"
+import RegistrationForm from "../components/Auth/Register/Register";
 
-export const Register = ()=>{
-    return(
-        <section>
-         <RegistrationForm/>
-        </section>
-    )
-   }
+export const Register = () => {
+  return (
+    <section>
+      <RegistrationForm />
+    </section>
+  );
+};
