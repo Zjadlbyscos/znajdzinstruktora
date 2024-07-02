@@ -101,3 +101,18 @@ export const resetPasswordRequest = createAsyncThunk(
     }
   }
 );
+
+export const changeUserPasswordByReset = createAsyncThunk(
+  "auth/changeUserPasswordByReset",
+  async (data, thunkAPI) => {
+    console.log(data);
+    try {
+      const response = await axios.post("/auth/reset-password", data);
+      Notiflix.Notify.success("Pomyślnie zmieniono hasło");
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);

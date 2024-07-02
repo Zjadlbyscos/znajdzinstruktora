@@ -5,6 +5,7 @@ import { Register } from "./pages/Register";
 import { AreYouIns } from "./pages/AreYouInstructor";
 import { ShareedLayout } from "./components/SharedLayout/SharedLayout";
 import { Login } from "./pages/Login";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
           <Route path="/czyInstruktor" element={<AreYouIns />} />
           <Route path="/zarejestruj" element={<Register />} />
           <Route path="/zaloguj" element={<Login />} />
+          <Route
+            path="resetowanie-hasla/:resetToken"
+            element={<ResetPasswordPage />}
+          />
         </Route>
       </Routes>
     </div>
