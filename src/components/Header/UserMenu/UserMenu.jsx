@@ -1,13 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-
-import { ProfieleModalContainer } from "./UserModal.styled";
-export const UserModal = () => {
+export const UserMenu = () => {
   return (
-    <ProfieleModalContainer>
+    <>
       <NavLink to="/czyInstruktor">Zarejestruj</NavLink>
       <NavLink to="/zaloguj">Zaloguj</NavLink>
-    </ProfieleModalContainer>
+    </>
   );
 };
+//lub Edytuj/Wyloguj 

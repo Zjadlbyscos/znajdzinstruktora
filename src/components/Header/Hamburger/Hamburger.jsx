@@ -24,7 +24,7 @@ export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
         <Nav />
         <div className="line" />
         <div>
-          <NavLink to="/zarejestruj">Zarejestruj</NavLink>
+          <NavLink to="/czyInstruktor">Zarejestruj</NavLink>
           <NavLink to="/zaloguj">Zaloguj</NavLink>
         </div>
       </HamburgerContainer>
