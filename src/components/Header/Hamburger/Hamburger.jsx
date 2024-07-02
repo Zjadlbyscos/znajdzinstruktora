@@ -1,16 +1,19 @@
 import React, { useRef } from "react";
 import { slide as Menu } from "react-burger-menu";
-import { NavLink } from "react-router-dom";
 
 import { Nav } from "../../Nav/Nav";
-import { HamburgerContainer } from "./Hamburger.styled";
+import { UserMenu } from "../UserMenu/UserMenu";
+import { LogoText } from "../../RenderSvg/RenderSvg";
 import useOutsideClick from "../../../hooks/useOutsideClick";
-import { UserModal } from "../UserModal/UserModal";
+
+import { HamburgerContainer, LogoDown } from "./Hamburger.styled";
 
 export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
   const menuRef = useRef();
   useOutsideClick(menuRef, handleCloseMenu, openState);
-
+  const handleClick = (event) => {
+    handleCloseMenu();
+  };
   return (
     <Menu
       right
@@ -20,13 +23,15 @@ export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
       isOpen={openState}
       onStateChange={({ isOpen }) => !isOpen && handleCloseMenu()}
     >
-      <HamburgerContainer ref={menuRef}>
-        <Nav />
+      <HamburgerContainer ref={menuRef} onClick={handleClick}>
+        <Nav  handleCloseMenu={handleCloseMenu} />
         <div className="line" />
         <div>
-          <NavLink to="/czyInstruktor">Zarejestruj</NavLink>
-          <NavLink to="/zaloguj">Zaloguj</NavLink>
+          <UserMenu  handleCloseMenu={handleCloseMenu}  />
         </div>
+        <LogoDown>
+          <LogoText />
+        </LogoDown>
       </HamburgerContainer>
     </Menu>
   );

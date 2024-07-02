@@ -9,4 +9,4 @@ export const UserMenu = () => {
     </>
   );
 };
-//lub Edytuj/Wyloguj 
+// lub edytuj profil / wyloguj - jeśli zalogowany

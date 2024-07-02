@@ -39,4 +39,11 @@ export const HamburgerContainer = styled.div`
   @media (min-width: 1024px) {
     display: none;
   }
+
 `;
+export const LogoDown=styled.div`
+  width: 40px;
+  &svg{
+    width: 100%;
+  }
+`
