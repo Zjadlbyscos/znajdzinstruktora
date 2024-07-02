@@ -30,6 +30,10 @@ export const Option = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  @media (min-width: 768px) {
+    max-width: 30vw;
+  }
+
   p {
     text-align: center;
   }
