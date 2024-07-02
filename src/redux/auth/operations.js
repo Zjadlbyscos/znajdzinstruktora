@@ -88,7 +88,7 @@ export const changePassword = createAsyncThunk(
   }
 );
 
-export const resetPassword = createAsyncThunk(
+export const resetPasswordRequest = createAsyncThunk(
   "auth/resetPassword",
   async (email, thunkAPI) => {
     try {
@@ -96,6 +96,7 @@ export const resetPassword = createAsyncThunk(
       Notiflix.Notify.success("Link do zmiany hasła został wysłany na email");
       return response.data.ResponseBody;
     } catch (error) {
+      console.log(error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

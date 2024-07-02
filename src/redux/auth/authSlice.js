@@ -5,7 +5,7 @@ import {
   logout,
   currentUser,
   changePassword,
-  resetPassword,
+  resetPasswordRequest,
   registerUser,
 } from "./operations";
 
@@ -75,7 +75,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = true;
       })
-      .addCase(resetPassword.fulfilled, (state) => {
+      .addCase(resetPasswordRequest.fulfilled, (state) => {
         state.isRefreshing = true;
       })
       .addMatcher(isPendingAction, handlePending)
