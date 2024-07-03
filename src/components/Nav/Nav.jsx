@@ -6,7 +6,7 @@ export const Nav = ({ isMobile }) => {
   return (
     <NavContainer>
       <NavLink to="/instruktorzy">Instruktorzy</NavLink>
-      <NavLink to="/obiekty">Obiekty</NavLink>
+      <NavLink to="/edit-profile">Obiekty</NavLink>
     </NavContainer>
   );
 };
