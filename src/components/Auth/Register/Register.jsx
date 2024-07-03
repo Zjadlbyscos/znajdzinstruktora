@@ -3,6 +3,26 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useFormConfig } from "../../../hooks/useFormConfig";
 import { registerUser } from "../../../redux/auth/operations";
+import {
+  RegisterWrapper,
+  FieldContainer,
+  FormLabel,
+  FormInput,
+  RegisterContainer,
+  RegisterHeading,
+  RegisterSpan,
+  SelectContainer,
+  SelectOption,
+  SelectedOption,
+  CheckboxContainer,
+  CheckboxLabel,
+  CheckboxInput,
+  ErrorMessage,
+  RequiredWrapper,
+  RequiredSpan,
+  RequiredP,
+} from "./Register.styled";
+
 const RegistrationForm = () => {
   const {
     register,
@@ -14,34 +34,57 @@ const RegistrationForm = () => {
 
   const onSubmit = (data) => {
     const { confirmPassword, ...filteredData } = data;
+    console.log(filteredData);
     dispatch(registerUser(filteredData));
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {formConfig.map((field) => (
-        <div key={field.name}>
-          <label>{field.label}</label>
-          {field.type === "select" ? (
-            <select {...register(field.name, field.validation)}>
-              <option value="">Wybierz</option>
-              {field.options.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <input
-              type={field.type}
-              {...register(field.name, field.validation)}
-            />
-          )}
-          {errors[field.name] && <p>{errors[field.name].message}</p>}
-        </div>
-      ))}
-      <button type="submit">Zarejestruj</button>
-    </form>
+    <RegisterContainer>
+      <RegisterHeading>Nie masz jeszcze konta?</RegisterHeading>
+      <RegisterSpan>Zarejestruj się!</RegisterSpan>
+      <RegisterWrapper onSubmit={handleSubmit(onSubmit)}>
+        {formConfig.map((field) => (
+          <FieldContainer key={field.name}>
+            {field.type !== "checkbox" && <FormLabel>{field.label}</FormLabel>}
+            {field.type === "select" ? (
+              <SelectContainer hasError={!!errors[field.name]}>
+                <SelectOption value="">Wybierz</SelectOption>
+                {field.options.map((option) => (
+                  <SelectedOption key={option} value={option}>
+                    {option}
+                  </SelectedOption>
+                ))}
+              </SelectContainer>
+            ) : field.type === "checkbox" ? (
+              <CheckboxContainer>
+                <CheckboxInput
+                  type="checkbox"
+                  {...register(field.name, field.validation)}
+                  id={field.name}
+                />
+                <CheckboxLabel htmlFor={field.name}>
+                  {field.label}
+                </CheckboxLabel>
+              </CheckboxContainer>
+            ) : (
+              <FormInput
+                type={field.type}
+                {...register(field.name, field.validation)}
+                hasError={!!errors[field.name]}
+              />
+            )}
+            {errors[field.name] && (
+              <ErrorMessage>{errors[field.name].message}</ErrorMessage>
+            )}
+          </FieldContainer>
+        ))}
+        <RequiredWrapper>
+          <RequiredSpan>*</RequiredSpan>
+          <RequiredP>- pole wymagane</RequiredP>
+        </RequiredWrapper>
+        <button type="submit">ZAREJESTRUJ</button>
+      </RegisterWrapper>
+    </RegisterContainer>
   );
 };
 
