@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
 import { useForm, Controller } from 'react-hook-form';
-import { useFormConfig } from '../../../hooks/useFormConfig';
+import { useChangePassword } from '../../../hooks/useChangePasswordConfig';
 import { changePassword } from '../../../redux/auth/operations';
 
 const ChangePassword = () => {
   const { handleSubmit, control, formState: { errors }, watch } = useForm();
-  const formConfig = useFormConfig();
+  const formConfig = useChangePassword(); ;
   const dispatch = useDispatch();
 
 
