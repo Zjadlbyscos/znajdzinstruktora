@@ -5,8 +5,6 @@ export const InstructorProfile = () => {
     return (
 <>
 
-
-
 <p>ChangePassword.jsx  </p>
 <ChangePassword/>
 </>
