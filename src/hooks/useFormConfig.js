@@ -103,7 +103,6 @@ export const useFormConfig = () => {
           "Wyrażenie zgody na udostępnienie adresu E-mail jest wymagane.",
       },
     },
-
   ];
   return formConfig;
 };
