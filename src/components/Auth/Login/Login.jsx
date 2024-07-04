@@ -6,6 +6,16 @@ import {
   resetPasswordRequest as resetPasswordAction,
 } from "../../../redux/auth/operations";
 import { useForm } from "react-hook-form";
+import {
+  ButtonContainer,
+  ErrorMessage,
+  FieldContainer,
+  FormInput,
+  FormLabel,
+  LoginContainer,
+  LoginWrapper,
+  RemindPasswordContainer,
+} from "./Login.styled";
 
 const LoginForm = () => {
   const [isResetPassword, setIsResetPassword] = useState(false);
@@ -15,9 +25,9 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
-  const formConfig = useFormConfig();
+  const { registerFormConfig } = useFormConfig();
 
-  const loginConfig = formConfig.filter(
+  const loginConfig = registerFormConfig.filter(
     (field) => field.name === "email" || field.name === "password"
   );
 
@@ -31,42 +41,46 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <LoginContainer>
       {!isResetPassword ? (
-        <form onSubmit={handleSubmit(onSubmitLogin)}>
+        <LoginWrapper onSubmit={handleSubmit(onSubmitLogin)}>
           {loginConfig.map((field) => (
-            <div key={field.name}>
-              <label>{field.label}</label>
-              <input
+            <FieldContainer key={field.name}>
+              <FormLabel>{field.label}</FormLabel>
+              <FormInput
                 {...register(field.name, {
                   required: field.validation.required,
                 })}
                 type={field.type}
                 name={field.name}
               />
-              {errors[field.name] && <span>To pole jest wymagane</span>}
-            </div>
+              {errors[field.name] && (
+                <ErrorMessage>To pole jest wymagane</ErrorMessage>
+              )}
+            </FieldContainer>
           ))}
-          <button type="submit">Zaloguj się</button>
-          <button onClick={() => setIsResetPassword(true)}>
-            Nie pamiętasz hasła?
-          </button>
-        </form>
+          <ButtonContainer>
+            <button type="submit">Zaloguj się</button>
+            <button onClick={() => setIsResetPassword(true)}>
+              Nie pamiętasz hasła?
+            </button>
+          </ButtonContainer>
+        </LoginWrapper>
       ) : (
-        <form onSubmit={handleSubmit(onSubmitResetPassword)}>
-          <div>
-            <label>Email</label>
-            <input
+        <LoginWrapper onSubmit={handleSubmit(onSubmitResetPassword)}>
+          <FieldContainer>
+            <FormLabel>Email</FormLabel>
+            <FormInput
               {...register("email", { required: true })}
               type="email"
               name="email"
             />
-            {errors.email && <span>To pole jest wymagane</span>}
-          </div>
+            {errors.email && <ErrorMessage>To pole jest wymagane</ErrorMessage>}
+          </FieldContainer>
           <button type="submit">Resetuj hasło</button>
-        </form>
+        </LoginWrapper>
       )}
-    </div>
+    </LoginContainer>
   );
 };
 
