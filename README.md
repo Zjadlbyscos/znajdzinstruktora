@@ -22,6 +22,10 @@ ZNAJDZINSTRUKTORA is an online portal that facilitates booking sports lessons wi
 - Register as an instructor.
 - Add information to your profile.
 
+## Contributors
+- github: [Zuzanna Maciejczyk](https://www.github.com/Zjadlbyscos)
+- github: [Rafał Cegliński](https://www.github.com/RafalCeglinsk)
+
 ## Contact
 Email: halo.instruktorzy@gmail.com
 
