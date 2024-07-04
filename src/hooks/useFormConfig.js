@@ -1,19 +1,19 @@
 export const useFormConfig = () => {
   const registerFormConfig = [
     {
-      label: "Imię",
+      label: "Imię *",
       name: "firstName",
       type: "text",
       validation: { required: `Pole "Imię" jest wymagane.` },
     },
     {
-      label: "Nazwisko",
+      label: "Nazwisko *",
       name: "lastName",
       type: "text",
       validation: { required: `Pole "Nazwisko" jest wymagane.` },
     },
     {
-      label: "Email",
+      label: "Email *",
       name: "email",
       type: "text",
       validation: {
@@ -25,7 +25,7 @@ export const useFormConfig = () => {
       },
     },
     {
-      label: "Hasło",
+      label: "Hasło *",
       name: "password",
       type: "password",
       validation: {
@@ -42,7 +42,7 @@ export const useFormConfig = () => {
       },
     },
     {
-      label: "Powtórz hasło",
+      label: "Powtórz hasło *",
       name: "confirmPassword",
       type: "password",
       validation: {
@@ -52,7 +52,7 @@ export const useFormConfig = () => {
       },
     },
     {
-      label: "Miasto",
+      label: "Miasto *",
       name: "city",
       type: "select",
       options: [
@@ -84,7 +84,7 @@ export const useFormConfig = () => {
       validation: { required: `Pole "Miasto" jest wymagane.` },
     },
     {
-      label: "Dyscyplina sportu",
+      label: "Dyscyplina sportu *",
       name: "discipline",
       type: "select",
       options: ["Wspinaczka"],
@@ -93,7 +93,7 @@ export const useFormConfig = () => {
   ];
   const registerTermsConfig = [
     {
-      label: "Akceptuję regulamin i politykę prywatności.*",
+      label: "Akceptuję regulamin i politykę prywatności. *",
       name: "terms",
       type: "checkbox",
       validation: {
@@ -102,7 +102,7 @@ export const useFormConfig = () => {
     },
     {
       label:
-        "Wyrażam zgodę na udostępnienie podanego wyżej adresu E-mail dla użytkowników poszukujących instruktora.*",
+        "Wyrażam zgodę na udostępnienie podanego wyżej adresu E-mail dla użytkowników poszukujących instruktora. *",
       name: "emailConsent",
       type: "checkbox",
       validation: {
@@ -114,13 +114,13 @@ export const useFormConfig = () => {
 
   const changePasswordConfig = [
     {
-      label: "Obecne hasło",
+      label: "Obecne hasło *",
       name: "currentPassword",
       type: "password",
       validation: { required: "Obecne hasło jest wymagane." },
     },
     {
-      label: "Nowe hasło",
+      label: "Nowe hasło *",
       name: "newPassword",
       type: "password",
       validation: {
@@ -132,7 +132,7 @@ export const useFormConfig = () => {
       },
     },
     {
-      label: "Powtórz nowe hasło",
+      label: "Powtórz nowe hasło *",
       name: "confirmNewPassword",
       type: "password",
       validation: {

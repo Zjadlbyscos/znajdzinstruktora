@@ -17,6 +17,20 @@ export const RegisterWrapper = styled.form`
   @media (min-width: 768px) {
     align-items: center;
   }
+  button {
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    @media (min-width: 768px) {
+      width: 100%;
+      max-width: 370px;
+    }
+  }
 `;
 
 export const FieldContainer = styled.div`

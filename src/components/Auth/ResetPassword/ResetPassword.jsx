@@ -4,6 +4,12 @@ import { useDispatch } from "react-redux";
 import { changeUserPasswordByReset } from "../../../redux/auth/operations";
 import { useParams } from "react-router-dom";
 import { useFormConfig } from "../../../hooks/useFormConfig";
+import {
+  FieldContainer,
+  FormInput,
+  FormLabel,
+  ResetPasswordWrapper,
+} from "./ResetPassword.styled";
 
 const ResetPasswordForm = () => {
   const {
@@ -13,7 +19,7 @@ const ResetPasswordForm = () => {
   } = useForm();
   const dispatch = useDispatch();
   const { resetToken } = useParams();
-  const formConfig = useFormConfig();
+  const { registerFormConfig } = useFormConfig();
 
   const onSubmit = (data) => {
     const { confirmPassword, ...filteredData } = data;
@@ -21,7 +27,7 @@ const ResetPasswordForm = () => {
     dispatch(changeUserPasswordByReset(filteredData));
   };
 
-  const resetConfig = formConfig.filter(
+  const resetConfig = registerFormConfig.filter(
     (field) =>
       field.name === "email" ||
       field.name === "password" ||
@@ -29,19 +35,19 @@ const ResetPasswordForm = () => {
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <ResetPasswordWrapper onSubmit={handleSubmit(onSubmit)}>
       {resetConfig.map((field) => (
-        <div key={field.name}>
-          <label>{field.label}</label>
-          <input
+        <FieldContainer key={field.name}>
+          <FormLabel>{field.label}</FormLabel>
+          <FormInput
             type={field.type}
             {...register(field.name, field.validation)}
           />
           {errors[field.name] && <p>{errors[field.name].message}</p>}
-        </div>
+        </FieldContainer>
       ))}
       <button type="submit">Zmień hasło</button>
-    </form>
+    </ResetPasswordWrapper>
   );
 };
 

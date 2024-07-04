@@ -14,7 +14,6 @@ import {
   FormLabel,
   LoginContainer,
   LoginWrapper,
-  RemindPasswordContainer,
 } from "./Login.styled";
 
 const LoginForm = () => {
