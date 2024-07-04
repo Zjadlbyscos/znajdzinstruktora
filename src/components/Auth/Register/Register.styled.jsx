@@ -14,11 +14,18 @@ export const RegisterSpan = styled.p``;
 export const RegisterWrapper = styled.form`
   display: flex;
   flex-direction: column;
+  @media (min-width: 768px) {
+    align-items: center;
+  }
 `;
 
 export const FieldContainer = styled.div`
   display: flex;
   flex-direction: column;
+  @media (min-width: 768px) {
+    width: 100%;
+    max-width: 370px;
+  }
 `;
 
 export const FormLabel = styled.label`
@@ -30,7 +37,7 @@ export const FormInput = styled.input`
   margin-bottom: 18px;
   padding: 12px 8px;
   border: 1px solid black;
-  border-color: ${(props) => (props.hasError ? "red" : "#ccc")};
+  border-color: ${(props) => (props.hasError ? "red" : "black")};
 `;
 
 export const SelectContainer = styled.select`
@@ -67,13 +74,6 @@ export const CheckboxLabel = styled.label`
     top: 50%;
     transform: translateY(-50%);
   }
-
-  @media screen and (min-width: 768px) {
-    &:before {
-      width: 35px;
-      height: 35px;
-    }
-  }
 `;
 
 export const CheckboxInput = styled.input`
@@ -91,6 +91,11 @@ export const CheckboxInput = styled.input`
     transform: translateY(-50%) rotate(45deg);
   }
 
+  @media (min-width: 768px) {
+    width: 10px;
+    height: 20px;
+  }
+
   &:checked + ${CheckboxLabel}:before {
     background-color: var(--primary-color);
   }
@@ -105,6 +110,7 @@ export const ErrorMessage = styled.p`
 export const RequiredWrapper = styled.div`
   margin-top: 1rem;
   font-size: 0.875rem;
+  margin-bottom: 10px;
 `;
 
 export const RequiredSpan = styled.span`
