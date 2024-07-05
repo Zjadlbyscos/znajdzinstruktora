@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 export const HamburgerContainer = styled.div`
-position: absolute;
-top: 0px;
-right: 21px;
+  position: absolute;
+  top: -16px;
+  right: -32px;
   z-index: 1000;
-  background-color: var( --background-2);
-
+  background-color: var(--background-2);
+  width: 75vw;
+  height: 100vh;
   border-radius: 8px;
-min-height: 100%;
+  min-height: 100%;
   padding: 75px 26px;
   & div {
     padding: 12px 32px;
@@ -44,11 +45,10 @@ min-height: 100%;
   @media (min-width: 1024px) {
     display: none;
   }
-
 `;
-export const LogoDown=styled.div`
+export const LogoDown = styled.div`
   width: 40px;
-  &svg{
+  &svg {
     width: 100%;
   }
-`
+`;

@@ -25,8 +25,8 @@
 }
 
 body {
-  font-family: 'Nunito Sans', sans-serif;
-  line-height: 1.5; 
+  font-family: "Nunito Sans", sans-serif;
+  line-height: 1.5;
   color: var(--text-color-1);
   background-color: var(--background-1);
   margin: 0 auto;
@@ -34,25 +34,24 @@ body {
 
 @font-face {
   font-family: "Nunito sans";
-  src:   url(./assets/fonts/Nunito_Sans/NunitoSans_7pt-Regular.ttf) format("truetype");
+  src: url(./assets/fonts/Nunito_Sans/NunitoSans_7pt-Regular.ttf)
+    format("truetype");
   font-weight: 400;
   font-style: normal;
-  
 }
 
 @font-face {
   font-family: "Nunito Sans";
-  src:  url(./assets/fonts/Nunito_Sans/NunitoSans_7pt-SemiBold.ttf) format("truetype");
-  font-weight: 500
-   
-
+  src: url(./assets/fonts/Nunito_Sans/NunitoSans_7pt-SemiBold.ttf)
+    format("truetype");
+  font-weight: 500;
 }
 
 @font-face {
   font-family: "Nunito Sans";
-  src: url(./assets/fonts/Nunito_Sans/NunitoSans_7pt-Bold.ttf) format("truetype");
-  font-weight: 600
-    
+  src: url(./assets/fonts/Nunito_Sans/NunitoSans_7pt-Bold.ttf)
+    format("truetype");
+  font-weight: 600;
 }
 
 h1,
@@ -141,7 +140,6 @@ section {
 .cls-3 {
   fill: #c3c3c3;
 }
-
 
 .header {
   background: linear-gradient(
