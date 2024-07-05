@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
 export const HamburgerContainer = styled.div`
-  background-color: var(--background-2);
+position: absolute;
+top: 0px;
+right: 21px;
+  z-index: 1000;
+  background-color: var( --background-2);
+
   border-radius: 8px;
-  min-height: 100%;
+min-height: 100%;
   padding: 75px 26px;
   & div {
     padding: 12px 32px;
