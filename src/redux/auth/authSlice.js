@@ -8,6 +8,7 @@ import {
   resetPasswordRequest,
   registerUser,
   changeUserPasswordByReset,
+  activateAccount,
 } from "./operations";
 
 const isPendingAction = (action) => {
@@ -38,6 +39,7 @@ const initialState = {
   token: "",
   isLoggedIn: false,
   isRefreshing: false,
+  isVerified: false,
 };
 
 const authSlice = createSlice({
@@ -84,6 +86,9 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = true;
+      })
+      .addCase(activateAccount.fulfilled, (state) => {
+        state.isVerified = true;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)

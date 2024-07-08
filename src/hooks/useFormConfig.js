@@ -1,24 +1,23 @@
 export const useFormConfig = () => {
-  const password = "password";
-  const formConfig = [
+  const registerFormConfig = [
     {
-      label: "Imię",
+      label: "Imię *",
       name: "firstName",
       type: "text",
-      validation: { required: "Imię jest wymagane." },
+      validation: { required: `Pole "Imię" jest wymagane.` },
     },
     {
-      label: "Nazwisko",
+      label: "Nazwisko *",
       name: "lastName",
       type: "text",
-      validation: { required: "Nazwisko jest wymagane." },
+      validation: { required: `Pole "Nazwisko" jest wymagane.` },
     },
     {
-      label: "Email",
+      label: "Email *",
       name: "email",
       type: "text",
       validation: {
-        required: "Email jest wymagany.",
+        required: `Pole "Email" jest wymagane.`,
         pattern: {
           value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
           message: "Nieprawidłowy format email.",
@@ -26,28 +25,34 @@ export const useFormConfig = () => {
       },
     },
     {
-      label: "Hasło",
+      label: "Hasło *",
       name: "password",
       type: "password",
       validation: {
-        required: "Hasło jest wymagane.",
+        required: `Pole "Hasło" jest wymagane.`,
         minLength: {
           value: 6,
           message: "Hasło musi mieć przynajmniej 6 znaków.",
         },
+        pattern: {
+          value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+          message:
+            "Hasło musi zawierać przynajmniej jedną dużą literę, jedną małą literę i jedną cyfrę.",
+        },
       },
     },
     {
-      label: "Powtórz hasło",
+      label: "Powtórz hasło *",
       name: "confirmPassword",
       type: "password",
       validation: {
-        required: "Powtórz hasło jest wymagane.",
-        validate: (value) => value === password || "Hasła nie są takie same.",
+        required: `Pole "Powtórz hasło" jest wymagane.`,
+        validate: (value, context) =>
+          value === context.password || "Hasła nie są takie same.",
       },
     },
     {
-      label: "Miasto",
+      label: "Miasto *",
       name: "city",
       type: "select",
       options: [
@@ -76,17 +81,19 @@ export const useFormConfig = () => {
         "Bytom",
         "Zielona Góra",
       ],
-      validation: { required: "Miasto jest wymagane." },
+      validation: { required: `Pole "Miasto" jest wymagane.` },
     },
     {
-      label: "Dyscyplina sportu",
+      label: "Dyscyplina sportu *",
       name: "discipline",
       type: "select",
       options: ["Wspinaczka"],
-      validation: { required: "Dyscyplina sportu jest wymagana." },
+      validation: { required: `Pole "Dyscyplina sportu" jest wymagane.` },
     },
+  ];
+  const registerTermsConfig = [
     {
-      label: "Akceptuję regulamin i politykę prywatności.*",
+      label: "Akceptuję regulamin i politykę prywatności. *",
       name: "terms",
       type: "checkbox",
       validation: {
@@ -95,7 +102,7 @@ export const useFormConfig = () => {
     },
     {
       label:
-        "Wyrażam zgodę na udostępnienie podanego wyżej adresu E-mail dla użytkowników poszukujących instruktora.",
+        "Wyrażam zgodę na udostępnienie podanego wyżej adresu E-mail dla użytkowników poszukujących instruktora. *",
       name: "emailConsent",
       type: "checkbox",
       validation: {
@@ -104,5 +111,37 @@ export const useFormConfig = () => {
       },
     },
   ];
-  return formConfig;
+
+  const changePasswordConfig = [
+    {
+      label: "Obecne hasło *",
+      name: "password",
+      type: "password",
+      validation: { required: "Obecne hasło jest wymagane." },
+    },
+    {
+      label: "Nowe hasło *",
+      name: "newPassword",
+      type: "password",
+      validation: {
+        required: "Nowe hasło jest wymagane.",
+        minLength: {
+          value: 6,
+          message: "Hasło musi mieć przynajmniej 6 znaków.",
+        },
+      },
+    },
+    {
+      label: "Powtórz nowe hasło *",
+      name: "confirmNewPassword",
+      type: "password",
+      validation: {
+        required: "Powtórz nowe hasło jest wymagane.",
+        validate: (value, { newPassword }) =>
+          value === newPassword || "Hasła nie są takie same.",
+      },
+    },
+  ];
+
+  return { registerFormConfig, registerTermsConfig, changePasswordConfig };
 };

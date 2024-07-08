@@ -3,13 +3,25 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useFormConfig } from "../../../hooks/useFormConfig";
 import { registerUser } from "../../../redux/auth/operations";
+import {
+  RegisterWrapper,
+  RegisterContainer,
+  RegisterHeading,
+  RegisterSpan,
+  RequiredWrapper,
+  RequiredSpan,
+  RequiredP,
+} from "./Register.styled";
+import Field from "./Fields/Field";
+import CheckboxField from "./Fields/CheckboxField";
+
 const RegistrationForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const formConfig = useFormConfig();
+  const { registerFormConfig, registerTermsConfig } = useFormConfig();
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
@@ -18,30 +30,33 @@ const RegistrationForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {formConfig.map((field) => (
-        <div key={field.name}>
-          <label>{field.label}</label>
-          {field.type === "select" ? (
-            <select {...register(field.name, field.validation)}>
-              <option value="">Wybierz</option>
-              {field.options.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <input
-              type={field.type}
-              {...register(field.name, field.validation)}
-            />
-          )}
-          {errors[field.name] && <p>{errors[field.name].message}</p>}
-        </div>
-      ))}
-      <button type="submit">Zarejestruj</button>
-    </form>
+    <RegisterContainer>
+      <RegisterHeading>Nie masz jeszcze konta?</RegisterHeading>
+      <RegisterSpan>Zarejestruj się!</RegisterSpan>
+      <RegisterWrapper onSubmit={handleSubmit(onSubmit)}>
+        {registerFormConfig.map((field) => (
+          <Field
+            key={field.name}
+            field={field}
+            register={register}
+            errors={errors}
+          />
+        ))}
+        {registerTermsConfig.map((field) => (
+          <CheckboxField
+            key={field.name}
+            field={field}
+            register={register}
+            errors={errors}
+          />
+        ))}
+        <RequiredWrapper>
+          <RequiredSpan>*</RequiredSpan>
+          <RequiredP>- pole wymagane</RequiredP>
+        </RequiredWrapper>
+        <button type="submit">ZAREJESTRUJ</button>
+      </RegisterWrapper>
+    </RegisterContainer>
   );
 };
 

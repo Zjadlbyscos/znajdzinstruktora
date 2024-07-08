@@ -31,10 +31,11 @@ export const registerUser = createAsyncThunk(
 export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
   try {
     const response = await axios.post("/auth/login", data);
-    const { user, token } = response.data.RequestBody;
+    const responseBody = response.data.RequestBody;
+    const user = responseBody.user;
+    const token = responseBody["Current token"];
 
     setAuthHeader(token);
-    console.log(response.data.RequestBody);
 
     return { user, token };
   } catch (error) {
@@ -77,11 +78,13 @@ export const currentUser = createAsyncThunk(
 
 export const changePassword = createAsyncThunk(
   "auth/changePassword",
-  async (credentials, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      const response = await axios.post("/auth/change-password", credentials);
+      const response = await axios.post("/auth/change-password", data, {
+        headers: { Authorization: `Bearer ${data.token}` },
+      });
       Notiflix.Notify.success("Pomyślnie zmieniono hasło");
-      return response.data.ResponseBody;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -105,7 +108,6 @@ export const resetPasswordRequest = createAsyncThunk(
 export const changeUserPasswordByReset = createAsyncThunk(
   "auth/changeUserPasswordByReset",
   async (data, thunkAPI) => {
-    console.log(data);
     try {
       const response = await axios.post("/auth/reset-password", data);
       Notiflix.Notify.success("Pomyślnie zmieniono hasło");
@@ -113,6 +115,20 @@ export const changeUserPasswordByReset = createAsyncThunk(
     } catch (error) {
       console.log(error.message);
       return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const activateAccount = createAsyncThunk(
+  "auth/activate",
+  async (verificationToken, thunkAPI) => {
+    try {
+      const response = await axios.post("/auth/activate", verificationToken);
+      Notiflix.Notify.success("Konto zostało aktywowane");
+      return response.data.ResponseBody;
+    } catch (error) {
+      console.log(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
