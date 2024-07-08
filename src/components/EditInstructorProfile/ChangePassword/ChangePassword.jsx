@@ -1,8 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { changePassword } from "../../../redux/auth/operations";
 import { useFormConfig } from "../../../hooks/useFormConfig";
+import { selectToken } from "../../../redux/auth/selectors";
 
 const ChangePassword = () => {
   const {
@@ -13,9 +14,11 @@ const ChangePassword = () => {
   } = useForm();
   const { changePasswordConfig } = useFormConfig();
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
 
   const onSubmit = (data) => {
-    const { confirmPassword, ...filteredData } = data;
+    const { confirmNewPassword, ...filteredData } = data;
+    filteredData.token = token;
     dispatch(changePassword(filteredData));
   };
 

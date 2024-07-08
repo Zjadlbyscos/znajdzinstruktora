@@ -115,7 +115,7 @@ export const useFormConfig = () => {
   const changePasswordConfig = [
     {
       label: "Obecne hasło *",
-      name: "currentPassword",
+      name: "password",
       type: "password",
       validation: { required: "Obecne hasło jest wymagane." },
     },

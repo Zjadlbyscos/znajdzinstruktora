@@ -7,6 +7,7 @@ import { ShareedLayout } from "./components/SharedLayout/SharedLayout";
 import { Login } from "./pages/Login";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import { EditInstructorProfile } from "./pages/EditInstructorProfile";
+import { Activate } from "./components/Auth/Activate/Activate";
 
 function App() {
   return (
@@ -15,13 +16,14 @@ function App() {
         <Route path="/" element={<ShareedLayout />}>
           <Route path="/" element={<Main />} />
           <Route path="/czyInstruktor" element={<AreYouIns />} />
-          <Route path='/edit-profile' element={<EditInstructorProfile/>}/>
+          <Route path="/edit-profile" element={<EditInstructorProfile />} />
           <Route path="/zarejestruj" element={<Register />} />
           <Route path="/zaloguj" element={<Login />} />
           <Route
             path="resetowanie-hasla/:resetToken"
             element={<ResetPasswordPage />}
           />
+          <Route path="/aktywacja/:verificationToken" element={<Activate />} />
         </Route>
       </Routes>
     </div>
