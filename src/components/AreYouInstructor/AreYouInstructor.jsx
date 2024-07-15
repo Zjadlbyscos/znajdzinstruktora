@@ -20,10 +20,10 @@ export const AreYouInstructor = () => {
         <Option>
           <h3>Nie</h3>
           <p>
-            Nie potrzebujesz konta, żeby znaleść instruktora. Przejdź do
-            wyszukiwania
+            Nie potrzebujesz konta, żeby znaleźć instruktora. Przejdź do
+            wyszukiwania.
           </p>
-          <Link to='/'>
+          <Link to="/">
             <button>WRÓĆ DO STRONY GŁÓWNEJ</button>
           </Link>
         </Option>

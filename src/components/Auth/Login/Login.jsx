@@ -15,6 +15,7 @@ import {
   LoginContainer,
   LoginWrapper,
 } from "./Login.styled";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [isResetPassword, setIsResetPassword] = useState(false);
@@ -24,6 +25,7 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { registerFormConfig } = useFormConfig();
 
   const loginConfig = registerFormConfig.filter(
@@ -32,6 +34,7 @@ const LoginForm = () => {
 
   const onSubmitLogin = (data) => {
     dispatch(loginUser(data));
+    navigate("/");
   };
 
   const onSubmitResetPassword = (data) => {

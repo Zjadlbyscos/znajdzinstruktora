@@ -40,6 +40,7 @@ const initialState = {
   isLoggedIn: false,
   isRefreshing: false,
   isVerified: false,
+  isSuccess: false,
 };
 
 const authSlice = createSlice({
@@ -50,6 +51,7 @@ const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.isSuccess = true;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
@@ -77,15 +79,18 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = true;
+        state.isSuccess = true;
       })
       .addCase(resetPasswordRequest.fulfilled, (state) => {
         state.isRefreshing = true;
+        state.isSuccess = true;
       })
       .addCase(changeUserPasswordByReset.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = true;
+        state.isSuccess = true;
       })
       .addCase(activateAccount.fulfilled, (state) => {
         state.isVerified = true;

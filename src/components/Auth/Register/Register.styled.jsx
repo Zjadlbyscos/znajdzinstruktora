@@ -33,6 +33,12 @@ export const RegisterWrapper = styled.form`
   }
 `;
 
+export const SuccessP = styled.p`
+  color: green;
+  text-align: center;
+  margin-bottom: 25px;
+`;
+
 export const FieldContainer = styled.div`
   display: flex;
   flex-direction: column;
