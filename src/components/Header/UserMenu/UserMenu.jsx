@@ -23,7 +23,7 @@ export const UserMenu = () => {
         </>
       ) : (
         <>
-          <NavLink to="/edytuj-profil">Edytuj profil</NavLink>
+          <NavLink to="/edit-profile">Edytuj profil</NavLink>
           <NavLink onClick={handleLogout}>Wyloguj</NavLink>
         </>
       )}
