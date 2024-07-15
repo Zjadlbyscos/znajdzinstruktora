@@ -40,7 +40,7 @@ const RegistrationForm = () => {
       {isSuccess && (
         <SuccessP>
           Rejestracja zakonczona pomyślnie. Sprawdź swoją skrzynkę w celu
-          aktywacji konta
+          aktywacji konta.
         </SuccessP>
       )}
       {!isSuccess && (

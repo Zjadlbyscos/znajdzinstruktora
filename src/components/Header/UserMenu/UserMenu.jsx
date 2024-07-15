@@ -1,11 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 import { selectIsLoggedIn } from "../../../redux/auth/selectors";
+import { logout } from "../../../redux/auth/operations";
 
 export const UserMenu = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   console.log("isLoggedIn", isLoggedIn);
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   return (
     <>
@@ -17,10 +24,9 @@ export const UserMenu = () => {
       ) : (
         <>
           <NavLink to="/edytuj-profil">Edytuj profil</NavLink>
-          <NavLink to="/wyloguj">Wyloguj</NavLink>
+          <NavLink onClick={handleLogout}>Wyloguj</NavLink>
         </>
       )}
     </>
   );
 };
-// lub edytuj profil / wyloguj - jeśli zalogowany
