@@ -34,7 +34,6 @@ const LoginForm = () => {
 
   const onSubmitLogin = (data) => {
     dispatch(loginUser(data));
-    navigate("/");
   };
 
   const onSubmitResetPassword = (data) => {
