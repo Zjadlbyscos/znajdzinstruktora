@@ -35,6 +35,7 @@ const initialState = {
     email: null,
     city: null,
     discipline: null,
+    id: null,
   },
   token: "",
   isLoggedIn: false,

@@ -14,3 +14,15 @@ export const fetchInstructors = createAsyncThunk(
     }
   }
 );
+export const createInstructorProfile = createAsyncThunk(
+  "instructors/createInstructorProfile",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.post("/instructors/id", { id });
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectedWithValue(error.message);
+    }
+  }
+);
