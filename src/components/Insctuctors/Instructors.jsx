@@ -1,17 +1,16 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchInstructors } from "../../redux/instructors/operations";
+import { selectInstructors } from "../../redux/instructors/selectors";
+import { GalleryElement } from "../GalleryElement/GalleryElement";
+import { useEffect } from "react";
 
 export const Instructors = () => {
+  const instructors = useSelector(selectInstructors);
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  useEffect(() => {
     dispatch(fetchInstructors());
-  };
-  return (
-    <>
-      {" "}
-      <p>Instructors Component</p>
-      <button onClick={handleClick}>Kliknij</button>{" "}
-    </>
-  );
+  }, [dispatch]);
+
+  return <GalleryElement elements={instructors} />;
 };
