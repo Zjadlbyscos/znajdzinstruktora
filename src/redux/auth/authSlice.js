@@ -10,6 +10,7 @@ import {
   changeUserPasswordByReset,
   activateAccount,
 } from "./operations";
+import { createInstructorProfile } from "../instructors/operations";
 
 const isPendingAction = (action) => {
   return action.type.endsWith("/pending");
@@ -35,12 +36,14 @@ const initialState = {
     email: null,
     city: null,
     discipline: null,
+    id: null,
   },
   token: "",
   isLoggedIn: false,
   isRefreshing: false,
   isVerified: false,
   isSuccess: false,
+  isInstructor: false,
 };
 
 const authSlice = createSlice({
@@ -56,21 +59,15 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.isInstructor = action.payload.user.isInstructor;
         state.isLoggedIn = true;
       })
-      .addCase(logout.fulfilled, (state) => {
-        state.user = {
-          firstName: null,
-          lastName: null,
-          email: null,
-          city: null,
-          discipline: null,
-        };
-        state.token = null;
-        state.isLoggedIn = false;
+      .addCase(logout.fulfilled, () => {
+        return initialState;
       })
       .addCase(currentUser.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.isInstructor = action.payload.user.isInstructor;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
@@ -94,6 +91,9 @@ const authSlice = createSlice({
       })
       .addCase(activateAccount.fulfilled, (state) => {
         state.isVerified = true;
+      })
+      .addCase(createInstructorProfile.fulfilled, (state) => {
+        state.isInstructor = true;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)
