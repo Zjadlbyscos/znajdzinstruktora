@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createInstructorProfile, fetchInstructors } from "./operations";
+import { fetchInstructors } from "./operations";
 
 const isPendingAction = (action) => {
   return action.type.endsWith("/pending");
@@ -22,7 +22,6 @@ const initialState = {
   instructors: [],
   isLoading: false,
   error: null,
-  isInstructor: false,
 };
 
 const instructorsSlice = createSlice({
@@ -32,9 +31,6 @@ const instructorsSlice = createSlice({
     builder
       .addCase(fetchInstructors.fulfilled, (state, action) => {
         state.instructors = action.payload;
-      })
-      .addCase(createInstructorProfile.fulfilled, (state) => {
-        state.isInstructor = true;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)
