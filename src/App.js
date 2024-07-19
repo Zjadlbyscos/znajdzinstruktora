@@ -8,6 +8,7 @@ import { Login } from "./pages/Login";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import { EditInstructorProfile } from "./pages/EditInstructorProfile";
 import { Activate } from "./components/Auth/Activate/Activate";
+import { InstructorsPage } from "./pages/Instructors";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             path="resetowanie-hasla/:resetToken"
             element={<ResetPasswordPage />}
           />
+          <Route path="/instruktorzy" element={<InstructorsPage />} />
           <Route path="/aktywacja/:verificationToken" element={<Activate />} />
         </Route>
       </Routes>
