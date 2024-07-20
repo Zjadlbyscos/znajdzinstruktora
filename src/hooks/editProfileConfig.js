@@ -1,5 +1,5 @@
 export const editProfileConfig = () => {
-  const kindOfClass = [
+  const classLevel = [
     {
       label: "rodzaj zajęc",
       name: "classes",
@@ -26,5 +26,5 @@ export const editProfileConfig = () => {
       options: ["Polski", "Angielski", "Niemiecki", "Francuski"],
     },
   ];
-  return { kindOfClass, languages };
+  return { classLevel, languages };
 };

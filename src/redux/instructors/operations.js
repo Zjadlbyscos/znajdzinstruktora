@@ -26,3 +26,29 @@ export const createInstructorProfile = createAsyncThunk(
     }
   }
 );
+
+export const updateInstructorProfile = createAsyncThunk(
+  "instructors/updateInstructorProfile",
+  async ({ id, data }, thunkAPI) => {
+    try {
+      const response = await axios.put(`/instructors/${id}`, data);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const getInstructorById = createAsyncThunk(
+  "instructors/getInstructorById",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(`/instructors/${id}`);
+      console.log(response.data.instructor);
+      return response.data.instructor;
+    } catch (error) {
+      return thunkAPI.rejectedWithValue(error.message);
+    }
+  }
+);

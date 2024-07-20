@@ -86,17 +86,17 @@ export const Button = styled.button`
 `;
 
 export const ProfilePictureLabel = styled.label`
-  display: inline-block;
+  display: inline-flex;
   width: 302px;
   height: 426px;
   background-color: var(--background-3);
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  position: relative;
   cursor: pointer;
   margin-bottom: 20px;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background-color: var(--background-4);
@@ -105,5 +105,30 @@ export const ProfilePictureLabel = styled.label`
 
   input {
     display: none;
+  }
+`;
+
+export const ImagePreview = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-3);
+  border-radius: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  span {
+    font-size: 16px;
+    color: #aaa;
   }
 `;
