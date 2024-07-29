@@ -25,7 +25,7 @@ import {
   getInstructorById,
   updateInstructorProfile,
 } from "../../redux/instructors/operations";
-import { selectInstructors } from "../../redux/instructors/selectors";
+import { selectInstructor } from "../../redux/instructors/selectors";
 
 export const InstructorProfile = () => {
   const user = useSelector(selectUser);
@@ -45,16 +45,16 @@ export const InstructorProfile = () => {
   const { firstName, lastName } = user;
   const { classLevel, languages } = editProfileConfig();
 
-  useEffect(() => {
-    dispatch(getInstructorById(id));
-  }, []);
-
-  const instructor = useSelector(selectInstructors);
+  const instructor = useSelector(selectInstructor);
   const id = instructor.id;
 
   useEffect(() => {
+    dispatch(getInstructorById(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
     if (instructor) {
-      setValue("id", id);
+      setValue("id", instructor.id);
       setValue("bio", instructor.bio);
       setValue("phoneNumber", instructor.phoneNumber);
       setValue("email", instructor.email);
@@ -71,7 +71,7 @@ export const InstructorProfile = () => {
         languages.map((language) => language.value)
       );
     }
-  }, [id, instructor, setValue]);
+  }, [instructor, setValue]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -82,6 +82,7 @@ export const InstructorProfile = () => {
       setValue("photo", null);
     }
   };
+
   const onSubmit = (data) => {
     const formData = new FormData();
 
@@ -137,7 +138,12 @@ export const InstructorProfile = () => {
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="email">Email</Label>
-                <Input type="text" id="email" {...register("email")} />
+                <Input
+                  type="text"
+                  id="email"
+                  {...register("email")}
+                  defaultValue={user.email}
+                />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="socialMedia">Social Media</Label>
