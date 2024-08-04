@@ -33,11 +33,14 @@ export const InstructorProfile = () => {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
       phoneNumber: user.phoneNumber || "",
       email: user.email || "",
+      classLevel: [],
+      languages: [],
     },
   });
   const dispatch = useDispatch();
@@ -45,33 +48,32 @@ export const InstructorProfile = () => {
   const { firstName, lastName } = user;
   const { classLevel, languages } = editProfileConfig();
 
-  useEffect(() => {
-    dispatch(getInstructorById(id));
-  }, []);
-
   const instructor = useSelector(selectInstructors);
   const id = instructor.id;
 
   useEffect(() => {
+    dispatch(getInstructorById(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
     if (instructor) {
-      setValue("id", id);
-      setValue("bio", instructor.bio);
-      setValue("phoneNumber", instructor.phoneNumber);
-      setValue("email", instructor.email);
-      setValue("socialMedia", instructor.socialMedia);
-      setValue("photo", instructor.photo);
-      const classLevels = instructor.classLevel || [];
-      const languages = instructor.languages || [];
-      setValue(
-        "classLevel",
-        classLevels.map((level) => level.value)
-      );
-      setValue(
-        "languages",
-        languages.map((language) => language.value)
-      );
+      setValue("bio", instructor.bio || "");
+      setValue("phoneNumber", instructor.phoneNumber || "");
+      setValue("email", instructor.email || "");
+      setValue("socialMedia", instructor.socialMedia || "");
+      setValue("photo", instructor.photo || "");
+
+      const classLevels = instructor.classLevel
+        ? instructor.classLevel.map((level) => level.trim())
+        : [];
+      const languageLevels = instructor.languages
+        ? instructor.languages.map((lang) => lang.trim())
+        : [];
+
+      setValue("classLevel", classLevels);
+      setValue("languages", languageLevels);
     }
-  }, [id, instructor, setValue]);
+  }, [instructor, setValue]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -82,6 +84,7 @@ export const InstructorProfile = () => {
       setValue("photo", null);
     }
   };
+
   const onSubmit = (data) => {
     const formData = new FormData();
 
@@ -97,6 +100,9 @@ export const InstructorProfile = () => {
 
     dispatch(updateInstructorProfile({ id, data: formData }));
   };
+
+  const watchedClassLevel = watch("classLevel", []);
+  const watchedLanguages = watch("languages", []);
 
   return (
     <Section>
@@ -162,6 +168,7 @@ export const InstructorProfile = () => {
                     id={option}
                     value={option}
                     {...register("classLevel")}
+                    defaultChecked={watchedClassLevel.includes(option.trim())}
                   />
                   {option}
                 </CheckboxLabel>
@@ -178,6 +185,7 @@ export const InstructorProfile = () => {
                     id={option}
                     value={option}
                     {...register("languages")}
+                    defaultChecked={watchedLanguages.includes(option.trim())}
                   />
                   {option}
                 </CheckboxLabel>
