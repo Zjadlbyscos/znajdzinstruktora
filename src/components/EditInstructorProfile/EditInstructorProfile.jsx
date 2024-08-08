@@ -13,11 +13,14 @@ import {
   InfoWrapper,
   Button,
   EditProfileWrapper,
-  RightProfileForm,
   ProfilePictureLabel,
-  Section,
   ContactWrapper,
   ImagePreview,
+  UserName,
+  UserDetailsWrapper,
+  ContactGroup,
+  RightProfileForm,
+  LanguagesContainer,
 } from "./EdItInstructorProfile.styled";
 import { selectUser } from "../../redux/auth/selectors";
 import { editProfileConfig } from "../../hooks/editProfileConfig";
@@ -26,6 +29,7 @@ import {
   updateInstructorProfile,
 } from "../../redux/instructors/operations";
 import { selectInstructors } from "../../redux/instructors/selectors";
+import { EnvelopeIcon, IGIcon, PhoneIcon } from "../RenderSvg/RenderSvg";
 
 export const InstructorProfile = () => {
   const user = useSelector(selectUser);
@@ -50,6 +54,7 @@ export const InstructorProfile = () => {
 
   const instructor = useSelector(selectInstructors);
   const id = instructor.id;
+  console.log(id, "id");
 
   useEffect(() => {
     dispatch(getInstructorById(id));
@@ -57,21 +62,21 @@ export const InstructorProfile = () => {
 
   useEffect(() => {
     if (instructor) {
+      setValue("id", instructor.id || "");
       setValue("bio", instructor.bio || "");
       setValue("phoneNumber", instructor.phoneNumber || "");
       setValue("email", instructor.email || "");
-      setValue("socialMedia", instructor.socialMedia || "");
+      setValue("instagram", instructor.instagram || "");
+      setValue("tiktok", instructor.tiktok || "");
+      setValue("youtube", instructor.youtube || "");
+      setValue("facebook", instructor.facebook || "");
       setValue("photo", instructor.photo || "");
 
-      const classLevels = instructor.classLevel
-        ? instructor.classLevel.map((level) => level.trim())
-        : [];
-      const languageLevels = instructor.languages
-        ? instructor.languages.map((lang) => lang.trim())
-        : [];
+      const classLevels = instructor.classLevel;
+      const languages = instructor.languages;
 
       setValue("classLevel", classLevels);
-      setValue("languages", languageLevels);
+      setValue("languages", languages);
     }
   }, [instructor, setValue]);
 
@@ -105,95 +110,92 @@ export const InstructorProfile = () => {
   const watchedLanguages = watch("languages", []);
 
   return (
-    <Section>
-      <EditProfileWrapper>
-        <LeftProfileForm onSubmit={handleSubmit(onSubmit)}>
-          <FormGroup>
-            <ProfilePictureLabel>
-              <input type="file" accept="image/*" onChange={handleFileChange} />
+    <EditProfileWrapper>
+      <LeftProfileForm onSubmit={handleSubmit(onSubmit)}>
+        <Button type="submit">ZAPISZ</Button>
+        <UserDetailsWrapper>
+          <ProfilePictureLabel>
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+            {preview ? (
               <ImagePreview>
-                {preview ? (
-                  <img src={preview} alt="profile" />
-                ) : (
-                  <span>Wybierz zdjęcie</span>
-                )}
+                <img src={preview} alt="Profile Preview" />
               </ImagePreview>
-            </ProfilePictureLabel>
+            ) : (
+              <span>Wybierz zdjęcie</span>
+            )}
+          </ProfilePictureLabel>
+          <UserName>
+            {firstName} {lastName}
+          </UserName>
+          <FormGroup>
+            <TextArea id="bio" {...register("bio")} />
           </FormGroup>
-          <InfoWrapper>
-            <FormGroup>
-              <div>
-                {firstName} {lastName}
-              </div>
-              <TextArea
-                id="bio"
-                {...register("bio")}
-                rows="4"
-                placeholder="Bio"
+          <ContactWrapper>
+            <ContactGroup>
+              <PhoneIcon />
+              <Input
+                id="phoneNumber"
+                type="tel"
+                {...register("phoneNumber", { required: true })}
               />
-            </FormGroup>
-            <ContactWrapper>
-              <FormGroup>
-                <Label htmlFor="phoneNumber">Telefon</Label>
-                <Input
-                  type="text"
-                  id="phoneNumber"
-                  {...register("phoneNumber")}
+              {errors.phoneNumber && <span>To pole jest wymagane</span>}
+            </ContactGroup>
+            <ContactGroup>
+              <EnvelopeIcon />
+              <Input
+                id="email"
+                type="email"
+                {...register("email", { required: true })}
+              />
+              {errors.email && <span>To pole jest wymagane</span>}
+            </ContactGroup>
+            <ContactGroup>
+              <IGIcon />
+              <Input id="instagram" type="text" {...register("instagram")} />
+            </ContactGroup>
+          </ContactWrapper>
+        </UserDetailsWrapper>
+      </LeftProfileForm>
+      <RightProfileForm>
+        <FormGroup>
+          <Label>Poziomy nauczania</Label>
+          <CheckboxGroup>
+            {classLevel.map((level, index) => (
+              <React.Fragment key={index}>
+                <CheckboxInput
+                  id={`classLevel_${index}`}
+                  type="checkbox"
+                  value={level}
+                  {...register("classLevel")}
+                  checked={watchedClassLevel.includes(level)}
                 />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="email">Email</Label>
-                <Input type="text" id="email" {...register("email")} />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="socialMedia">Social Media</Label>
-                <Input
-                  type="text"
-                  id="socialMedia"
-                  {...register("socialMedia")}
+                <CheckboxLabel htmlFor={`classLevel_${index}`}>
+                  {level}
+                </CheckboxLabel>
+              </React.Fragment>
+            ))}
+          </CheckboxGroup>
+        </FormGroup>
+        <FormGroup>
+          <Label>Języki</Label>
+          <LanguagesContainer>
+            {languages.map((language, index) => (
+              <React.Fragment key={index}>
+                <CheckboxInput
+                  id={`language_${index}`}
+                  type="checkbox"
+                  value={language}
+                  {...register("languages")}
+                  checked={watchedLanguages.includes(language)}
                 />
-              </FormGroup>
-            </ContactWrapper>
-          </InfoWrapper>
-          <Button type="submit">Zapisz</Button>
-        </LeftProfileForm>
-        <RightProfileForm>
-          <FormGroup>
-            <Label>Zajęcia</Label>
-            <CheckboxGroup>
-              {classLevel[0].options.map((option) => (
-                <CheckboxLabel key={option}>
-                  <CheckboxInput
-                    type="checkbox"
-                    id={option}
-                    value={option}
-                    {...register("classLevel")}
-                    defaultChecked={watchedClassLevel.includes(option.trim())}
-                  />
-                  {option}
+                <CheckboxLabel htmlFor={`language_${index}`}>
+                  {language}
                 </CheckboxLabel>
-              ))}
-            </CheckboxGroup>
-          </FormGroup>
-          <FormGroup>
-            <Label>Języki</Label>
-            <CheckboxGroup>
-              {languages[0].options.map((option) => (
-                <CheckboxLabel key={option}>
-                  <CheckboxInput
-                    type="checkbox"
-                    id={option}
-                    value={option}
-                    {...register("languages")}
-                    defaultChecked={watchedLanguages.includes(option.trim())}
-                  />
-                  {option}
-                </CheckboxLabel>
-              ))}
-            </CheckboxGroup>
-          </FormGroup>
-        </RightProfileForm>
-      </EditProfileWrapper>
-    </Section>
+              </React.Fragment>
+            ))}
+          </LanguagesContainer>
+        </FormGroup>
+      </RightProfileForm>
+    </EditProfileWrapper>
   );
 };
