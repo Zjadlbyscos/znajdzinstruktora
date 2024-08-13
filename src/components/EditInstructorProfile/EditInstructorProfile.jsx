@@ -124,36 +124,38 @@ export const InstructorProfile = () => {
               <span>Wybierz zdjęcie</span>
             )}
           </ProfilePictureLabel>
-          <UserName>
-            {firstName} {lastName}
-          </UserName>
-          <FormGroup>
-            <TextArea id="bio" {...register("bio")} />
-          </FormGroup>
-          <ContactWrapper>
-            <ContactGroup>
-              <PhoneIcon />
-              <Input
-                id="phoneNumber"
-                type="tel"
-                {...register("phoneNumber", { required: true })}
-              />
-              {errors.phoneNumber && <span>To pole jest wymagane</span>}
-            </ContactGroup>
-            <ContactGroup>
-              <EnvelopeIcon />
-              <Input
-                id="email"
-                type="email"
-                {...register("email", { required: true })}
-              />
-              {errors.email && <span>To pole jest wymagane</span>}
-            </ContactGroup>
-            <ContactGroup>
-              <IGIcon />
-              <Input id="instagram" type="text" {...register("instagram")} />
-            </ContactGroup>
-          </ContactWrapper>
+          <InfoWrapper>
+            <UserName>
+              {firstName} {lastName}
+            </UserName>
+            <FormGroup>
+              <TextArea id="bio" {...register("bio")} />
+            </FormGroup>
+            <ContactWrapper>
+              <ContactGroup>
+                <PhoneIcon />
+                <Input
+                  id="phoneNumber"
+                  type="tel"
+                  {...register("phoneNumber", { required: true })}
+                />
+                {errors.phoneNumber && <span>To pole jest wymagane</span>}
+              </ContactGroup>
+              <ContactGroup>
+                <EnvelopeIcon />
+                <Input
+                  id="email"
+                  type="email"
+                  {...register("email", { required: true })}
+                />
+                {errors.email && <span>To pole jest wymagane</span>}
+              </ContactGroup>
+              <ContactGroup>
+                <IGIcon />
+                <Input id="instagram" type="text" {...register("instagram")} />
+              </ContactGroup>
+            </ContactWrapper>
+          </InfoWrapper>
         </UserDetailsWrapper>
       </LeftProfileForm>
       <RightProfileForm>

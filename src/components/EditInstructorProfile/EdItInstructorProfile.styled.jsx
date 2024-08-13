@@ -1,23 +1,10 @@
 import styled from "styled-components";
 
-export const EditProfileWrapper = styled.div``;
-
-export const UserDetailsWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  align-items: center;
-  flex-direction: column;
-  padding: 30px 0px 30px 0px;
-  border-radius: 15px;
-  background-color: var(--background-2);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-`;
-
-export const RightProfileForm = styled.div`
-  border-radius: 15px;
-  background-color: var(--background-2);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  position: relative;
+export const EditProfileWrapper = styled.div`
+  @media (min-width: 1440px) {
+    display: flex;
+    gap: 18px;
+  }
 `;
 
 export const LeftProfileForm = styled.form`
@@ -25,12 +12,47 @@ export const LeftProfileForm = styled.form`
   align-items: center;
   flex-direction: column;
   margin-bottom: 30px;
+  background-color: var(--background-2);
+  border-radius: 15px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  @media (min-width: 1440px) {
+    flex: 0 0 70%;
+    margin-bottom: 0;
+  }
+`;
+
+export const RightProfileForm = styled.div`
+  background-color: var(--background-2);
+  border-radius: 15px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  position: relative;
+  @media (min-width: 1440px) {
+    flex: 0 0 30%;
+  }
+`;
+
+export const UserDetailsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 0;
+  border-radius: 15px;
+  background-color: var(--background-2);
+  @media (min-width: 1440px) {
+    flex-direction: row;
+    padding: 0;
+    height: 100%;
+  }
 `;
 
 export const InfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  @media (min-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 export const UserName = styled.h2``;
@@ -41,6 +63,9 @@ export const ContactWrapper = styled.div`
   align-items: center;
   gap: 15px;
   padding: 30px 0px 30px 0px;
+  @media (min-width: 1440px) {
+    padding: 0;
+  }
 `;
 export const FormGroup = styled.div`
   display: flex;
@@ -48,6 +73,10 @@ export const FormGroup = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 30px 0 30px 0;
+  @media (min-width: 1440px) {
+    padding: 0;
+    align-items: flex-start;
+  }
 `;
 
 export const Label = styled.label`
@@ -68,8 +97,12 @@ export const ContactGroup = styled.div`
 export const TextArea = styled.textarea`
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 80%;
+  width: 70vw;
   height: 225px;
+  @media (min-width: 1440px) {
+    width: 30vw;
+    height: 442px;
+  }
 `;
 
 export const LanguagesContainer = styled.div`
@@ -120,8 +153,6 @@ export const CheckboxInput = styled.input`
   }
 
   @media (min-width: 768px) {
-    width: 10px;
-    height: 20px;
   }
 
   &:checked + ${CheckboxLabel}:before {
@@ -135,6 +166,8 @@ export const CheckboxGroup = styled.div`
   gap: 5px;
   width: 80%;
   margin: 10px 0px 10px 0px;
+  @media (min-width: 1440px) {
+  }
 `;
 
 export const Select = styled.select`
@@ -154,6 +187,11 @@ export const Button = styled.button`
   margin: 40px 0px 19px 0;
   &:hover {
     background-color: var(--button-hover);
+  }
+  @media (min-width: 1440px) {
+    position: relative;
+    margin: 0;
+    top: -50px;
   }
 `;
 
@@ -176,6 +214,13 @@ export const ProfilePictureLabel = styled.label`
 
   input {
     display: none;
+  }
+
+  @media (min-width: 1440px) {
+    margin: 0;
+    width: 302px;
+    max-width: 100%;
+    height: 75%;
   }
 `;
 
