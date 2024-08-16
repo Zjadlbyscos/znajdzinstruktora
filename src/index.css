@@ -20,6 +20,9 @@
   --background-3: #303030;
   --background-4: #474747;
 
+  --button-hover: #793798;
+  --button-primary: #8e4a9a;
+
   --spacing-unit: 8px;
   --transition-time: 200ms;
 }
