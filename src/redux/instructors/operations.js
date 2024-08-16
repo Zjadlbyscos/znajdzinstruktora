@@ -10,7 +10,7 @@ export const fetchInstructors = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log(error);
-      return thunkAPI.rejectedWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -22,7 +22,7 @@ export const createInstructorProfile = createAsyncThunk(
       console.log(response);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectedWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -48,7 +48,7 @@ export const getInstructorById = createAsyncThunk(
       console.log(response.data.instructor);
       return response.data.instructor;
     } catch (error) {
-      return thunkAPI.rejectedWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

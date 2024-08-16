@@ -20,6 +20,7 @@ const handleRejected = (state, action) => {
 
 const initialState = {
   instructors: [],
+  instructor: {},
   isLoading: false,
   error: null,
 };
@@ -33,7 +34,7 @@ const instructorsSlice = createSlice({
         state.instructors = action.payload;
       })
       .addCase(getInstructorById.fulfilled, (state, action) => {
-        state.instructors = action.payload;
+        state.instructor = action.payload;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)
