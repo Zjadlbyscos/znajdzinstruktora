@@ -48,9 +48,11 @@ export const UserDetailsWrapper = styled.div`
 `;
 
 export const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   @media (min-width: 1440px) {
-    display: flex;
-    flex-direction: column;
+    align-items: flex-start;
     gap: 20px;
   }
 `;
