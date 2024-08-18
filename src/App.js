@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import { Main } from "./pages/Main";
+import { MainPage } from "./pages/MainPage";
 import { Register } from "./pages/Register";
 import { AreYouIns } from "./pages/AreYouInstructor";
 import { ShareedLayout } from "./components/SharedLayout/SharedLayout";
@@ -15,7 +15,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<ShareedLayout />}>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<MainPage />} />
           <Route path="/czyInstruktor" element={<AreYouIns />} />
           <Route path="/edit-profile" element={<EditInstructorProfile />} />
           <Route path="/zarejestruj" element={<Register />} />
