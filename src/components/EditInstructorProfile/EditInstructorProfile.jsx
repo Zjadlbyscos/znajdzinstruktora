@@ -30,6 +30,7 @@ import {
 } from "../../redux/instructors/operations";
 import { selectInstructors } from "../../redux/instructors/selectors";
 import { EnvelopeIcon, IGIcon, PhoneIcon } from "../RenderSvg/RenderSvg";
+import { Calendar } from "./Calendar/Calendar";
 
 export const InstructorProfile = () => {
   const user = useSelector(selectUser);
@@ -110,94 +111,101 @@ export const InstructorProfile = () => {
   const watchedLanguages = watch("languages", []);
 
   return (
-    <EditProfileWrapper>
-      <LeftProfileForm onSubmit={handleSubmit(onSubmit)}>
-        <Button type="submit">ZAPISZ</Button>
-        <UserDetailsWrapper>
-          <ProfilePictureLabel>
-            <input type="file" accept="image/*" onChange={handleFileChange} />
-            {preview ? (
-              <ImagePreview>
-                <img src={preview} alt="Profile Preview" />
-              </ImagePreview>
-            ) : (
-              <span>Wybierz zdjęcie</span>
-            )}
-          </ProfilePictureLabel>
-          <InfoWrapper>
-            <UserName>
-              {firstName} {lastName}
-            </UserName>
-            <FormGroup>
-              <TextArea id="bio" {...register("bio")} />
-            </FormGroup>
-            <ContactWrapper>
-              <ContactGroup>
-                <PhoneIcon />
-                <Input
-                  id="phoneNumber"
-                  type="tel"
-                  {...register("phoneNumber", { required: true })}
-                />
-                {errors.phoneNumber && <span>To pole jest wymagane</span>}
-              </ContactGroup>
-              <ContactGroup>
-                <EnvelopeIcon />
-                <Input
-                  id="email"
-                  type="email"
-                  {...register("email", { required: true })}
-                />
-                {errors.email && <span>To pole jest wymagane</span>}
-              </ContactGroup>
-              <ContactGroup>
-                <IGIcon />
-                <Input id="instagram" type="text" {...register("instagram")} />
-              </ContactGroup>
-            </ContactWrapper>
-          </InfoWrapper>
-        </UserDetailsWrapper>
-      </LeftProfileForm>
-      <RightProfileForm>
-        <FormGroup>
-          <Label>Poziomy nauczania</Label>
-          <CheckboxGroup>
-            {classLevel.map((level, index) => (
-              <React.Fragment key={index}>
-                <CheckboxInput
-                  id={`classLevel_${index}`}
-                  type="checkbox"
-                  value={level}
-                  {...register("classLevel")}
-                  checked={watchedClassLevel.includes(level)}
-                />
-                <CheckboxLabel htmlFor={`classLevel_${index}`}>
-                  {level}
-                </CheckboxLabel>
-              </React.Fragment>
-            ))}
-          </CheckboxGroup>
-        </FormGroup>
-        <FormGroup>
-          <Label>Języki</Label>
-          <LanguagesContainer>
-            {languages.map((language, index) => (
-              <React.Fragment key={index}>
-                <CheckboxInput
-                  id={`language_${index}`}
-                  type="checkbox"
-                  value={language}
-                  {...register("languages")}
-                  checked={watchedLanguages.includes(language)}
-                />
-                <CheckboxLabel htmlFor={`language_${index}`}>
-                  {language}
-                </CheckboxLabel>
-              </React.Fragment>
-            ))}
-          </LanguagesContainer>
-        </FormGroup>
-      </RightProfileForm>
-    </EditProfileWrapper>
+    <>
+      <EditProfileWrapper>
+        <LeftProfileForm onSubmit={handleSubmit(onSubmit)}>
+          <Button type="submit">ZAPISZ</Button>
+          <UserDetailsWrapper>
+            <ProfilePictureLabel>
+              <input type="file" accept="image/*" onChange={handleFileChange} />
+              {preview ? (
+                <ImagePreview>
+                  <img src={preview} alt="Profile Preview" />
+                </ImagePreview>
+              ) : (
+                <span>Wybierz zdjęcie</span>
+              )}
+            </ProfilePictureLabel>
+            <InfoWrapper>
+              <UserName>
+                {firstName} {lastName}
+              </UserName>
+              <FormGroup>
+                <TextArea id="bio" {...register("bio")} />
+              </FormGroup>
+              <ContactWrapper>
+                <ContactGroup>
+                  <PhoneIcon />
+                  <Input
+                    id="phoneNumber"
+                    type="tel"
+                    {...register("phoneNumber", { required: true })}
+                  />
+                  {errors.phoneNumber && <span>To pole jest wymagane</span>}
+                </ContactGroup>
+                <ContactGroup>
+                  <EnvelopeIcon />
+                  <Input
+                    id="email"
+                    type="email"
+                    {...register("email", { required: true })}
+                  />
+                  {errors.email && <span>To pole jest wymagane</span>}
+                </ContactGroup>
+                <ContactGroup>
+                  <IGIcon />
+                  <Input
+                    id="instagram"
+                    type="text"
+                    {...register("instagram")}
+                  />
+                </ContactGroup>
+              </ContactWrapper>
+            </InfoWrapper>
+          </UserDetailsWrapper>
+        </LeftProfileForm>
+        <RightProfileForm>
+          <FormGroup>
+            <Label>Poziomy nauczania</Label>
+            <CheckboxGroup>
+              {classLevel.map((level, index) => (
+                <React.Fragment key={index}>
+                  <CheckboxInput
+                    id={`classLevel_${index}`}
+                    type="checkbox"
+                    value={level}
+                    {...register("classLevel")}
+                    checked={watchedClassLevel.includes(level)}
+                  />
+                  <CheckboxLabel htmlFor={`classLevel_${index}`}>
+                    {level}
+                  </CheckboxLabel>
+                </React.Fragment>
+              ))}
+            </CheckboxGroup>
+          </FormGroup>
+          <FormGroup>
+            <Label>Języki</Label>
+            <LanguagesContainer>
+              {languages.map((language, index) => (
+                <React.Fragment key={index}>
+                  <CheckboxInput
+                    id={`language_${index}`}
+                    type="checkbox"
+                    value={language}
+                    {...register("languages")}
+                    checked={watchedLanguages.includes(language)}
+                  />
+                  <CheckboxLabel htmlFor={`language_${index}`}>
+                    {language}
+                  </CheckboxLabel>
+                </React.Fragment>
+              ))}
+            </LanguagesContainer>
+          </FormGroup>
+        </RightProfileForm>
+      </EditProfileWrapper>
+      <Calendar />
+    </>
   );
 };
