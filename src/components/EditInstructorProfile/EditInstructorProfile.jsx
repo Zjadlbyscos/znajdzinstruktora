@@ -112,10 +112,14 @@ export const InstructorProfile = () => {
   const watchedLanguages = watch("languages", []);
 
   return (
+    <>
+  
+    <Button type="submit">ZAPISZ</Button>
     <EditProfileWrapper>
+
       <LeftProfileForm onSubmit={handleSubmit(onSubmit)}>
-        <Button type="submit">ZAPISZ</Button>
-        <UserDetailsWrapper>
+     
+        {/* <UserDetailsWrapper> */}
           <ProfilePictureLabel>
             <input type="file" accept="image/*" onChange={handleFileChange} />
             {preview ? (
@@ -128,11 +132,12 @@ export const InstructorProfile = () => {
           </ProfilePictureLabel>
           <InfoWrapper>
             <UserName>
-              {firstName} {lastName}
+              {firstName}Zuzanna Maciejczyk  {lastName}
+              {/* usuń imię i nazwisko na sztywno */}
             </UserName>
-            <FormGroup>
-              <TextArea id="bio" {...register("bio")} />
-            </FormGroup>
+            {/* <FormGroup> */}
+              <TextArea id="bio" {...register("bio")} placeholder="  Napisz Coś o Sobie" />
+            {/* </FormGroup> */}
             <ContactWrapper>
               <ContactGroup>
                 <FiPhone />
@@ -155,12 +160,12 @@ export const InstructorProfile = () => {
               </ContactGroup>
               <ContactGroup>
                 <LuInstagram />
-
                 <Input id="instagram" type="text" {...register("instagram")} />
               </ContactGroup>
             </ContactWrapper>
           </InfoWrapper>
-        </UserDetailsWrapper>
+        {/* </UserDetailsWrapper> */}
+       
       </LeftProfileForm>
       <RightProfileForm>
         <FormGroup>
@@ -203,5 +208,6 @@ export const InstructorProfile = () => {
         </FormGroup>
       </RightProfileForm>
     </EditProfileWrapper>
+    </>
   );
 };

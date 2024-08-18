@@ -1,75 +1,111 @@
 import styled from "styled-components";
 
 export const EditProfileWrapper = styled.div`
-  @media (min-width: 1440px) {
-    display: flex;
-    gap: 18px;
-  }
-`;
-
-export const LeftProfileForm = styled.form`
   display: flex;
-  align-items: center;
   flex-direction: column;
-  margin-bottom: 30px;
-  background-color: var(--background-2);
-  border-radius: 15px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  @media (min-width: 1440px) {
-    flex: 0 0 70%;
-    margin-bottom: 0;
-  }
-`;
 
-export const RightProfileForm = styled.div`
-  background-color: var(--background-2);
-  border-radius: 15px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 20px;
-  position: relative;
-  @media (min-width: 1440px) {
-    flex: 0 0 30%;
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2vw;
   }
 `;
 
 export const UserDetailsWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  align-items: center;
-  flex-direction: column;
-  padding: 30px 0;
-  border-radius: 15px;
+  /* 
+   DELETE
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
+  border-radius: 8px;
   background-color: var(--background-2);
-  @media (min-width: 1440px) {
+  @media (min-width: 1024px) {
     flex-direction: row;
-    padding: 0;
+
+  }  */
+`;
+
+export const LeftProfileForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  background-color: var(--background-2);
+  border-radius: 8px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  @media (min-width: 1024px) {
+    width: 70%;
+    gap: 2vw;
+    justify-content: flex-start;
+  }
+`;
+export const ProfilePictureLabel = styled.label`
+  display: inline-flex;
+  max-width: 287px;
+  width: 100%;
+  height: 287px;
+  background-color: var(--background-3);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  @media (min-width: 760px) {
+    width: 302px;
+    height: 426px;
+  }
+  &:hover {
+    background-color: var(--background-4);
+  }
+  input {
+    display: none;
+  }
+`;
+
+export const ImagePreview = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-3);
+  border-radius: 8px;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  img {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
+  }
+
+  span {
+    font-size: 16px;
+    color: #aaa;
   }
 `;
 
 export const InfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media (min-width: 1440px) {
-    align-items: flex-start;
-    gap: 20px;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
 
-export const UserName = styled.h2``;
-
-export const ContactWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  padding: 30px 0px 30px 0px;
-  @media (min-width: 1440px) {
-    padding: 0;
-  }
-`;
 export const FormGroup = styled.div`
+  /* 
+  
+  ?? DELETE ?
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -78,33 +114,66 @@ export const FormGroup = styled.div`
   @media (min-width: 1440px) {
     padding: 0;
     align-items: flex-start;
-  }
-`;
-
-export const Label = styled.label`
-  margin: 15px 0 8px 0;
-  font-weight: bold;
-`;
-
-export const Input = styled.input`
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-left: 15px;
-`;
-export const ContactGroup = styled.div`
-  display: flex;
+  } */
 `;
 
 export const TextArea = styled.textarea`
   border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 70vw;
+  border-radius: 8px;
+  max-width: 287px;
+  width: 100%;
   height: 225px;
-  @media (min-width: 1440px) {
-    width: 30vw;
-    height: 442px;
+  @media (min-width: 1024px) {
+    max-width: 302px;
+    height: 230px;
   }
+`;
+export const ContactWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  padding-top: 15px;
+
+  @media (min-width: 1440px) {
+  }
+`;
+export const ContactGroup = styled.div`
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+  & svg{
+color:var(--primary-color);
+  }
+`;
+
+export const Input = styled.input`
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+`;
+
+///////do tego ////
+
+export const RightProfileForm = styled.div`
+  background-color: var(--background-2);
+  border-radius: 15px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  position: relative;
+  @media (min-width: 1024px) {
+    width: 30%;
+  }
+`;
+
+export const UserName = styled.h2``;
+
+export const Label = styled.label`
+  margin: 15px 0 8px 0;
+  font-weight: bold;
 `;
 
 export const LanguagesContainer = styled.div`
@@ -149,7 +218,7 @@ export const CheckboxInput = styled.input`
     height: 10px;
     border: solid white;
     border-width: 0 2px 2px 0;
-    top: 50%;
+    top: 45%;
     left: 7px;
     transform: translateY(-50%) rotate(45deg);
   }
@@ -186,66 +255,13 @@ export const Button = styled.button`
   border-radius: 23px;
   cursor: pointer;
   width: 80px;
-  margin: 40px 0px 19px 0;
+
   &:hover {
     background-color: var(--button-hover);
   }
-  @media (min-width: 1440px) {
+  /* @media (min-width: 1440px) {
     position: relative;
     margin: 0;
     top: -50px;
-  }
-`;
-
-export const ProfilePictureLabel = styled.label`
-  display: inline-flex;
-  width: 80%;
-  height: 475px;
-  background-color: var(--background-3);
-  border-radius: 15px 15px 0 0;
-  overflow: hidden;
-  cursor: pointer;
-  margin-bottom: 20px;
-  align-items: center;
-  justify-content: center;
-  color: white;
-
-  &:hover {
-    background-color: var(--background-4);
-  }
-
-  input {
-    display: none;
-  }
-
-  @media (min-width: 1440px) {
-    margin: 0;
-    width: 302px;
-    max-width: 100%;
-    height: 75%;
-  }
-`;
-
-export const ImagePreview = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: var(--background-3);
-  border-radius: 8px;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  span {
-    font-size: 16px;
-    color: #aaa;
-  }
+  } */
 `;
