@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { FiPhone } from "react-icons/fi";
+import { LuInstagram } from "react-icons/lu";
+import { FaRegEnvelope } from "react-icons/fa6";
 import {
   LeftProfileForm,
   FormGroup,
@@ -29,7 +32,6 @@ import {
   updateInstructorProfile,
 } from "../../redux/instructors/operations";
 import { selectInstructors } from "../../redux/instructors/selectors";
-import { EnvelopeIcon, IGIcon, PhoneIcon } from "../RenderSvg/RenderSvg";
 
 export const InstructorProfile = () => {
   const user = useSelector(selectUser);
@@ -133,7 +135,7 @@ export const InstructorProfile = () => {
             </FormGroup>
             <ContactWrapper>
               <ContactGroup>
-                <PhoneIcon />
+                <FiPhone />
                 <Input
                   id="phoneNumber"
                   type="tel"
@@ -142,7 +144,8 @@ export const InstructorProfile = () => {
                 {errors.phoneNumber && <span>To pole jest wymagane</span>}
               </ContactGroup>
               <ContactGroup>
-                <EnvelopeIcon />
+                <FaRegEnvelope />
+
                 <Input
                   id="email"
                   type="email"
@@ -151,7 +154,8 @@ export const InstructorProfile = () => {
                 {errors.email && <span>To pole jest wymagane</span>}
               </ContactGroup>
               <ContactGroup>
-                <IGIcon />
+                <LuInstagram />
+
                 <Input id="instagram" type="text" {...register("instagram")} />
               </ContactGroup>
             </ContactWrapper>
