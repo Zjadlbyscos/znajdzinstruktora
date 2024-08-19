@@ -3,13 +3,13 @@ import styled from "styled-components";
 export const EditProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 2vw;
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1440px) {
     flex-direction: row;
-    /* align-items: center; */
     justify-content: space-between;
     align-items: flex-start;
-    gap: 2vw;
+  
   }
 `;
 
@@ -32,16 +32,16 @@ export const LeftProfileForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 100%;
   background-color: var(--background-2);
   border-radius: 8px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 15px;
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-around;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1440px) {
     width: 70%;
     gap: 2vw;
     justify-content: flex-start;
@@ -96,6 +96,8 @@ export const ImagePreview = styled.div`
 `;
 
 export const InfoWrapper = styled.div`
+width: 100%;
+max-width: 286px;
   @media (min-width: 768px) {
     display: flex;
     flex-direction: column;
@@ -117,10 +119,11 @@ export const FormGroup = styled.div`
   } */
 `;
 
+export const UserName = styled.h2``;
+
 export const TextArea = styled.textarea`
   border: 1px solid #ccc;
   border-radius: 8px;
-  max-width: 287px;
   width: 100%;
   height: 225px;
   @media (min-width: 1024px) {
@@ -160,16 +163,19 @@ export const Input = styled.input`
 
 export const RightProfileForm = styled.div`
   background-color: var(--background-2);
-  border-radius: 15px;
+  border-radius: 8px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 20px;
-  position: relative;
-  @media (min-width: 1024px) {
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  @media (min-width: 768px) {
+    justify-content: space-around
+  }
+  @media (min-width: 1440px) {
     width: 30%;
   }
 `;
 
-export const UserName = styled.h2``;
 
 export const Label = styled.label`
   margin: 15px 0 8px 0;
@@ -185,8 +191,8 @@ export const LanguagesContainer = styled.div`
 export const ClassLevelGroup = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-left: 15px;
+  align-items: center;
+  /* margin-left: 15px; */
 `;
 
 export const CheckboxLabel = styled.label`
