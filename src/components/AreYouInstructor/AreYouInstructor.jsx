@@ -29,7 +29,9 @@ export const AreYouInstructor = () => {
         <Option>
           <h3>Tak</h3>
           <p>Kliknij "Stwórz" aby utworzyć profil instruktora.</p>
+          <Link to="/edit-profile">
           <button onClick={handleCreateProfile}>STWÓRZ</button>
+          </Link>
         </Option>
         <Option>
           <h3>Nie</h3>
