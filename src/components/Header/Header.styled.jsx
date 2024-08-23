@@ -55,6 +55,7 @@ export const HamburgerStyle = styled.div`
   position: absolute;
   right: 21px;
   z-index: 2000;
+  color: white;
   @media (min-width: 768px) {
     display: none;
   }
