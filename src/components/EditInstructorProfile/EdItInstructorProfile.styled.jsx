@@ -253,6 +253,11 @@ export const Select = styled.select`
   border-radius: 4px;
 `;
 
+export const ButtonWrapper = styled.div`
+  display:flex;
+  justify-content: center;
+  padding-bottom: 16px;
+`
 export const Button = styled.button`
   padding: 10px 15px;
   background-color: var(--button-primary);

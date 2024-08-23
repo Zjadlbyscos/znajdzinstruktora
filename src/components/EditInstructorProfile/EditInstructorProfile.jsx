@@ -14,6 +14,7 @@ import {
   CheckboxLabel,
   CheckboxInput,
   InfoWrapper,
+  ButtonWrapper,
   Button,
   EditProfileWrapper,
   ProfilePictureLabel,
@@ -113,8 +114,10 @@ export const InstructorProfile = () => {
 
   return (
     <>
-  
-    <Button type="submit">ZAPISZ</Button>
+  <ButtonWrapper>
+  <Button type="submit">ZAPISZ</Button>
+  </ButtonWrapper>
+   
     <EditProfileWrapper>
 
       <LeftProfileForm onSubmit={handleSubmit(onSubmit)}>
@@ -132,7 +135,7 @@ export const InstructorProfile = () => {
           </ProfilePictureLabel>
           <InfoWrapper>
             <UserName>
-              {firstName}Zuzanna Maciejczyk  {lastName}
+              {firstName}{lastName}
               {/* usuń imię i nazwisko na sztywno */}
             </UserName>
             {/* <FormGroup> */}
