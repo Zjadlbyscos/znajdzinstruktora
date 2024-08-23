@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FiPhone } from "react-icons/fi";
 import { LuInstagram } from "react-icons/lu";
 import { FaRegEnvelope } from "react-icons/fa6";
+import { FaFacebook } from "react-icons/fa";
 import {
   LeftProfileForm,
   FormGroup,
@@ -164,6 +165,10 @@ export const InstructorProfile = () => {
               <ContactGroup>
                 <LuInstagram />
                 <Input id="instagram" type="text" {...register("instagram")} />
+              </ContactGroup>
+              <ContactGroup>
+              <FaFacebook/>
+              <Input id="facebook" type="text" {...register("facebook")} />
               </ContactGroup>
             </ContactWrapper>
           </InfoWrapper>

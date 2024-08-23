@@ -105,18 +105,20 @@ max-width: 286px;
 `;
 
 export const FormGroup = styled.div`
-  /* 
   
-  ?? DELETE ?
-  display: flex;
+
+  /* display: flex;
   align-items: center;
   flex-direction: column;
   width: 100%;
-  padding: 30px 0 30px 0;
+  padding: 30px 0 30px 0; */
   @media (min-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     padding: 0;
     align-items: flex-start;
-  } */
+  }
 `;
 
 export const UserName = styled.h2``;
@@ -144,11 +146,12 @@ export const ContactWrapper = styled.div`
 `;
 export const ContactGroup = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 5px;
   width: 100%;
   align-items: center;
   & svg{
 color:var(--primary-color);
+width: 40px;
   }
 `;
 
@@ -167,8 +170,11 @@ export const RightProfileForm = styled.div`
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   padding: 15px;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
+
   @media (min-width: 768px) {
+    flex-direction: row;
     justify-content: space-around
   }
   @media (min-width: 1440px) {
@@ -178,25 +184,24 @@ export const RightProfileForm = styled.div`
 
 
 export const Label = styled.label`
-  margin: 15px 0 8px 0;
+ margin: 15px 0 8px 0;
   font-weight: bold;
 `;
 
 export const LanguagesContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  width: 80%;
+  justify-items: start
 `;
 
-export const ClassLevelGroup = styled.div`
+/* export const ClassLevelGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-left: 15px; */
-`;
+  /* margin-left: 15px; 
+`;*/
 
 export const CheckboxLabel = styled.label`
-  margin: 10px 0px 0px 8px;
   cursor: pointer;
   position: relative;
   padding-left: 32px;
@@ -240,7 +245,7 @@ export const CheckboxInput = styled.input`
 export const CheckboxGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   width: 80%;
   margin: 10px 0px 10px 0px;
   @media (min-width: 1440px) {
