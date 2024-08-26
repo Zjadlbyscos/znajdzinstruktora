@@ -12,21 +12,6 @@ export const EditProfileWrapper = styled.div`
   }
 `;
 
-export const UserDetailsWrapper = styled.div`
-  /* 
-   DELETE
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   width: 100%;
-  border-radius: 8px;
-  background-color: var(--background-2);
-  @media (min-width: 1024px) {
-    flex-direction: row;
-
-  }  */
-`;
-
 export const LeftProfileForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -152,8 +137,6 @@ export const Input = styled.input`
   width: 100%;
 `;
 
-///////do tego ////
-
 export const RightProfileForm = styled.div`
   background-color: var(--background-2);
   border-radius: 8px;
@@ -174,20 +157,6 @@ export const RightProfileForm = styled.div`
     height: 600px;
   }
 `;
-export const FormGroup = styled.div`
-  /* 
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 10px 0 10px 0;
-  @media (min-width: 1440px) {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0;
-    align-items: flex-start;
-  } */
-`;
 
 export const Label = styled.label`
   margin: 15px 0 8px 0;
@@ -201,13 +170,6 @@ export const LanguagesContainer = styled.div`
   gap: 10px;
   margin-top: 8px;
 `;
-/* 
-export const ClassLevelGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 15px; 
-`; */
 
 export const CheckboxLabel = styled.label`
   cursor: pointer;
@@ -286,9 +248,4 @@ export const Button = styled.button`
   &:hover {
     background-color: var(--button-hover);
   }
-  /* @media (min-width: 1440px) {
-    position: relative;
-    margin: 0;
-    top: -50px;
-  } */
 `;
