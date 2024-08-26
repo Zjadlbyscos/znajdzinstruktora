@@ -136,7 +136,7 @@ export const InstructorProfile = () => {
           </ProfilePictureLabel>
           <InfoWrapper>
             <UserName>
-              {firstName}{lastName}
+              {firstName}Zuzanna Maciejczyk{lastName}
               {/* usuń imię i nazwisko na sztywno */}
             </UserName>
             {/* <FormGroup> */}

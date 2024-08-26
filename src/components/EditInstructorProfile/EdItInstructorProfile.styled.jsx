@@ -9,7 +9,6 @@ export const EditProfileWrapper = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-  
   }
 `;
 
@@ -44,7 +43,7 @@ export const LeftProfileForm = styled.form`
   @media (min-width: 1440px) {
     width: 70%;
     gap: 2vw;
-    justify-content: flex-start;
+    height: 600px;
   }
 `;
 export const ProfilePictureLabel = styled.label`
@@ -96,34 +95,21 @@ export const ImagePreview = styled.div`
 `;
 
 export const InfoWrapper = styled.div`
-width: 100%;
-max-width: 286px;
+  width: 100%;
+  max-width: 286px;
   @media (min-width: 768px) {
     display: flex;
     flex-direction: column;
   }
-`;
-
-export const FormGroup = styled.div`
-  
-
-  /* display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  padding: 30px 0 30px 0; */
   @media (min-width: 1440px) {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0;
-    align-items: flex-start;
+    max-width: 50%;
   }
 `;
 
 export const UserName = styled.h2``;
 
 export const TextArea = styled.textarea`
+  padding: 10px 5px;
   border: 1px solid #ccc;
   border-radius: 8px;
   width: 100%;
@@ -131,6 +117,10 @@ export const TextArea = styled.textarea`
   @media (min-width: 1024px) {
     max-width: 302px;
     height: 230px;
+  }
+  @media (min-width: 1440px) {
+    max-width: 100%;
+    height: 330px;
   }
 `;
 export const ContactWrapper = styled.div`
@@ -149,9 +139,9 @@ export const ContactGroup = styled.div`
   gap: 5px;
   width: 100%;
   align-items: center;
-  & svg{
-color:var(--primary-color);
-width: 40px;
+  & svg {
+    color: var(--primary-color);
+    width: 40px;
   }
 `;
 
@@ -171,42 +161,62 @@ export const RightProfileForm = styled.div`
   padding: 15px;
   display: flex;
   flex-direction: column;
+  align-content: center;
   flex-wrap: wrap;
 
   @media (min-width: 768px) {
     flex-direction: row;
-    justify-content: space-around
+    justify-content: space-around;
   }
   @media (min-width: 1440px) {
+    flex-direction: column;
     width: 30%;
+    height: 600px;
   }
 `;
-
+export const FormGroup = styled.div`
+  /* 
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 0 10px 0;
+  @media (min-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    align-items: flex-start;
+  } */
+`;
 
 export const Label = styled.label`
- margin: 15px 0 8px 0;
+  margin: 15px 0 8px 0;
   font-weight: bold;
 `;
 
 export const LanguagesContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  justify-items: start
+  justify-items: start;
+  gap: 10px;
+  margin-top: 8px;
 `;
-
-/* export const ClassLevelGroup = styled.div`
+/* 
+export const ClassLevelGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-left: 15px; 
-`;*/
+  margin-left: 15px; 
+`; */
 
 export const CheckboxLabel = styled.label`
   cursor: pointer;
+
   position: relative;
   padding-left: 32px;
   &:before {
     content: "";
+
     display: inline-block;
     width: 18px;
     height: 18px;
@@ -232,6 +242,7 @@ export const CheckboxInput = styled.input`
     top: 45%;
     left: 7px;
     transform: translateY(-50%) rotate(45deg);
+    color: var(--primary-color);
   }
 
   @media (min-width: 768px) {
@@ -246,8 +257,8 @@ export const CheckboxGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 80%;
   margin: 10px 0px 10px 0px;
+
   @media (min-width: 1440px) {
   }
 `;
@@ -259,10 +270,10 @@ export const Select = styled.select`
 `;
 
 export const ButtonWrapper = styled.div`
-  display:flex;
+  display: flex;
   justify-content: center;
   padding-bottom: 16px;
-`
+`;
 export const Button = styled.button`
   padding: 10px 15px;
   background-color: var(--button-primary);
