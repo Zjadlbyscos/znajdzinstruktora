@@ -12,7 +12,8 @@ export const AreYouInstructor = () => {
 
   const handleCreateProfile = async () => {
     try {
-      const result = await dispatch(createInstructorProfile(user.id)).unwrap();
+      const id = user.id;
+      const result = dispatch(createInstructorProfile(id));
       if (result) {
         navigate(`/edit-profile`);
       }
@@ -30,7 +31,7 @@ export const AreYouInstructor = () => {
           <h3>Tak</h3>
           <p>Kliknij "Stwórz" aby utworzyć profil instruktora.</p>
           <Link to="/edit-profile">
-          <button onClick={handleCreateProfile}>STWÓRZ</button>
+            <button onClick={handleCreateProfile}>STWÓRZ</button>
           </Link>
         </Option>
         <Option>

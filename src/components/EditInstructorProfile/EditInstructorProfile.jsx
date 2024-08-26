@@ -31,7 +31,7 @@ import {
   getInstructorById,
   updateInstructorProfile,
 } from "../../redux/instructors/operations";
-import { selectInstructors } from "../../redux/instructors/selectors";
+import { selectInstructor } from "../../redux/instructors/selectors";
 
 export const InstructorProfile = () => {
   const user = useSelector(selectUser);
@@ -54,8 +54,9 @@ export const InstructorProfile = () => {
   const { firstName, lastName } = user;
   const { classLevel, languages } = editProfileConfig();
 
-  const instructor = useSelector(selectInstructors);
-  const id = instructor.id;
+  const instructor = useSelector(selectInstructor);
+  console.log(instructor);
+  const id = instructor._id;
   console.log(id, "id");
 
   useEffect(() => {
