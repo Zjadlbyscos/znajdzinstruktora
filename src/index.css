@@ -33,6 +33,7 @@ body {
   color: var(--text-color-1);
   background-color: var(--background-1);
   margin: 0 auto;
+  font-size: 12px;
 }
 
 @font-face {
@@ -98,7 +99,7 @@ section {
 /* Tablet */
 @media (min-width: 768px) {
   body {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   section {
@@ -112,7 +113,7 @@ section {
 /* Desktop */
 @media (min-width: 1024px) {
   body {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   section {
@@ -125,6 +126,9 @@ section {
 @media (min-width: 1440px) {
   section {
     padding: 32px 100px;
+  }
+  body {
+    font-size: 18px;
   }
 }
 

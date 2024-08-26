@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { FiPhone } from "react-icons/fi";
+import { LuInstagram } from "react-icons/lu";
+import { FaRegEnvelope } from "react-icons/fa6";
+import { FaFacebook } from "react-icons/fa";
 import {
   LeftProfileForm,
-  FormGroup,
   Label,
   Input,
   TextArea,
@@ -11,13 +14,13 @@ import {
   CheckboxLabel,
   CheckboxInput,
   InfoWrapper,
+  ButtonWrapper,
   Button,
   EditProfileWrapper,
   ProfilePictureLabel,
   ContactWrapper,
   ImagePreview,
   UserName,
-  UserDetailsWrapper,
   ContactGroup,
   RightProfileForm,
   LanguagesContainer,
@@ -29,7 +32,6 @@ import {
   updateInstructorProfile,
 } from "../../redux/instructors/operations";
 import { selectInstructors } from "../../redux/instructors/selectors";
-import { EnvelopeIcon, IGIcon, PhoneIcon } from "../RenderSvg/RenderSvg";
 
 export const InstructorProfile = () => {
   const user = useSelector(selectUser);
@@ -110,10 +112,13 @@ export const InstructorProfile = () => {
   const watchedLanguages = watch("languages", []);
 
   return (
-    <EditProfileWrapper>
-      <LeftProfileForm onSubmit={handleSubmit(onSubmit)}>
+    <>
+      <ButtonWrapper>
         <Button type="submit">ZAPISZ</Button>
-        <UserDetailsWrapper>
+      </ButtonWrapper>
+
+      <EditProfileWrapper>
+        <LeftProfileForm onSubmit={handleSubmit(onSubmit)}>
           <ProfilePictureLabel>
             <input type="file" accept="image/*" onChange={handleFileChange} />
             {preview ? (
@@ -126,14 +131,19 @@ export const InstructorProfile = () => {
           </ProfilePictureLabel>
           <InfoWrapper>
             <UserName>
-              {firstName} {lastName}
+              {firstName}
+              {lastName}
             </UserName>
-            <FormGroup>
-              <TextArea id="bio" {...register("bio")} />
-            </FormGroup>
+
+            <TextArea
+              id="bio"
+              {...register("bio")}
+              placeholder="  Napisz Coś o Sobie"
+            />
+
             <ContactWrapper>
               <ContactGroup>
-                <PhoneIcon />
+                <FiPhone />
                 <Input
                   id="phoneNumber"
                   type="tel"
@@ -142,7 +152,8 @@ export const InstructorProfile = () => {
                 {errors.phoneNumber && <span>To pole jest wymagane</span>}
               </ContactGroup>
               <ContactGroup>
-                <EnvelopeIcon />
+                <FaRegEnvelope />
+
                 <Input
                   id="email"
                   type="email"
@@ -151,53 +162,57 @@ export const InstructorProfile = () => {
                 {errors.email && <span>To pole jest wymagane</span>}
               </ContactGroup>
               <ContactGroup>
-                <IGIcon />
+                <LuInstagram />
                 <Input id="instagram" type="text" {...register("instagram")} />
+              </ContactGroup>
+              <ContactGroup>
+                <FaFacebook />
+                <Input id="facebook" type="text" {...register("facebook")} />
               </ContactGroup>
             </ContactWrapper>
           </InfoWrapper>
-        </UserDetailsWrapper>
-      </LeftProfileForm>
-      <RightProfileForm>
-        <FormGroup>
-          <Label>Poziomy nauczania</Label>
-          <CheckboxGroup>
-            {classLevel.map((level, index) => (
-              <React.Fragment key={index}>
-                <CheckboxInput
-                  id={`classLevel_${index}`}
-                  type="checkbox"
-                  value={level}
-                  {...register("classLevel")}
-                  checked={watchedClassLevel.includes(level)}
-                />
-                <CheckboxLabel htmlFor={`classLevel_${index}`}>
-                  {level}
-                </CheckboxLabel>
-              </React.Fragment>
-            ))}
-          </CheckboxGroup>
-        </FormGroup>
-        <FormGroup>
-          <Label>Języki</Label>
-          <LanguagesContainer>
-            {languages.map((language, index) => (
-              <React.Fragment key={index}>
-                <CheckboxInput
-                  id={`language_${index}`}
-                  type="checkbox"
-                  value={language}
-                  {...register("languages")}
-                  checked={watchedLanguages.includes(language)}
-                />
-                <CheckboxLabel htmlFor={`language_${index}`}>
-                  {language}
-                </CheckboxLabel>
-              </React.Fragment>
-            ))}
-          </LanguagesContainer>
-        </FormGroup>
-      </RightProfileForm>
-    </EditProfileWrapper>
+        </LeftProfileForm>
+        <RightProfileForm>
+          <div>
+            <Label>Poziomy nauczania</Label>
+            <CheckboxGroup>
+              {classLevel.map((level, index) => (
+                <React.Fragment key={index}>
+                  <CheckboxInput
+                    id={`classLevel_${index}`}
+                    type="checkbox"
+                    value={level}
+                    {...register("classLevel")}
+                    checked={watchedClassLevel.includes(level)}
+                  />
+                  <CheckboxLabel htmlFor={`classLevel_${index}`}>
+                    {level}
+                  </CheckboxLabel>
+                </React.Fragment>
+              ))}
+            </CheckboxGroup>
+          </div>
+          <div>
+            <Label>Języki</Label>
+            <LanguagesContainer>
+              {languages.map((language, index) => (
+                <React.Fragment key={index}>
+                  <CheckboxInput
+                    id={`language_${index}`}
+                    type="checkbox"
+                    value={language}
+                    {...register("languages")}
+                    checked={watchedLanguages.includes(language)}
+                  />
+                  <CheckboxLabel htmlFor={`language_${index}`}>
+                    {language}
+                  </CheckboxLabel>
+                </React.Fragment>
+              ))}
+            </LanguagesContainer>
+          </div>
+        </RightProfileForm>
+      </EditProfileWrapper>
+    </>
   );
 };
