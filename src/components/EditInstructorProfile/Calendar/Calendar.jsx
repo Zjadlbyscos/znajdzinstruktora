@@ -9,52 +9,66 @@ import { CalendarContainer } from "./Calendar.styled";
 
 export const Calendar = () => {
   const [showDateModal, setShowDateModal] = useState(false);
-  const [newEvent, setNewEvent] = useState({
-    title: "",
-    start: "",
-    allDay: false,
-    id: 0,
-  });
+  const [currentEvent, setCurrentEvent] = useState(null);
+  const [events, setEvents] = useState([]);
 
   const openDateModal = (info) => {
-    setNewEvent({
-      ...newEvent,
+    setCurrentEvent({
+      title: "",
       start: info.dateStr,
       allDay: info.allDay,
       id: new Date().getTime(),
+      time: "",
+      additionalInfo: "",
     });
     setShowDateModal(true);
   };
 
   const closeDateModal = () => {
-    setNewEvent({
-      title: "",
-      start: "",
-      allDay: false,
-      id: 0,
-    });
     setShowDateModal(false);
   };
 
+  const updateEvent = (updatedEvent) => {
+    setCurrentEvent(updatedEvent);
+  };
+
+  const handleSave = () => {
+    setEvents((prevEvents) => {
+      const updatedEvents = prevEvents.filter((e) => e.id !== currentEvent.id);
+      return [...updatedEvents, currentEvent];
+    });
+    closeDateModal();
+  };
+
   return (
-    <CalendarContainer>
-      <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
-        locales={[pl]}
-        locale="pl"
-        nowIndicator={true}
-        editable={true}
-        droppable={true}
-        selectable={true}
-        selectMirror={true}
-        dateClick={openDateModal}
-      />
-      {showDateModal && <DateModal handleClose={closeDateModal} />}
-    </CalendarContainer>
+    <>
+      <CalendarContainer>
+        <FullCalendar
+          plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+          headerToolbar={{
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          }}
+          locales={[pl]}
+          locale="pl"
+          nowIndicator={true}
+          editable={true}
+          droppable={true}
+          selectable={true}
+          selectMirror={true}
+          dateClick={openDateModal}
+          events={events}
+        />
+        {showDateModal && (
+          <DateModal
+            handleClose={closeDateModal}
+            event={currentEvent}
+            updateEvent={updateEvent}
+            handleSave={handleSave}
+          />
+        )}
+      </CalendarContainer>
+    </>
   );
 };
