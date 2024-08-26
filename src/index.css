@@ -33,6 +33,7 @@ body {
   color: var(--text-color-1);
   background-color: var(--background-1);
   margin: 0 auto;
+  font-size: 12px;
 }
 
 @font-face {
@@ -98,7 +99,7 @@ section {
 /* Tablet */
 @media (min-width: 768px) {
   body {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   section {
@@ -112,7 +113,7 @@ section {
 /* Desktop */
 @media (min-width: 1024px) {
   body {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   section {
@@ -126,10 +127,13 @@ section {
   section {
     padding: 32px 100px;
   }
+  body {
+    font-size: 18px;
+  }
 }
 
 .cls-1 {
-  fill: #7b5267;
+  fill:#FBFAFA;
 }
 
 .cls-1,
@@ -138,18 +142,16 @@ section {
 }
 
 .cls-2 {
-  fill: #9e6b84;
+  fill: #FBFAFA;
 }
 .cls-3 {
-  fill: #c3c3c3;
+  fill: #FBFAFA;
 }
 
 .header {
-  background: linear-gradient(
-    0deg,
-    rgba(243, 243, 243, 1) 0%,
-    rgba(158, 107, 132, 0.36738445378151263) 74%
-  );
+  background: rgb(97,46,125);
+  background: linear-gradient(90deg, rgba(97,46,125,1) 31%, rgba(50,17,86,1) 74%);
+ 
 }
 .line {
   border-bottom: 1.5px solid var(--background-4);

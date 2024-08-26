@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchInstructors, getInstructorById } from "./operations";
+import {
+  createInstructorProfile,
+  fetchInstructors,
+  getInstructorById,
+} from "./operations";
 
 const isPendingAction = (action) => {
   return action.type.endsWith("/pending");
@@ -34,6 +38,9 @@ const instructorsSlice = createSlice({
         state.instructors = action.payload;
       })
       .addCase(getInstructorById.fulfilled, (state, action) => {
+        state.instructor = action.payload;
+      })
+      .addCase(createInstructorProfile.fulfilled, (state, action) => {
         state.instructor = action.payload;
       })
       .addMatcher(isPendingAction, handlePending)

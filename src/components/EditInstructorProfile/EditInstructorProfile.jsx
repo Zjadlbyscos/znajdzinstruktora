@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { FiPhone } from "react-icons/fi";
+import { LuInstagram } from "react-icons/lu";
+import { FaRegEnvelope } from "react-icons/fa6";
+import { FaFacebook } from "react-icons/fa";
 import {
   LeftProfileForm,
-  FormGroup,
   Label,
   Input,
   TextArea,
@@ -11,13 +14,13 @@ import {
   CheckboxLabel,
   CheckboxInput,
   InfoWrapper,
+  ButtonWrapper,
   Button,
   EditProfileWrapper,
   ProfilePictureLabel,
   ContactWrapper,
   ImagePreview,
   UserName,
-  UserDetailsWrapper,
   ContactGroup,
   RightProfileForm,
   LanguagesContainer,
@@ -28,9 +31,7 @@ import {
   getInstructorById,
   updateInstructorProfile,
 } from "../../redux/instructors/operations";
-import { selectInstructors } from "../../redux/instructors/selectors";
-import { EnvelopeIcon, IGIcon, PhoneIcon } from "../RenderSvg/RenderSvg";
-import { Calendar } from "./Calendar/Calendar";
+import { selectInstructor } from "../../redux/instructors/selectors";
 
 export const InstructorProfile = () => {
   const user = useSelector(selectUser);
@@ -53,8 +54,9 @@ export const InstructorProfile = () => {
   const { firstName, lastName } = user;
   const { classLevel, languages } = editProfileConfig();
 
-  const instructor = useSelector(selectInstructors);
-  const id = instructor.id;
+  const instructor = useSelector(selectInstructor);
+  console.log(instructor);
+  const id = instructor._id;
   console.log(id, "id");
 
   useEffect(() => {
@@ -114,58 +116,64 @@ export const InstructorProfile = () => {
     <>
       <EditProfileWrapper>
         <LeftProfileForm onSubmit={handleSubmit(onSubmit)}>
-          <Button type="submit">ZAPISZ</Button>
-          <UserDetailsWrapper>
-            <ProfilePictureLabel>
-              <input type="file" accept="image/*" onChange={handleFileChange} />
-              {preview ? (
-                <ImagePreview>
-                  <img src={preview} alt="Profile Preview" />
-                </ImagePreview>
-              ) : (
-                <span>Wybierz zdjęcie</span>
-              )}
-            </ProfilePictureLabel>
-            <InfoWrapper>
-              <UserName>
-                {firstName} {lastName}
-              </UserName>
-              <FormGroup>
-                <TextArea id="bio" {...register("bio")} />
-              </FormGroup>
-              <ContactWrapper>
-                <ContactGroup>
-                  <PhoneIcon />
-                  <Input
-                    id="phoneNumber"
-                    type="tel"
-                    {...register("phoneNumber", { required: true })}
-                  />
-                  {errors.phoneNumber && <span>To pole jest wymagane</span>}
-                </ContactGroup>
-                <ContactGroup>
-                  <EnvelopeIcon />
-                  <Input
-                    id="email"
-                    type="email"
-                    {...register("email", { required: true })}
-                  />
-                  {errors.email && <span>To pole jest wymagane</span>}
-                </ContactGroup>
-                <ContactGroup>
-                  <IGIcon />
-                  <Input
-                    id="instagram"
-                    type="text"
-                    {...register("instagram")}
-                  />
-                </ContactGroup>
-              </ContactWrapper>
-            </InfoWrapper>
-          </UserDetailsWrapper>
+          <ButtonWrapper>
+            <Button type="submit">ZAPISZ</Button>
+          </ButtonWrapper>
+          <ProfilePictureLabel>
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+            {preview ? (
+              <ImagePreview>
+                <img src={preview} alt="Profile Preview" />
+              </ImagePreview>
+            ) : (
+              <span>Wybierz zdjęcie</span>
+            )}
+          </ProfilePictureLabel>
+          <InfoWrapper>
+            <UserName>
+              {firstName}
+              {lastName}
+            </UserName>
+
+            <TextArea
+              id="bio"
+              {...register("bio")}
+              placeholder="  Napisz Coś o Sobie"
+            />
+
+            <ContactWrapper>
+              <ContactGroup>
+                <FiPhone />
+                <Input
+                  id="phoneNumber"
+                  type="tel"
+                  {...register("phoneNumber", { required: true })}
+                />
+                {errors.phoneNumber && <span>To pole jest wymagane</span>}
+              </ContactGroup>
+              <ContactGroup>
+                <FaRegEnvelope />
+
+                <Input
+                  id="email"
+                  type="email"
+                  {...register("email", { required: true })}
+                />
+                {errors.email && <span>To pole jest wymagane</span>}
+              </ContactGroup>
+              <ContactGroup>
+                <LuInstagram />
+                <Input id="instagram" type="text" {...register("instagram")} />
+              </ContactGroup>
+              <ContactGroup>
+                <FaFacebook />
+                <Input id="facebook" type="text" {...register("facebook")} />
+              </ContactGroup>
+            </ContactWrapper>
+          </InfoWrapper>
         </LeftProfileForm>
         <RightProfileForm>
-          <FormGroup>
+          <div>
             <Label>Poziomy nauczania</Label>
             <CheckboxGroup>
               {classLevel.map((level, index) => (
@@ -183,8 +191,8 @@ export const InstructorProfile = () => {
                 </React.Fragment>
               ))}
             </CheckboxGroup>
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div>
             <Label>Języki</Label>
             <LanguagesContainer>
               {languages.map((language, index) => (
@@ -202,10 +210,9 @@ export const InstructorProfile = () => {
                 </React.Fragment>
               ))}
             </LanguagesContainer>
-          </FormGroup>
+          </div>
         </RightProfileForm>
       </EditProfileWrapper>
-      <Calendar />
     </>
   );
 };

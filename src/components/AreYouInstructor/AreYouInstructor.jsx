@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Wrapper, Content, Option } from "./AreYouInstructor.styled";
@@ -12,7 +12,8 @@ export const AreYouInstructor = () => {
 
   const handleCreateProfile = async () => {
     try {
-      const result = await dispatch(createInstructorProfile(user.id)).unwrap();
+      const id = user.id;
+      const result = dispatch(createInstructorProfile(id));
       if (result) {
         navigate(`/edit-profile`);
       }
@@ -29,7 +30,9 @@ export const AreYouInstructor = () => {
         <Option>
           <h3>Tak</h3>
           <p>Kliknij "Stwórz" aby utworzyć profil instruktora.</p>
-          <button onClick={handleCreateProfile}>STWÓRZ</button>
+          <Link to="/edit-profile">
+            <button onClick={handleCreateProfile}>STWÓRZ</button>
+          </Link>
         </Option>
         <Option>
           <h3>Nie</h3>
