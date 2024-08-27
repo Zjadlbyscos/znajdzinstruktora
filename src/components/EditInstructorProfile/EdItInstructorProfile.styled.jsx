@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const EditProfileWrapper = styled.div`
+position: relative;
+margin-top: 50px;
   display: flex;
   flex-direction: column;
   gap: 2vw;
@@ -232,6 +234,9 @@ export const Select = styled.select`
 `;
 
 export const ButtonWrapper = styled.div`
+position: absolute;
+top:-50px;
+left: 50%;
   display: flex;
   justify-content: center;
   padding-bottom: 16px;
