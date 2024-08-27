@@ -27,6 +27,9 @@ export const Wrapper = styled.div`
   @media screen and (min-width: 1024px) {
     height: 760px;
   }
+  @media screen and (min-width: 1440px) {
+    height: 900px;
+  }
 `;
 
 export const Content = styled.div`
@@ -55,8 +58,12 @@ top:0px;
   }
   @media screen and (min-width: 1024px) {
     background-image: url(${tlo_big});
-    max-width: 600px;
+    max-width: 800px;
 height: 900px;
 background-position: center center;
+  }
+  @media screen and (min-width: 1440px) {
+    max-width: 800px;
+height: 1050px;
   }
 `;
