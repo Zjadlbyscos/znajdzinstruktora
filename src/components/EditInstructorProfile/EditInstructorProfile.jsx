@@ -114,12 +114,13 @@ export const InstructorProfile = () => {
 
   return (
     <>
-      <ButtonWrapper>
-        <Button type="submit">ZAPISZ</Button>
-      </ButtonWrapper>
+     
 
       <EditProfileWrapper>
         <LeftProfileForm onSubmit={handleSubmit(onSubmit)}>
+        <ButtonWrapper>
+        <Button type="submit">ZAPISZ</Button>
+      </ButtonWrapper>
           <ProfilePictureLabel>
             <input type="file" accept="image/*" onChange={handleFileChange} />
             {preview ? (
