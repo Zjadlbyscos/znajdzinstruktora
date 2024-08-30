@@ -32,6 +32,7 @@ import {
   updateInstructorProfile,
 } from "../../redux/instructors/operations";
 import { selectInstructor } from "../../redux/instructors/selectors";
+import { Calendar } from "./Calendar/Calendar";
 
 export const InstructorProfile = () => {
   const user = useSelector(selectUser);
@@ -213,6 +214,7 @@ export const InstructorProfile = () => {
           </div>
         </RightProfileForm>
       </EditProfileWrapper>
+      <Calendar />
     </>
   );
 };
