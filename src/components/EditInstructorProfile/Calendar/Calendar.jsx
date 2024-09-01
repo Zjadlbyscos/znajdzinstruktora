@@ -6,6 +6,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import pl from "@fullcalendar/core/locales/pl";
 import { DateModal } from "./Modals/DateModal";
+import { EditDateModal } from "./Modals/EditEventModal";
 import { CalendarContainer } from "./Calendar.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectInstructorEvents } from "../../../redux/events/selectors";
@@ -21,6 +22,7 @@ export const Calendar = () => {
   const instructorEvents = useSelector(selectInstructorEvents);
   const instructorId = useSelector(selectInstructor)._id;
   const [showDateModal, setShowDateModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [currentEvent, setCurrentEvent] = useState(null);
 
   useEffect(() => {
@@ -41,8 +43,17 @@ export const Calendar = () => {
     setShowDateModal(true);
   };
 
+  const handleEventClick = (info) => {
+    setCurrentEvent(info.event);
+    setShowEditModal(true);
+  };
+
   const closeDateModal = () => {
     setShowDateModal(false);
+  };
+
+  const closeEditModal = () => {
+    setShowEditModal(false);
   };
 
   const updateEvent = (updatedEvent) => {
@@ -94,10 +105,19 @@ export const Calendar = () => {
           events={formattedEvents}
           eventContent={eventContent}
           eventDrop={handleEventDrop}
+          eventClick={handleEventClick}
         />
         {showDateModal && (
           <DateModal
             handleClose={closeDateModal}
+            event={currentEvent}
+            updateEvent={updateEvent}
+            handleSave={handleSave}
+          />
+        )}
+        {showEditModal && (
+          <EditDateModal
+            handleClose={closeEditModal}
             event={currentEvent}
             updateEvent={updateEvent}
             handleSave={handleSave}
