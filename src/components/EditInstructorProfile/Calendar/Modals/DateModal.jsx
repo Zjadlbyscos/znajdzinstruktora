@@ -3,9 +3,8 @@ import useOutsideClick from "../../../../hooks/useOutsideClick";
 import { editProfileConfig } from "../../../../hooks/editProfileConfig";
 import { DateModalContainer } from "./DateModal.styled";
 import { selectInstructor } from "../../../../redux/instructors/selectors";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { createNewEvent } from "../../../../redux/events/operations";
 
 export const DateModal = ({ handleClose, event, handleSave }) => {
   const modalRef = useRef();
@@ -16,7 +15,6 @@ export const DateModal = ({ handleClose, event, handleSave }) => {
     formState: { errors },
   } = useForm();
   const { classLevel } = editProfileConfig();
-  const dispatch = useDispatch();
   useOutsideClick(modalRef, handleClose, true);
   const instructor = useSelector(selectInstructor);
 
@@ -52,8 +50,7 @@ export const DateModal = ({ handleClose, event, handleSave }) => {
         ? data.classLevel
         : [data.classLevel],
     };
-    dispatch(createNewEvent(preparedData));
-    handleSave();
+    handleSave(preparedData);
   };
 
   return (

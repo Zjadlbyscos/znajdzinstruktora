@@ -12,6 +12,7 @@ import { selectInstructorEvents } from "../../../redux/events/selectors";
 import {
   createNewEvent,
   fetchInstructorEvents,
+  updateEventInfo,
 } from "../../../redux/events/operations";
 import { selectInstructor } from "../../../redux/instructors/selectors";
 
@@ -19,13 +20,17 @@ export const Calendar = () => {
   const dispatch = useDispatch();
   const instructorEvents = useSelector(selectInstructorEvents);
   const instructorId = useSelector(selectInstructor)._id;
-  console.log(instructorEvents, "instructorEvents");
   const [showDateModal, setShowDateModal] = useState(false);
   const [currentEvent, setCurrentEvent] = useState(null);
 
   useEffect(() => {
     dispatch(fetchInstructorEvents(instructorId));
   }, [dispatch, instructorId]);
+
+  const formattedEvents = instructorEvents.events.map((event) => ({
+    ...event,
+    id: event._id,
+  }));
 
   const openDateModal = (info) => {
     setCurrentEvent({
@@ -44,13 +49,27 @@ export const Calendar = () => {
     setCurrentEvent(updatedEvent);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (preparedData) => {
     try {
-      await dispatch(createNewEvent(currentEvent));
+      await dispatch(createNewEvent(preparedData));
       await dispatch(fetchInstructorEvents(instructorId));
       closeDateModal();
     } catch (error) {
       console.error("Failed to save the event:", error);
+    }
+  };
+
+  const handleEventDrop = async (info) => {
+    const eventId = info.event.id;
+    const updatedEventData = {
+      start: info.event.startStr,
+      end: info.event.endStr,
+    };
+    try {
+      await dispatch(updateEventInfo({ eventId, data: updatedEventData }));
+      await dispatch(fetchInstructorEvents(instructorId));
+    } catch (error) {
+      console.error("Failed to update the event:", error);
     }
   };
 
@@ -72,8 +91,9 @@ export const Calendar = () => {
           selectable={true}
           selectMirror={true}
           select={openDateModal}
-          events={instructorEvents}
+          events={formattedEvents}
           eventContent={eventContent}
+          eventDrop={handleEventDrop}
         />
         {showDateModal && (
           <DateModal
@@ -90,16 +110,16 @@ export const Calendar = () => {
 
 const eventContent = ({ event }) => {
   const { start, end, extendedProps } = event;
-  const formattedStart = format(new Date(start), "h:mm");
-  const formattedEnd = format(new Date(end), "h:mm");
-  console.log(extendedProps, "extendedProps");
+  const formattedStart = format(new Date(start), "HH:mm");
+  const formattedEnd = format(new Date(end), "HH:mm");
+  const classLevel = extendedProps.classLevel || "No class level";
+
   return (
     <div>
       <p>
         {formattedStart} - {formattedEnd}
       </p>
-      <p>{extendedProps.classLevel}</p>
-      <p>{extendedProps.duration}</p>
+      <p>{classLevel}</p>
     </div>
   );
 };
