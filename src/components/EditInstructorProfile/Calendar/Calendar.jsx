@@ -20,19 +20,26 @@ import { selectInstructor } from "../../../redux/instructors/selectors";
 export const Calendar = () => {
   const dispatch = useDispatch();
   const instructorEvents = useSelector(selectInstructorEvents);
-  const instructorId = useSelector(selectInstructor)._id;
+  const instructorId = useSelector(selectInstructor)?._id;
   const [showDateModal, setShowDateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [currentEvent, setCurrentEvent] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchInstructorEvents(instructorId));
+    if (instructorId) {
+      dispatch(fetchInstructorEvents(instructorId));
+    }
   }, [dispatch, instructorId]);
 
-  const formattedEvents = instructorEvents.events.map((event) => ({
-    ...event,
-    id: event._id,
-  }));
+  if (!instructorEvents) {
+    return <p>Loading events...</p>;
+  }
+
+  const formattedEvents =
+    instructorEvents?.events?.map((event) => ({
+      ...event,
+      id: event._id,
+    })) || [];
 
   const openDateModal = (info) => {
     setCurrentEvent({

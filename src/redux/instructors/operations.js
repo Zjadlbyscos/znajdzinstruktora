@@ -6,7 +6,6 @@ export const fetchInstructors = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/instructors");
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -18,9 +17,9 @@ export const createInstructorProfile = createAsyncThunk(
   "instructors/createInstructorProfile",
   async (id, thunkAPI) => {
     try {
-      const response = await axios.post("/instructors/id", { id });
-      console.log(response);
-      return response.data;
+      const response = await axios.post(`/instructors/${id}`);
+
+      return response.data.ResponseBody.newInstructor;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -32,7 +31,6 @@ export const updateInstructorProfile = createAsyncThunk(
   async ({ id, data }, thunkAPI) => {
     try {
       const response = await axios.patch(`/instructors/${id}`, data);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
@@ -45,7 +43,6 @@ export const getInstructorById = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await axios.get(`/instructors/${id}`);
-      console.log(response.data.instructor);
       return response.data.instructor;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

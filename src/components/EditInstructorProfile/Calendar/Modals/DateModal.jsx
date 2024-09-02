@@ -37,9 +37,6 @@ export const DateModal = ({ handleClose, event, handleSave }) => {
       setValue("avaiable", true);
       setValue("address", "ul. Testowa 1, 00-000 Warszawa" || "");
       // poki co na sztywno - potem do zmiany
-      console.log(event, "event");
-      console.log(duration, "duration");
-      console.log(instructorId, "instructorId");
     }
   }, [event, setValue, instructorId]);
 
