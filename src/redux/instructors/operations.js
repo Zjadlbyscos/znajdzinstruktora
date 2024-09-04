@@ -18,8 +18,7 @@ export const createInstructorProfile = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await axios.post(`/instructors/${id}`);
-
-      return response.data.ResponseBody.newInstructor;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
