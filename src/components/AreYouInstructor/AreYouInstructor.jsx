@@ -13,7 +13,7 @@ export const AreYouInstructor = () => {
   const handleCreateProfile = async () => {
     try {
       const id = user.id;
-      const result = dispatch(createInstructorProfile(id));
+      const result = await dispatch(createInstructorProfile(id));
       if (result) {
         navigate(`/edit-profile`);
       }

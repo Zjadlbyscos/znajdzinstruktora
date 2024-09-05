@@ -37,6 +37,7 @@ const initialState = {
   isVerified: false,
   isSuccess: false,
   isInstructor: false,
+  instructorId: null,
 };
 
 const authSlice = createSlice({
@@ -85,8 +86,9 @@ const authSlice = createSlice({
       .addCase(activateAccount.fulfilled, (state) => {
         state.isVerified = true;
       })
-      .addCase(createInstructorProfile.fulfilled, (state) => {
+      .addCase(createInstructorProfile.fulfilled, (state, action) => {
         state.isInstructor = true;
+        state.instructorId = action.payload.instructorId;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)

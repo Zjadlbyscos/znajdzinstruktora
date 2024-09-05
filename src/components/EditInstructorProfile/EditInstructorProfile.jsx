@@ -32,9 +32,12 @@ import {
   updateInstructorProfile,
 } from "../../redux/instructors/operations";
 import { selectInstructor } from "../../redux/instructors/selectors";
+import { Calendar } from "./Calendar/Calendar";
 
 export const InstructorProfile = () => {
   const user = useSelector(selectUser);
+  const instructor = useSelector(selectInstructor);
+
   const {
     register,
     handleSubmit,
@@ -54,18 +57,18 @@ export const InstructorProfile = () => {
   const { firstName, lastName } = user;
   const { classLevel, languages } = editProfileConfig();
 
-  const instructor = useSelector(selectInstructor);
-  console.log(instructor);
-  const id = instructor._id;
-  console.log(id, "id");
+  const id = user.instructorId;
 
   useEffect(() => {
-    dispatch(getInstructorById(id));
-  }, [dispatch, id]);
+    if (user.isInstructor) {
+      dispatch(getInstructorById(id));
+    }
+  }, [dispatch, id, user.isInstructor]);
 
   useEffect(() => {
     if (instructor) {
-      setValue("id", instructor.id || "");
+      console.log(instructor);
+      setValue("id", id || "");
       setValue("bio", instructor.bio || "");
       setValue("phoneNumber", instructor.phoneNumber || "");
       setValue("email", instructor.email || "");
@@ -81,7 +84,7 @@ export const InstructorProfile = () => {
       setValue("classLevel", classLevels);
       setValue("languages", languages);
     }
-  }, [instructor, setValue]);
+  }, [instructor, id, setValue]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -114,13 +117,11 @@ export const InstructorProfile = () => {
 
   return (
     <>
-     
-
       <EditProfileWrapper>
         <LeftProfileForm onSubmit={handleSubmit(onSubmit)}>
-        <ButtonWrapper>
-        <Button type="submit">ZAPISZ</Button>
-      </ButtonWrapper>
+          <ButtonWrapper>
+            <Button type="submit">ZAPISZ</Button>
+          </ButtonWrapper>
           <ProfilePictureLabel>
             <input type="file" accept="image/*" onChange={handleFileChange} />
             {preview ? (
@@ -215,6 +216,7 @@ export const InstructorProfile = () => {
           </div>
         </RightProfileForm>
       </EditProfileWrapper>
+      <Calendar />
     </>
   );
 };
