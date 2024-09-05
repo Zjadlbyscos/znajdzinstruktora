@@ -1,7 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import useOutsideClick from "../../../../hooks/useOutsideClick";
 import { editProfileConfig } from "../../../../hooks/editProfileConfig";
-import { DateModalContainer } from "./DateModal.styled";
+import {
+  Button,
+  CloseButton,
+  DateModalContainer,
+  EventForm,
+  InfoInput,
+} from "./DateModal.styled";
 import { selectInstructor } from "../../../../redux/instructors/selectors";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -52,24 +58,22 @@ export const DateModal = ({ handleClose, event, handleSave }) => {
 
   return (
     <DateModalContainer ref={modalRef}>
-      <div>
-        <button onClick={handleClose}>X</button>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <h4>Rodzaj prowadzonych zajęć:</h4>
-          <select id="classLevel" {...register("classLevel")}>
-            {classLevel.map((level, index) => (
-              <option key={index} value={level}>
-                {level}
-              </option>
-            ))}
-          </select>
-          <h2>Obiekt:</h2>
-          <select></select>
-          <h2>Dodatkowe informacje:</h2>
-          <input type="text" {...register("description")} />
-          <button type="submit">Zapisz</button>
-        </form>
-      </div>
+      <CloseButton onClick={handleClose}>X</CloseButton>
+      <EventForm onSubmit={handleSubmit(onSubmit)}>
+        <h4>Rodzaj prowadzonych zajęć:</h4>
+        <select id="classLevel" {...register("classLevel")}>
+          {classLevel.map((level, index) => (
+            <option key={index} value={level}>
+              {level}
+            </option>
+          ))}
+        </select>
+        <h4>Obiekt:</h4>
+        <select></select>
+        <h4>Dodatkowe informacje:</h4>
+        <InfoInput type="text" {...register("description")} />
+        <Button type="submit">Zapisz</Button>
+      </EventForm>
     </DateModalContainer>
   );
 };

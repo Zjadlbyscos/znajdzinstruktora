@@ -7,7 +7,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import pl from "@fullcalendar/core/locales/pl";
 import { DateModal } from "./Modals/DateModal";
 import { EditDateModal } from "./Modals/EditEventModal";
-import { CalendarContainer } from "./Calendar.styled";
+import { CalendarContainer, EventContentContainer } from "./Calendar.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectInstructorEvents } from "../../../redux/events/selectors";
 import {
@@ -142,11 +142,11 @@ const eventContent = ({ event }) => {
   const classLevel = extendedProps.classLevel || "No class level";
 
   return (
-    <div>
+    <EventContentContainer>
       <p>
         {formattedStart} - {formattedEnd}
       </p>
       <p>{classLevel}</p>
-    </div>
+    </EventContentContainer>
   );
 };

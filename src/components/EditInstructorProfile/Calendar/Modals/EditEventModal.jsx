@@ -7,7 +7,12 @@ import {
   updateEventInfo,
 } from "../../../../redux/events/operations";
 import { DateModal } from "./DateModal";
-import { EditEventContainer } from "./EditEventModal.styled";
+import {
+  ButtonsContainer,
+  EditEventContainer,
+  EventInfoContainer,
+} from "./EditEventModal.styled";
+import { Button, CloseButton } from "./DateModal.styled";
 
 export const EditDateModal = ({ handleClose, event }) => {
   const dispatch = useDispatch();
@@ -51,14 +56,16 @@ export const EditDateModal = ({ handleClose, event }) => {
 
   return (
     <EditEventContainer ref={modalRef}>
-      <div>
-        <button onClick={handleClose}>X</button>
+      <EventInfoContainer>
+        <CloseButton onClick={handleClose}>X</CloseButton>
         <p>{extendedProps.classLevel}</p>
         <p>{extendedProps.address}</p>
         <p>{extendedProps.description}</p>
-        <button onClick={handleEditEvent}>Edytuj zajęcia</button>
-        <button onClick={handleDelete}>Usuń zajęcia</button>
-      </div>
+      </EventInfoContainer>
+      <ButtonsContainer>
+        <Button onClick={handleEditEvent}>Edytuj zajęcia</Button>
+        <Button onClick={handleDelete}>Usuń zajęcia</Button>
+      </ButtonsContainer>
 
       {showEditModal && (
         <DateModal
