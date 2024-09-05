@@ -76,7 +76,7 @@ export const InstructorProfile = () => {
       setValue("tiktok", instructor.tiktok || "");
       setValue("youtube", instructor.youtube || "");
       setValue("facebook", instructor.facebook || "");
-      setValue("photo", instructor.photo || "");
+      setValue("image", instructor.image || "");
 
       const classLevels = instructor.classLevel;
       const languages = instructor.languages;
@@ -90,9 +90,9 @@ export const InstructorProfile = () => {
     const file = event.target.files[0];
     if (file) {
       setPreview(URL.createObjectURL(file));
-      setValue("photo", file);
+      setValue("image", file);
     } else {
-      setValue("photo", null);
+      setValue("image", null);
     }
   };
 
