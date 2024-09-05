@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useOutsideClick from "../../../../hooks/useOutsideClick";
 import { editProfileConfig } from "../../../../hooks/editProfileConfig";
 import {
@@ -9,11 +9,14 @@ import {
   InfoInput,
 } from "./DateModal.styled";
 import { selectInstructor } from "../../../../redux/instructors/selectors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { selectFacilities } from "../../../../redux/facilities/selectors";
+import { fetchFacilities } from "../../../../redux/facilities/operations";
 
 export const DateModal = ({ handleClose, event, handleSave }) => {
   const modalRef = useRef();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -23,12 +26,22 @@ export const DateModal = ({ handleClose, event, handleSave }) => {
   const { classLevel } = editProfileConfig();
   useOutsideClick(modalRef, handleClose, true);
   const instructor = useSelector(selectInstructor);
+  const facilities = useSelector(selectFacilities);
+  const [selectedFacility, setSelectedFacility] = useState("");
+  const [address, setAddress] = useState("");
 
   const instructorId = instructor._id;
 
   useEffect(() => {
+    dispatch(fetchFacilities());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (event) {
-      setValue("classLevel", Array.isArray(event.classLevel) || []);
+      setValue(
+        "classLevel",
+        Array.isArray(event.classLevel) ? event.classLevel : []
+      );
       setValue("description", event.description || "");
       setValue("instructorId", instructorId || "");
       setValue("date", event.start || "");
@@ -38,20 +51,31 @@ export const DateModal = ({ handleClose, event, handleSave }) => {
         ? (new Date(event.end) - new Date(event.start)) / (1000 * 60)
         : "";
       setValue("duration", duration || "");
-      setValue("facilityId", "66cc6087e545db411fb91796");
-      // poki co na sztywno - potem do zmiany
+      setValue("facilityId", facilities.length > 0 ? facilities[0]._id : "");
+      setSelectedFacility(facilities.length > 0 ? facilities[0]._id : "");
       setValue("avaiable", true);
-      setValue("address", "ul. Testowa 1, 00-000 Warszawa" || "");
-      // poki co na sztywno - potem do zmiany
+      setValue("address", facilities.length > 0 ? facilities[0].city : "");
+      setAddress(facilities.length > 0 ? facilities[0].city : "");
     }
-  }, [event, setValue, instructorId]);
+  }, [event, setValue, instructorId, facilities]);
+
+  const handleFacilityChange = (e) => {
+    const selectedId = e.target.value;
+    setSelectedFacility(selectedId);
+    const selected = facilities.find((facility) => facility._id === selectedId);
+    if (selected) {
+      setAddress(selected.city);
+      setValue("address", selected.city);
+    }
+  };
 
   const onSubmit = (data) => {
     const preparedData = {
       ...data,
+      address,
       classLevel: Array.isArray(data.classLevel)
-        ? data.classLevel
-        : [data.classLevel],
+        ? data.classLevel.filter((level) => level !== null)
+        : [data.classLevel].filter((level) => level !== null),
     };
     handleSave(preparedData);
   };
@@ -69,7 +93,18 @@ export const DateModal = ({ handleClose, event, handleSave }) => {
           ))}
         </select>
         <h4>Obiekt:</h4>
-        <select></select>
+        <select
+          id="facility"
+          {...register("facilityId")}
+          onChange={handleFacilityChange}
+          value={selectedFacility}
+        >
+          {facilities.map((facility, index) => (
+            <option key={index} value={facility._id}>
+              {facility.name}
+            </option>
+          ))}
+        </select>
         <h4>Dodatkowe informacje:</h4>
         <InfoInput type="text" {...register("description")} />
         <Button type="submit">Zapisz</Button>
