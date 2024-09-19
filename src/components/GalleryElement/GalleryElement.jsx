@@ -6,8 +6,6 @@ export const GalleryElement = ({ elements }) => {
   return (
     <GalleryElementUl>
       {elements.map((el) => {
-        console.log(el.type);
-
         const imgSrc = el.photo || NoImageSmall;
         const altText = el.photo ? "Image" : "brak zdjęcia";
         const linkPath =
