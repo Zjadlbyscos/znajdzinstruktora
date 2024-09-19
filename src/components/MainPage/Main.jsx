@@ -1,4 +1,11 @@
-import { Background, Wrapper, Content, Image } from "./Main.styled";
+import {
+  Background,
+  Wrapper,
+  Content,
+  Image,
+  SearchContainer,
+} from "./Main.styled";
+import SearchForm from "./SearchForm/SearchForm";
 
 export const Main = () => {
   return (
@@ -6,8 +13,9 @@ export const Main = () => {
       <section>
         <Wrapper>
           <Content>
+            <SearchForm />
+
             <p>ZNAJDŹ ZAJĘCIA DLA SIEBIE</p>
-            <p> CONTENT MAIN.JSX</p>
           </Content>
           <Image></Image>
         </Wrapper>
