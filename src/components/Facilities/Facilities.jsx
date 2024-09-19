@@ -3,7 +3,7 @@ import { selectFacilities } from "../../redux/facilities/selectors";
 import { fetchFacilities } from "../../redux/facilities/operations";
 import { useEffect, useState } from "react";
 import { GalleryElement } from "../GalleryElement/GalleryElement";
-import { Input } from "../search/Input";
+import { Input } from "../search/input";
 
 export const Facilities = () => {
   const facilities = useSelector(selectFacilities);
