@@ -12,7 +12,7 @@ import {
 import { searchEvents } from "../../../redux/search/operations";
 import { useDispatch } from "react-redux";
 
-const SearchForm = () => {
+export const SearchForm = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedActivity, setSelectedActivity] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -72,5 +72,3 @@ const SearchForm = () => {
     </SearchWrapper>
   );
 };
-
-export default SearchForm;

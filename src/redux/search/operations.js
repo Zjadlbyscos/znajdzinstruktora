@@ -9,7 +9,7 @@ export const searchEvents = createAsyncThunk(
         params: searchData,
       });
       console.log(response.data);
-      return response.data;
+      return response.data.result;
     } catch (error) {
       console.error("Error during search:", error);
       return thunkAPI.rejectWithValue({ error: error.message });

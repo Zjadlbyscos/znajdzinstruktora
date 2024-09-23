@@ -11,11 +11,13 @@ const isRejectAction = (action) => {
 
 const handlePending = (state) => {
   state.isLoading = true;
+  state.isSuccess = false;
 };
 
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
+  state.isSuccess = false;
 };
 
 const initialState = {
@@ -32,6 +34,8 @@ const searchSlice = createSlice({
     builder
       .addCase(searchEvents.fulfilled, (state, action) => {
         state.results = action.payload;
+        state.loading = false;
+        state.isSuccess = true;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)
