@@ -7,16 +7,17 @@ import {
   FieldContainer,
   StyledSelect,
   DateInput,
-  SubmitButton,
-  InputLabel,
   StyledOption,
 } from "./SearchForm.styled";
+import { searchEvents } from "../../../redux/search/operations";
+import { useDispatch } from "react-redux";
 
 const SearchForm = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedActivity, setSelectedActivity] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const { searchConfig } = useSearchConfig();
+  const dispatch = useDispatch();
 
   const renderField = (field) => {
     if (field.type === "date-picker") {
@@ -56,14 +57,12 @@ const SearchForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const searchData = {
       activity: selectedActivity,
       city: selectedCity,
       date: selectedDate,
     };
-
-    console.log("Wyszukiwanie z danymi:", searchData);
+    dispatch(searchEvents(searchData));
   };
 
   return (
