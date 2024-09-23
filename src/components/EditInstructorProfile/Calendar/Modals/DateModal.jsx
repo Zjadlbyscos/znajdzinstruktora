@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { selectFacilities } from "../../../../redux/facilities/selectors";
 import { fetchFacilities } from "../../../../redux/facilities/operations";
+import { selectUser } from "../../../../redux/auth/selectors";
 
 export const DateModal = ({ handleClose, event, handleSave }) => {
   const modalRef = useRef();
@@ -31,6 +32,7 @@ export const DateModal = ({ handleClose, event, handleSave }) => {
   const [address, setAddress] = useState("");
 
   const instructorId = instructor._id;
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(fetchFacilities());
@@ -56,8 +58,10 @@ export const DateModal = ({ handleClose, event, handleSave }) => {
       setValue("avaiable", true);
       setValue("address", facilities.length > 0 ? facilities[0].city : "");
       setAddress(facilities.length > 0 ? facilities[0].city : "");
+      setValue("discipline", user.discipline || "");
+      setValue("date", event.start || "");
     }
-  }, [event, setValue, instructorId, facilities]);
+  }, [event, setValue, instructorId, facilities, user]);
 
   const handleFacilityChange = (e) => {
     const selectedId = e.target.value;
