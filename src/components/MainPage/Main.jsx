@@ -12,9 +12,8 @@ export const Main = () => {
         <section>
           <Wrapper>
             <Content>
-              <SearchForm />
-
               <p>ZNAJDŹ ZAJĘCIA DLA SIEBIE</p>
+              <SearchForm />
             </Content>
             <Image></Image>
           </Wrapper>
