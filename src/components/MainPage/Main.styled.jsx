@@ -37,6 +37,10 @@ export const Content = styled.div`
   color: white;
   font-size: 23px;
   font-weight: 600;
+  @media screen and (min-width: 768px) {
+    margin-top: 550px;
+    z-index: 1;
+  }
 `;
 export const Image = styled.div`
   position: absolute;
