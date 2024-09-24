@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyledInput } from "./Input.styled";
+import { StyledInput } from "./input.styled";
 
 export const Input = ({ onChangeCallback }) => {
   const [value, setValue] = useState("");

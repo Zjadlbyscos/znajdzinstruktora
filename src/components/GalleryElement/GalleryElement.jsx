@@ -1,4 +1,3 @@
-
 import {
   GalleryElementUl,
   GalleryImg,
@@ -13,7 +12,6 @@ import { Link } from "react-router-dom";
 export const GalleryElement = ({ elements }) => {
   return (
     <GalleryElementUl>
-
       {elements.map((el) => {
         const imgSrc = el.photo || NoImageSmall;
         const altText = el.photo ? "Image" : "brak zdjęcia";
@@ -37,6 +35,6 @@ export const GalleryElement = ({ elements }) => {
           </StyledElement>
         );
       })}
-
+    </GalleryElementUl>
   );
 };
