@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  createInstructorProfile,
-  fetchInstructors,
-  getInstructorById,
-} from "./operations";
+import { fetchFacilities, fetchFacilityById } from "./operations";
 
 const isPendingAction = (action) => {
   return action.type.endsWith("/pending");
@@ -23,25 +19,22 @@ const handleRejected = (state, action) => {
 };
 
 const initialState = {
-  instructors: [],
-  instructor: {},
+  facilities: [],
+  facility: {},
   isLoading: false,
   error: null,
 };
 
-const instructorsSlice = createSlice({
-  name: "instructors",
+const facilitiesSlice = createSlice({
+  name: "facilities",
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchInstructors.fulfilled, (state, action) => {
-        state.instructors = action.payload;
+      .addCase(fetchFacilities.fulfilled, (state, action) => {
+        state.facilities = action.payload;
       })
-      .addCase(getInstructorById.fulfilled, (state, action) => {
-        state.instructor = action.payload;
-      })
-      .addCase(createInstructorProfile.fulfilled, (state, action) => {
-        state.instructor = action.payload;
+      .addCase(fetchFacilityById.fulfilled, (state, action) => {
+        state.facility = action.payload;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)
@@ -51,4 +44,4 @@ const instructorsSlice = createSlice({
   },
 });
 
-export const instructorsReducer = instructorsSlice.reducer;
+export const facilitiesReducer = facilitiesSlice.reducer;

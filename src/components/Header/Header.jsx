@@ -45,7 +45,7 @@ export const Header = () => {
             toggle={toggle(setOpen)}
             direction="right"
             label="Show menu"
-            color="#303030"
+            color="#f3f3f3"
             rounded
           />
         </HamburgerStyle>

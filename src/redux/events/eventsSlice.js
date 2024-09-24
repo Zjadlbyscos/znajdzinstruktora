@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  createInstructorProfile,
-  fetchInstructors,
-  getInstructorById,
+  createNewEvent,
+  deleteEvent,
+  fetchEventById,
+  fetchEvents,
+  fetchInstructorEvents,
 } from "./operations";
 
 const isPendingAction = (action) => {
@@ -23,25 +25,32 @@ const handleRejected = (state, action) => {
 };
 
 const initialState = {
-  instructors: [],
-  instructor: {},
+  events: [],
+  event: {},
+  instructorEvents: [],
   isLoading: false,
   error: null,
 };
 
-const instructorsSlice = createSlice({
-  name: "instructors",
+const eventsSlice = createSlice({
+  name: "events",
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchInstructors.fulfilled, (state, action) => {
-        state.instructors = action.payload;
+      .addCase(fetchEvents.fulfilled, (state, action) => {
+        state.events = action.payload;
       })
-      .addCase(getInstructorById.fulfilled, (state, action) => {
-        state.instructor = action.payload;
+      .addCase(fetchInstructorEvents.fulfilled, (state, action) => {
+        state.instructorEvents = action.payload;
       })
-      .addCase(createInstructorProfile.fulfilled, (state, action) => {
-        state.instructor = action.payload;
+      .addCase(fetchEventById.fulfilled, (state, action) => {
+        state.event = action.payload;
+      })
+      .addCase(createNewEvent.fulfilled, (state, action) => {
+        state.event = action.payload;
+      })
+      .addCase(deleteEvent.fulfilled, (state, action) => {
+        state.event = action.payload;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)
@@ -51,4 +60,4 @@ const instructorsSlice = createSlice({
   },
 });
 
-export const instructorsReducer = instructorsSlice.reducer;
+export const eventsReducer = eventsSlice.reducer;

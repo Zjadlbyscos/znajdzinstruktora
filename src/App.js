@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import { Main } from "./pages/Main";
+import { MainPage } from "./pages/MainPage";
 import { Register } from "./pages/Register";
 import { AreYouIns } from "./pages/AreYouInstructor";
 import { ShareedLayout } from "./components/SharedLayout/SharedLayout";
@@ -9,13 +9,14 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import { EditInstructorProfile } from "./pages/EditInstructorProfile";
 import { Activate } from "./components/Auth/Activate/Activate";
 import { InstructorsPage } from "./pages/Instructors";
+import { FacilitiesPage } from "./pages/Facilities";
 
 function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<ShareedLayout />}>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<MainPage />} />
           <Route path="/czyInstruktor" element={<AreYouIns />} />
           <Route path="/edit-profile" element={<EditInstructorProfile />} />
           <Route path="/zarejestruj" element={<Register />} />
@@ -25,6 +26,7 @@ function App() {
             element={<ResetPasswordPage />}
           />
           <Route path="/instruktorzy" element={<InstructorsPage />} />
+          <Route path="/obiekty/" element={<FacilitiesPage />} />
           <Route path="/aktywacja/:verificationToken" element={<Activate />} />
         </Route>
       </Routes>

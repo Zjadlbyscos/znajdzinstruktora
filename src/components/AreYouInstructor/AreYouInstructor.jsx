@@ -1,9 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
 import { Wrapper, Content, Option } from "./AreYouInstructor.styled";
 import { createInstructorProfile } from "../../redux/instructors/operations";
-import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
 
 export const AreYouInstructor = () => {
@@ -11,12 +10,18 @@ export const AreYouInstructor = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const id = user.id;
-
-  const handleCreateInstructorProfile = () => {
-    dispatch(createInstructorProfile(id));
-    navigate("/edit-profile");
+  const handleCreateProfile = async () => {
+    try {
+      const id = user.id;
+      const result = await dispatch(createInstructorProfile(id));
+      if (result) {
+        navigate(`/edit-profile`);
+      }
+    } catch (error) {
+      console.error("Failed to create instructor profile:", error);
+    }
   };
+
   return (
     <Wrapper>
       <Content>
@@ -24,9 +29,10 @@ export const AreYouInstructor = () => {
 
         <Option>
           <h3>Tak</h3>
-
           <p>Kliknij "Stwórz" aby utworzyć profil instruktora.</p>
-          <button onClick={handleCreateInstructorProfile}>STWÓRZ</button>
+          <Link to="/edit-profile">
+            <button onClick={handleCreateProfile}>STWÓRZ</button>
+          </Link>
         </Option>
         <Option>
           <h3>Nie</h3>

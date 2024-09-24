@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  createInstructorProfile,
-  fetchInstructors,
-  getInstructorById,
-} from "./operations";
+import { searchEvents } from "./operations";
 
 const isPendingAction = (action) => {
   return action.type.endsWith("/pending");
@@ -15,33 +11,31 @@ const isRejectAction = (action) => {
 
 const handlePending = (state) => {
   state.isLoading = true;
+  state.isSuccess = false;
 };
 
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
+  state.isSuccess = false;
 };
 
 const initialState = {
-  instructors: [],
-  instructor: {},
-  isLoading: false,
+  results: [],
+  loading: false,
   error: null,
+  isSuccess: false,
 };
 
-const instructorsSlice = createSlice({
-  name: "instructors",
+const searchSlice = createSlice({
+  name: "search",
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchInstructors.fulfilled, (state, action) => {
-        state.instructors = action.payload;
-      })
-      .addCase(getInstructorById.fulfilled, (state, action) => {
-        state.instructor = action.payload;
-      })
-      .addCase(createInstructorProfile.fulfilled, (state, action) => {
-        state.instructor = action.payload;
+      .addCase(searchEvents.fulfilled, (state, action) => {
+        state.results = action.payload;
+        state.loading = false;
+        state.isSuccess = true;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)
@@ -51,4 +45,4 @@ const instructorsSlice = createSlice({
   },
 });
 
-export const instructorsReducer = instructorsSlice.reducer;
+export const searchReducer = searchSlice.reducer;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
+z-index: 30;
   position: relative;
   width: 100%;
   display: flex;
@@ -55,6 +56,7 @@ export const HamburgerStyle = styled.div`
   position: absolute;
   right: 21px;
   z-index: 2000;
+  color: white;
   @media (min-width: 768px) {
     display: none;
   }
