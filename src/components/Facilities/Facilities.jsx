@@ -4,6 +4,7 @@ import { fetchFacilities } from "../../redux/facilities/operations";
 import { useEffect, useState } from "react";
 import { GalleryElement } from "../GalleryElement/GalleryElement";
 import { Input } from "../search/input";
+import { FacilitiesWrapper } from "./Facilities.styled";
 
 export const Facilities = () => {
   const facilities = useSelector(selectFacilities);
@@ -27,9 +28,9 @@ export const Facilities = () => {
     setFilteredFacilities(filtered);
   };
   return (
-    <div>
+    <FacilitiesWrapper>
       <Input onChangeCallback={filterFacilities} />
       <GalleryElement elements={filteredFacilities} />
-    </div>
+    </FacilitiesWrapper>
   );
 };
