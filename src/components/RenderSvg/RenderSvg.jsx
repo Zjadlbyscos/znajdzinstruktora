@@ -270,12 +270,12 @@ export function FBSvg() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M1 12.5642C1 18.2821 5.15277 23.0363 10.5833 24V15.6944H7.70833V12.5H10.5833V9.94443C10.5833 7.06943 12.4361 5.47222 15.0556 5.47222C15.8861 5.47222 16.7806 5.59999 17.6111 5.72776V8.66666H16.1417C14.7361 8.66666 14.4167 9.36943 14.4167 10.2639V12.5H17.4833L16.9723 15.6944H14.4167V24C19.8473 23.0363 24 18.2821 24 12.5642C24 6.20391 18.825 1 12.5 1C6.175 1 1 6.20391 1 12.5642Z"
         stroke="#8E4A9A"
-        stroke-width="2"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinejoin="round"
       />
     </svg>
   );
