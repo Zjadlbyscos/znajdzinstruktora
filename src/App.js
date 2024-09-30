@@ -10,6 +10,7 @@ import { EditInstructorProfile } from "./pages/EditInstructorProfile";
 import { Activate } from "./components/Auth/Activate/Activate";
 import { InstructorsPage } from "./pages/Instructors";
 import { FacilitiesPage } from "./pages/Facilities";
+import { InstructorProfile } from "./pages/InstructorProfile";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             element={<ResetPasswordPage />}
           />
           <Route path="/instruktorzy" element={<InstructorsPage />} />
+          <Route path="/instruktorzy/:id" element={<InstructorProfile />} />
           <Route path="/obiekty/" element={<FacilitiesPage />} />
           <Route path="/aktywacja/:verificationToken" element={<Activate />} />
         </Route>

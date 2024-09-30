@@ -13,11 +13,11 @@ export const GalleryElement = ({ elements }) => {
   return (
     <GalleryElementUl>
       {elements.map((el) => {
-        const imgSrc = el.photo || NoImageSmall;
+        const imgSrc = el.image || NoImageSmall;
         const altText = el.photo ? "Image" : "brak zdjęcia";
         const linkPath =
           el.type === "instructor"
-            ? `/instructors/${el._id}`
+            ? `/instruktorzy/${el._id}`
             : `/obiekty/${el._id}`;
         return (
           <StyledElement key={el._id}>

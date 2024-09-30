@@ -67,7 +67,6 @@ export const InstructorProfile = () => {
 
   useEffect(() => {
     if (instructor) {
-      console.log(instructor);
       setValue("id", id || "");
       setValue("bio", instructor.bio || "");
       setValue("phoneNumber", instructor.phoneNumber || "");
