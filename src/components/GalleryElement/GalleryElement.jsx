@@ -1,3 +1,5 @@
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
 import {
   GalleryElementUl,
   GalleryImg,
@@ -7,11 +9,15 @@ import {
   StyledElement,
 } from "./GalleryElement.styled";
 import NoImageSmall from "../../images/NoImageSmall.png";
-import { Link } from "react-router-dom";
 
-export const GalleryElement = ({ elements }) => {
+export const GalleryElement = ({ elements, hasMore, fetchMoreData }) => {
   return (
     <GalleryElementUl>
+      <InfiniteScroll
+        dataLength={elements.length}
+        next={fetchMoreData}
+        hasMore={hasMore}
+      />
       {elements.map((el) => {
         const imgSrc = el.image || NoImageSmall;
         const altText = el.photo ? "Image" : "brak zdjęcia";
@@ -19,6 +25,7 @@ export const GalleryElement = ({ elements }) => {
           el.type === "instructor"
             ? `/instruktorzy/${el._id}`
             : `/obiekty/${el._id}`;
+
         return (
           <StyledElement key={el._id}>
             <Link to={linkPath}>
