@@ -3,9 +3,10 @@ import axios from "axios";
 
 export const fetchFacilities = createAsyncThunk(
   "facilities/fetchFacilities",
-  async (_, thunkAPI) => {
+  async (page, thunkAPI) => {
     try {
-      const response = await axios.get("/facilities");
+      const response = await axios.get(`/facilities?page=${page}&limit=2`);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
