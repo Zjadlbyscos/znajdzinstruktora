@@ -25,6 +25,8 @@ const handleRejected = (state, action) => {
 const initialState = {
   instructors: [],
   instructor: {},
+  totalPages: null,
+  currentPage: 1,
   isLoading: false,
   error: null,
 };
@@ -32,10 +34,21 @@ const initialState = {
 const instructorsSlice = createSlice({
   name: "instructors",
   initialState,
+  reducers: {
+    reset: (state) => {
+      state.instructors = [];
+      state.currentPage = 1;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchInstructors.fulfilled, (state, action) => {
-        state.instructors = action.payload;
+        state.instructors = [
+          ...state.instructors,
+          ...action.payload.instructors,
+        ];
+        state.totalPages = action.payload.totalPages;
+        state.currentPage = action.payload.currentPage;
       })
       .addCase(getInstructorById.fulfilled, (state, action) => {
         state.instructor = action.payload;
@@ -46,9 +59,10 @@ const instructorsSlice = createSlice({
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)
       .addDefaultCase((state) => {
-        state.error = "someone use old function, fix it!";
+        state.error = "someone used an old function, fix it!";
       });
   },
 });
 
+export const { reset } = instructorsSlice.actions;
 export const instructorsReducer = instructorsSlice.reducer;
