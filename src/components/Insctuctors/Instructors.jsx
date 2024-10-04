@@ -1,38 +1,47 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchInstructors } from "../../redux/instructors/operations";
-import { selectInstructors } from "../../redux/instructors/selectors";
+import {
+  selectInstructors,
+  selectTotalPages,
+} from "../../redux/instructors/selectors";
 import { GalleryElement } from "../GalleryElement/GalleryElement";
 import { useEffect, useState } from "react";
-import { Input } from "../search/input";
 import { InstructorsWrapper } from "./Instructors.styled";
 
 export const Instructors = () => {
   const instructors = useSelector(selectInstructors);
+  const totalPages = useSelector(selectTotalPages);
   const dispatch = useDispatch();
-  const [filteredInstructors, setFilteredInstructors] = useState(instructors);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+
+  const resetInstructors = () => {
+    setCurrentPage(1);
+    dispatch({ type: "instructors/reset" });
+  };
 
   useEffect(() => {
-    dispatch(fetchInstructors());
+    resetInstructors();
+    dispatch(fetchInstructors(1));
   }, [dispatch]);
 
-  useEffect(() => {
-    setFilteredInstructors(instructors);
-  }, [instructors]);
-
-  const filterInstructors = (searchTerm) => {
-    const filtered = instructors.filter(
-      (instructor) =>
-        instructor.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        instructor.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        instructor.discipline.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredInstructors(filtered);
+  const fetchMoreData = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+      dispatch(fetchInstructors(currentPage + 1));
+    } else {
+      setHasMore(false);
+    }
   };
 
   return (
     <InstructorsWrapper>
-      <Input onChangeCallback={filterInstructors} />
-      <GalleryElement elements={filteredInstructors} />
+      <GalleryElement
+        elements={instructors}
+        fetchMoreData={fetchMoreData}
+        hasMore={hasMore}
+      />
     </InstructorsWrapper>
   );
 };
