@@ -23,13 +23,13 @@ const handleRejected = (state, action) => {
 };
 
 const initialState = {
-  paginatedInstructors: [],
+  instructors: [],
   instructor: {},
-  allInstructors: [],
   totalPages: null,
   currentPage: 1,
   isLoading: false,
   error: null,
+  isSuccess: false,
 };
 
 const instructorsSlice = createSlice({
@@ -37,20 +37,20 @@ const instructorsSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      state.paginatedInstructors = [];
+      state.instructors = [];
       state.currentPage = 1;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchInstructors.fulfilled, (state, action) => {
-        state.paginatedInstructors = [
-          ...state.paginatedInstructors,
-          ...action.payload.paginatedInstructors,
+        state.instructors = [
+          ...state.instructors,
+          ...action.payload.instructors,
         ];
         state.totalPages = action.payload.totalPages;
         state.currentPage = action.payload.currentPage;
-        state.allInstructors = action.payload.allInstructors;
+        state.isSuccess = true;
       })
       .addCase(getInstructorById.fulfilled, (state, action) => {
         state.instructor = action.payload;
