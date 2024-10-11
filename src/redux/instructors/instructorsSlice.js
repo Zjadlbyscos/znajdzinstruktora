@@ -23,8 +23,9 @@ const handleRejected = (state, action) => {
 };
 
 const initialState = {
-  instructors: [],
+  paginatedInstructors: [],
   instructor: {},
+  allInstructors: [],
   totalPages: null,
   currentPage: 1,
   isLoading: false,
@@ -36,19 +37,20 @@ const instructorsSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      state.instructors = [];
+      state.paginatedInstructors = [];
       state.currentPage = 1;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchInstructors.fulfilled, (state, action) => {
-        state.instructors = [
-          ...state.instructors,
-          ...action.payload.instructors,
+        state.paginatedInstructors = [
+          ...state.paginatedInstructors,
+          ...action.payload.paginatedInstructors,
         ];
         state.totalPages = action.payload.totalPages;
         state.currentPage = action.payload.currentPage;
+        state.allInstructors = action.payload.allInstructors;
       })
       .addCase(getInstructorById.fulfilled, (state, action) => {
         state.instructor = action.payload;

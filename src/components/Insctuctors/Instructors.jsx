@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchInstructors } from "../../redux/instructors/operations";
 import {
-  selectInstructors,
+  selectPaginatedInstructors,
   selectTotalPages,
 } from "../../redux/instructors/selectors";
 import { GalleryElement } from "../GalleryElement/GalleryElement";
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { InstructorsWrapper } from "./Instructors.styled";
 
 export const Instructors = () => {
-  const instructors = useSelector(selectInstructors);
+  const instructors = useSelector(selectPaginatedInstructors);
   const totalPages = useSelector(selectTotalPages);
   const dispatch = useDispatch();
 
