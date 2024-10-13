@@ -1,7 +1,20 @@
+import { useState } from "react";
 import { useFilterConfig } from "../../../hooks/useFilterConfig";
+import {
+  SearchButton,
+  ButtonWrapper,
+  FieldWrapper,
+  Form,
+  SelectContainer,
+  FieldContainer,
+  ShowFiltersButton,
+  FilterContainer,
+} from "./Filter.styled";
 
 export const Filter = ({ setFilters }) => {
   const { filterConfig } = useFilterConfig();
+  const [showFilters, setShowFilters] = useState(false);
+  console.log(showFilters);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,24 +25,37 @@ export const Filter = ({ setFilters }) => {
     setFilters(filterValues);
   };
 
+  const handleShowFilters = () => {
+    setShowFilters((prev) => !prev);
+  };
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        {filterConfig.map((field) => (
-          <div key={field.name}>
-            <label>{field.label}</label>
-            <select name={field.name}>
-              <option value="">Wybierz</option>
-              {field.options.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-        ))}
-        <button type="submit">Szukaj</button>
-      </form>
-    </div>
+    <FilterContainer>
+      <button onClick={handleShowFilters}>
+        {showFilters ? "Ukryj filtry" : "Pokaż filtry"}{" "}
+      </button>
+      {showFilters && (
+        <FieldWrapper>
+          <Form onSubmit={handleSubmit}>
+            {filterConfig.map((field) => (
+              <FieldContainer key={field.name}>
+                <label>{field.label}</label>
+                <SelectContainer name={field.name}>
+                  <option value="">Wybierz</option>
+                  {field.options.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </SelectContainer>
+              </FieldContainer>
+            ))}
+            <ButtonWrapper>
+              <SearchButton type="submit">Szukaj</SearchButton>
+            </ButtonWrapper>
+          </Form>
+        </FieldWrapper>
+      )}
+    </FilterContainer>
   );
 };
