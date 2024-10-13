@@ -1,18 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { reset } from "./instructorsSlice";
 
 export const fetchInstructors = createAsyncThunk(
   "instructors/fetchInstructors",
   async ({ city, discipline, languages, page, limit }, thunkAPI) => {
     try {
-      reset();
       const query = new URLSearchParams({
-        ...(city && { city }),
-        ...(discipline && { discipline }),
-        ...(languages && { languages }),
+        city,
+        discipline,
+        languages,
         page: page || 1,
-        limit: limit || 10,
+        limit: limit || 2,
       }).toString();
 
       const response = await axios.get(`/instructors?${query}`);
