@@ -29,6 +29,7 @@ const initialState = {
   currentPage: 1,
   isLoading: false,
   error: null,
+  isSuccess: false,
 };
 
 const instructorsSlice = createSlice({
@@ -49,6 +50,7 @@ const instructorsSlice = createSlice({
         ];
         state.totalPages = action.payload.totalPages;
         state.currentPage = action.payload.currentPage;
+        state.isSuccess = true;
       })
       .addCase(getInstructorById.fulfilled, (state, action) => {
         state.instructor = action.payload;
