@@ -84,3 +84,19 @@ export const updateEventInfo = createAsyncThunk(
     }
   }
 );
+
+export const getInstructorUpcomingEvents = createAsyncThunk(
+  "events/getInstructorUpcomingEvents",
+  async ({ id, limit, page }, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `/upcoming/${id}?limit=${limit}&page=${page}`
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

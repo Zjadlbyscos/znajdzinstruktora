@@ -1,35 +1,47 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectFacilities } from "../../redux/facilities/selectors";
+import {
+  selectFacilities,
+  selectFacilitiesTotalPages,
+} from "../../redux/facilities/selectors";
 import { fetchFacilities } from "../../redux/facilities/operations";
 import { useEffect, useState } from "react";
 import { GalleryElement } from "../GalleryElement/GalleryElement";
-import { Input } from "../search/input";
+import { FacilitiesWrapper } from "./Facilities.styled";
 
 export const Facilities = () => {
-  const facilities = useSelector(selectFacilities);
   const dispatch = useDispatch();
-  const [filteredFacilities, setFilteredFacilities] = useState(facilities);
+  const facilities = useSelector(selectFacilities);
+  const totalPages = useSelector(selectFacilitiesTotalPages);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+
+  const resetFacilities = () => {
+    setCurrentPage(1);
+    dispatch({ type: "facilities/reset" });
+  };
 
   useEffect(() => {
-    dispatch(fetchFacilities());
+    resetFacilities();
+    dispatch(fetchFacilities(1));
   }, [dispatch]);
 
-  useEffect(() => {
-    setFilteredFacilities(facilities);
-  }, [facilities]);
-
-  const filterFacilities = (searchTerm) => {
-    const filtered = facilities.filter(
-      (facility) =>
-        facility.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        facility.city.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredFacilities(filtered);
+  const fetchMoreData = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+      dispatch(fetchFacilities(currentPage + 1));
+    } else {
+      setHasMore(false);
+    }
   };
+
   return (
-    <div>
-      <Input onChangeCallback={filterFacilities} />
-      <GalleryElement elements={filteredFacilities} />
-    </div>
+    <FacilitiesWrapper>
+      <GalleryElement
+        elements={facilities}
+        fetchMoreData={fetchMoreData}
+        hasMore={hasMore}
+      />
+    </FacilitiesWrapper>
   );
 };

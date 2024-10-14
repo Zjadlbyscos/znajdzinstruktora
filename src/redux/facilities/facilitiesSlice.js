@@ -21,6 +21,8 @@ const handleRejected = (state, action) => {
 const initialState = {
   facilities: [],
   facility: {},
+  totalPages: null,
+  currentPage: 1,
   isLoading: false,
   error: null,
 };
@@ -28,10 +30,18 @@ const initialState = {
 const facilitiesSlice = createSlice({
   name: "facilities",
   initialState,
+  reducers: {
+    reset: (state) => {
+      state.facilities = [];
+      state.currentPage = 1;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFacilities.fulfilled, (state, action) => {
-        state.facilities = action.payload;
+        state.facilities = [...state.facilities, ...action.payload.facilities];
+        state.totalPages = action.payload.totalPages;
+        state.currentPage = action.payload.currentPage;
       })
       .addCase(fetchFacilityById.fulfilled, (state, action) => {
         state.facility = action.payload;
@@ -44,4 +54,5 @@ const facilitiesSlice = createSlice({
   },
 });
 
+export const { reset } = facilitiesSlice.actions;
 export const facilitiesReducer = facilitiesSlice.reducer;

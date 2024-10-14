@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { StyledInput } from "./input.styled";
 
 export const Input = ({ onChangeCallback }) => {
   const [value, setValue] = useState("");
@@ -11,7 +12,7 @@ export const Input = ({ onChangeCallback }) => {
   };
 
   return (
-    <input
+    <StyledInput
       type="text"
       placeholder="Wyszukaj..."
       value={value}

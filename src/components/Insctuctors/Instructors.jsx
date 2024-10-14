@@ -1,37 +1,59 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchInstructors } from "../../redux/instructors/operations";
-import { selectInstructors } from "../../redux/instructors/selectors";
+import {
+  selectAllInstructors,
+  selectTotalPages,
+} from "../../redux/instructors/selectors";
 import { GalleryElement } from "../GalleryElement/GalleryElement";
 import { useEffect, useState } from "react";
-import { Input } from "../search/input";
+import { InstructorsWrapper } from "./Instructors.styled";
+import { Filter } from "./Filter/Filter";
+import { reset } from "../../redux/instructors/instructorsSlice";
 
 export const Instructors = () => {
-  const instructors = useSelector(selectInstructors);
+  const instructors = useSelector(selectAllInstructors);
+  const totalPages = useSelector(selectTotalPages);
   const dispatch = useDispatch();
-  const [filteredInstructors, setFilteredInstructors] = useState(instructors);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [filters, setFilters] = useState({
+    city: "",
+    discipline: "",
+    languages: "",
+  });
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchInstructors());
-  }, [dispatch]);
+    setCurrentPage(1);
+    dispatch(reset());
+    setHasMore(true);
+    dispatch(fetchInstructors({ ...filters, page: 1, limit: 2 }));
+  }, [filters, dispatch]);
 
   useEffect(() => {
-    setFilteredInstructors(instructors);
-  }, [instructors]);
+    if (currentPage > 1) {
+      dispatch(fetchInstructors({ ...filters, page: currentPage, limit: 2 }));
+    }
+  }, [currentPage, filters, dispatch]);
 
-  const filterInstructors = (searchTerm) => {
-    const filtered = instructors.filter(
-      (instructor) =>
-        instructor.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        instructor.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        instructor.discipline.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredInstructors(filtered);
+  const fetchMoreData = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    } else {
+      setHasMore(false);
+    }
   };
 
   return (
-    <div>
-      <Input onChangeCallback={filterInstructors} />
-      <GalleryElement elements={filteredInstructors} />
-    </div>
+    <>
+      <Filter filters={filters} setFilters={setFilters} />
+      <InstructorsWrapper>
+        <GalleryElement
+          elements={instructors}
+          fetchMoreData={fetchMoreData}
+          hasMore={hasMore}
+        />
+      </InstructorsWrapper>
+    </>
   );
 };

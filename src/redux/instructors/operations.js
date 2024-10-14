@@ -3,16 +3,25 @@ import axios from "axios";
 
 export const fetchInstructors = createAsyncThunk(
   "instructors/fetchInstructors",
-  async (_, thunkAPI) => {
+  async ({ city, discipline, languages, page, limit }, thunkAPI) => {
     try {
-      const response = await axios.get("/instructors");
+      const query = new URLSearchParams({
+        city,
+        discipline,
+        languages,
+        page: page || 1,
+        limit: limit || 2,
+      }).toString();
+
+      const response = await axios.get(`/instructors?${query}`);
+      console.log(response.data);
       return response.data;
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
 export const createInstructorProfile = createAsyncThunk(
   "instructors/createInstructorProfile",
   async (id, thunkAPI) => {

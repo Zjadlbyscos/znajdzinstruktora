@@ -5,6 +5,7 @@ import {
   fetchEventById,
   fetchEvents,
   fetchInstructorEvents,
+  getInstructorUpcomingEvents,
 } from "./operations";
 
 const isPendingAction = (action) => {
@@ -27,7 +28,9 @@ const handleRejected = (state, action) => {
 const initialState = {
   events: [],
   event: {},
+  totalPages: 1,
   instructorEvents: [],
+  upcomingEvents: [],
   isLoading: false,
   error: null,
 };
@@ -45,6 +48,10 @@ const eventsSlice = createSlice({
       })
       .addCase(fetchEventById.fulfilled, (state, action) => {
         state.event = action.payload;
+      })
+      .addCase(getInstructorUpcomingEvents.fulfilled, (state, action) => {
+        state.upcomingEvents = action.payload.events;
+        state.totalPages = action.payload.totalPages;
       })
       .addCase(createNewEvent.fulfilled, (state, action) => {
         state.event = action.payload;
