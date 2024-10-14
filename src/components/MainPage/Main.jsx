@@ -1,11 +1,15 @@
-import { useSelector } from "react-redux";
-import { selectSearchResults } from "../../redux/search/selectors";
 import { Background, Wrapper, Content, Image } from "./Main.styled";
 import { SearchForm } from "./SearchForm/SearchForm";
 import { SearchElement } from "./SearchElement/SearchElement";
+import { useState } from "react";
 
 export const Main = () => {
-  const searchResults = useSelector(selectSearchResults);
+  const [searchParams, setSearchParams] = useState({});
+  const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const handleSearch = (params) => {
+    setSearchParams(params);
+  };
   return (
     <>
       <Background>
@@ -13,13 +17,16 @@ export const Main = () => {
           <Wrapper>
             <Content>
               <p>ZNAJDŹ ZAJĘCIA DLA SIEBIE</p>
-              <SearchForm />
+              <SearchForm
+                onSearch={handleSearch}
+                onFormFilled={setIsFormFilled}
+              />
             </Content>
             <Image></Image>
           </Wrapper>
         </section>
       </Background>
-      <SearchElement elements={searchResults} />
+      <SearchElement searchParams={searchParams} isFormFilled={isFormFilled} />
     </>
   );
 };

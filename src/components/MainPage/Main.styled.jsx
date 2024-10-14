@@ -38,7 +38,7 @@ export const Content = styled.div`
   font-size: 23px;
   font-weight: 600;
   @media screen and (min-width: 768px) {
-    margin-top: 550px;
+    margin-top: 400px;
     z-index: 1;
   }
 `;
