@@ -3,13 +3,16 @@ import axios from "axios";
 
 export const searchEvents = createAsyncThunk(
   "search/searchEvents",
-  async (searchData, thunkAPI) => {
+  async ({ searchData, page, limit }, thunkAPI) => {
     try {
-      const response = await axios.get(`/search`, {
-        params: searchData,
-      });
+      const query = new URLSearchParams({
+        ...searchData,
+        page,
+        limit,
+      }).toString();
+      const response = await axios.get(`/search?${query}`);
       console.log(response.data);
-      return response.data.result;
+      return response.data;
     } catch (error) {
       console.error("Error during search:", error);
       return thunkAPI.rejectWithValue({ error: error.message });
