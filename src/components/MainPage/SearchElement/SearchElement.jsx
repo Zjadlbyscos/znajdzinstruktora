@@ -1,18 +1,79 @@
+import { Link } from "react-router-dom";
 import NoImageSmall from "../../../images/NoImageSmall.png";
+import {
+  SearchElementWrapper,
+  SearchImg,
+  StyledBio,
+  StyledCaption,
+  StyledCard,
+  StyledElement,
+} from "./SearchElement.styled";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { searchEvents } from "../../../redux/search/operations";
 
-export const SearchElement = ({ elements }) => {
+import {
+  selectIsLoading,
+  selectSearchResults,
+  selectSearchTotalPages,
+} from "../../../redux/search/selectors";
+
+export const SearchElement = ({ searchParams, isFormFilled }) => {
+  const dispatch = useDispatch();
+  const instructors = useSelector(selectSearchResults);
+  const totalPages = useSelector(selectSearchTotalPages);
+  const loading = useSelector(selectIsLoading);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    if (searchParams) {
+      dispatch(searchEvents({ searchData: searchParams, page, limit: 4 }));
+    }
+  }, [dispatch, page, searchParams]);
+
+  const handleLoadMore = () => {
+    if (page < totalPages) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  if (!isFormFilled) return null;
+
   return (
-    <div>
-      {elements.map((el) => {
-        const imgSrc = el.instructorId.image || NoImageSmall;
-        const altText = el.instructorId.image ? "Image" : "brak zdjęcia";
-        return (
-          <div key={el._id}>
-            <img src={imgSrc} alt={altText} />
-            <p>{el.instructorId.fullName}</p>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <h2>Twoje wyszukiwanie</h2>
+      {loading && <p>Ładowanie...</p>}
+      {instructors && instructors.length > 0 ? (
+        <SearchElementWrapper>
+          {instructors.map((el) => (
+            <StyledElement key={el._id}>
+              <Link to={`/instruktorzy/${el._id}`}>
+                <StyledCard>
+                  <StyledBio>{el.bio}</StyledBio>
+                  <SearchImg src={el.image || NoImageSmall} alt="Image" />
+                  <StyledCaption>
+                    <p>{el.fullName}</p>
+                    <p>{el.discipline}</p>
+                  </StyledCaption>
+                </StyledCard>
+              </Link>
+            </StyledElement>
+          ))}
+        </SearchElementWrapper>
+      ) : (
+        <p>Brak wyników</p>
+      )}
+      <div>
+        <button
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+        >
+          {"<<"}
+        </button>
+        <button onClick={handleLoadMore} disabled={page >= totalPages}>
+          {">>"}
+        </button>
+      </div>
+    </>
   );
 };

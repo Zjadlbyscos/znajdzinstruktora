@@ -14,7 +14,6 @@ export const SearchWrapper = styled.form`
 
 export const FieldContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
 `;
 
 export const InputLabel = styled.label``;

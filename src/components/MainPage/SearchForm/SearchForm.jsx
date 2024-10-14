@@ -12,10 +12,12 @@ import {
 import { searchEvents } from "../../../redux/search/operations";
 import { useDispatch } from "react-redux";
 
-export const SearchForm = () => {
+export const SearchForm = ({ onSearch, onFormFilled }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedActivity, setSelectedActivity] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [formFilled, setFormFilled] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const { searchConfig } = useSearchConfig();
   const dispatch = useDispatch();
 
@@ -55,20 +57,42 @@ export const SearchForm = () => {
       );
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!selectedDate || !selectedActivity || !selectedCity) {
+      setErrorMessage("Uzupełnij wszystkie pola");
+      onFormFilled(false);
+      setFormFilled(false);
+      return;
+    }
+    setErrorMessage("");
+    setFormFilled(true);
+
+    const formattedDate =
+      selectedDate && !isNaN(selectedDate.getTime())
+        ? selectedDate.toISOString().split("T")[0]
+        : "";
+
     const searchData = {
-      activity: selectedActivity,
-      city: selectedCity,
-      date: selectedDate,
+      discipline: selectedActivity || "",
+      city: selectedCity || "",
+      date: formattedDate,
     };
-    dispatch(searchEvents(searchData));
+
+    onSearch(searchData);
+    onFormFilled(true);
+    dispatch(searchEvents({ searchData, page: 1, limit: 4 }));
   };
 
   return (
-    <SearchWrapper onSubmit={handleSubmit}>
-      {searchConfig.map((field) => renderField(field))}
-      <button type="submit">Szukaj</button>
-    </SearchWrapper>
+    <>
+      <SearchWrapper onSubmit={handleSubmit}>
+        {searchConfig.map((field) => renderField(field))}
+        <button type="submit">Szukaj</button>
+      </SearchWrapper>
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+    </>
   );
 };
