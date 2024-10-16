@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import NoImageSmall from "../../../images/NoImageSmall.png";
 import {
   SearchElementWrapper,
@@ -7,35 +10,27 @@ import {
   StyledCaption,
   StyledCard,
   StyledElement,
+  PageContainer,
 } from "./SearchElement.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { searchEvents } from "../../../redux/search/operations";
-
 import {
   selectIsLoading,
   selectSearchResults,
-  selectSearchTotalPages,
 } from "../../../redux/search/selectors";
+import { sliderSettings } from "../../../hooks/sliderSettings";
 
 export const SearchElement = ({ searchParams, isFormFilled }) => {
   const dispatch = useDispatch();
   const instructors = useSelector(selectSearchResults);
-  const totalPages = useSelector(selectSearchTotalPages);
   const loading = useSelector(selectIsLoading);
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     if (searchParams) {
-      dispatch(searchEvents({ searchData: searchParams, page, limit: 4 }));
+      dispatch(searchEvents({ searchData: searchParams }));
     }
-  }, [dispatch, page, searchParams]);
-
-  const handleLoadMore = () => {
-    if (page < totalPages) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
+  }, [dispatch, searchParams]);
 
   if (!isFormFilled) return null;
 
@@ -44,36 +39,29 @@ export const SearchElement = ({ searchParams, isFormFilled }) => {
       <h2>Twoje wyszukiwanie</h2>
       {loading && <p>Ładowanie...</p>}
       {instructors && instructors.length > 0 ? (
-        <SearchElementWrapper>
-          {instructors.map((el) => (
-            <StyledElement key={el._id}>
-              <Link to={`/instruktorzy/${el._id}`}>
-                <StyledCard>
-                  <StyledBio>{el.bio}</StyledBio>
-                  <SearchImg src={el.image || NoImageSmall} alt="Image" />
-                  <StyledCaption>
-                    <p>{el.fullName}</p>
-                    <p>{el.discipline}</p>
-                  </StyledCaption>
-                </StyledCard>
-              </Link>
-            </StyledElement>
-          ))}
-        </SearchElementWrapper>
+        <PageContainer>
+          <SearchElementWrapper className="slider-container">
+            <Slider {...sliderSettings}>
+              {instructors.map((el) => (
+                <StyledElement key={el._id}>
+                  <Link to={`/instruktorzy/${el._id}`}>
+                    <StyledCard>
+                      <StyledBio>{el.bio}</StyledBio>
+                      <SearchImg src={el.image || NoImageSmall} alt="Image" />
+                      <StyledCaption>
+                        <p>{el.fullName}</p>
+                        <p>{el.discipline}</p>
+                      </StyledCaption>
+                    </StyledCard>
+                  </Link>
+                </StyledElement>
+              ))}
+            </Slider>
+          </SearchElementWrapper>
+        </PageContainer>
       ) : (
         <p>Brak wyników</p>
       )}
-      <div>
-        <button
-          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-          disabled={page === 1}
-        >
-          {"<<"}
-        </button>
-        <button onClick={handleLoadMore} disabled={page >= totalPages}>
-          {">>"}
-        </button>
-      </div>
     </>
   );
 };
