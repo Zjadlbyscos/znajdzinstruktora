@@ -3,12 +3,10 @@ import axios from "axios";
 
 export const searchEvents = createAsyncThunk(
   "search/searchEvents",
-  async ({ searchData, page, limit }, thunkAPI) => {
+  async ({ searchData }, thunkAPI) => {
     try {
       const query = new URLSearchParams({
         ...searchData,
-        page,
-        limit,
       }).toString();
       const response = await axios.get(`/search?${query}`);
       console.log(response.data);

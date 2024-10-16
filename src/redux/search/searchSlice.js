@@ -22,8 +22,6 @@ const handleRejected = (state, action) => {
 
 const initialState = {
   instructors: [],
-  totalPages: null,
-  currentPage: 1,
   loading: false,
   error: null,
   isSuccess: false,
@@ -37,7 +35,6 @@ const searchSlice = createSlice({
       .addCase(searchEvents.fulfilled, (state, action) => {
         state.loading = false;
         state.instructors = action.payload.instructors;
-        state.totalPages = action.payload.totalPages;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)
