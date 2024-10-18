@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   createInstructorProfile,
   fetchInstructors,
+  fetchInstructorsByCity,
   getInstructorById,
 } from "./operations";
 
@@ -25,6 +26,7 @@ const handleRejected = (state, action) => {
 const initialState = {
   instructors: [],
   instructor: {},
+  instructorsByCity: [],
   totalPages: null,
   currentPage: 1,
   isLoading: false,
@@ -51,6 +53,9 @@ const instructorsSlice = createSlice({
         state.totalPages = action.payload.totalPages;
         state.currentPage = action.payload.currentPage;
         state.isSuccess = true;
+      })
+      .addCase(fetchInstructorsByCity.fulfilled, (state, action) => {
+        state.instructorsByCity = action.payload;
       })
       .addCase(getInstructorById.fulfilled, (state, action) => {
         state.instructor = action.payload;
