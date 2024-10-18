@@ -2,26 +2,31 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import NoImageSmall from "../../../images/NoImageSmall.png";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  selectIsLoading,
+  selectSearchResults,
+} from "../../../redux/search/selectors";
+import { useEffect } from "react";
+import { searchEvents } from "../../../redux/search/operations";
+import {
+  PageContainer,
   SearchElementWrapper,
   SearchImg,
   StyledBio,
   StyledCaption,
   StyledCard,
   StyledElement,
-  PageContainer,
-} from "./SearchElement.styled";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { searchEvents } from "../../../redux/search/operations";
-import {
-  selectIsLoading,
-  selectSearchResults,
-} from "../../../redux/search/selectors";
+} from "./MainElements.styled";
+import NoImageSmall from "../../../images/NoImageSmall.png";
 import { sliderSettings } from "../../../hooks/sliderSettings";
 
-export const SearchElement = ({ searchParams, isFormFilled }) => {
+export const MainElements = ({
+  searchParams,
+  isFormFilled,
+  elements,
+  city,
+}) => {
   const dispatch = useDispatch();
   const instructors = useSelector(selectSearchResults);
   const loading = useSelector(selectIsLoading);
@@ -32,17 +37,15 @@ export const SearchElement = ({ searchParams, isFormFilled }) => {
     }
   }, [dispatch, searchParams]);
 
-  if (!isFormFilled) return null;
-
-  return (
-    <>
-      <h2>Twoje wyszukiwanie</h2>
-      {loading && <p>Ładowanie...</p>}
-      {instructors && instructors.length > 0 ? (
+  const renderSection = (title, items) => {
+    if (items && items.length > 0) {
+      return (
         <PageContainer>
-          <SearchElementWrapper className="slider-container">
+          <h2>{title}</h2>
+
+          <SearchElementWrapper>
             <Slider {...sliderSettings}>
-              {instructors.map((el) => (
+              {items.map((el) => (
                 <StyledElement key={el._id}>
                   <Link to={`/instruktorzy/${el._id}`}>
                     <StyledCard>
@@ -59,9 +62,16 @@ export const SearchElement = ({ searchParams, isFormFilled }) => {
             </Slider>
           </SearchElementWrapper>
         </PageContainer>
-      ) : (
-        <p>Brak wyników</p>
-      )}
+      );
+    } else {
+      return <p>Brak wyników</p>;
+    }
+  };
+  return (
+    <>
+      {loading && <p>Ładowanie...</p>}
+      {isFormFilled && renderSection("Wyniki wyszukiwania", instructors)}
+      {city && renderSection(`Instruktorzy w ${city}`, elements)}
     </>
   );
 };
