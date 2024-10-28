@@ -1,11 +1,23 @@
 import { Background, Wrapper, Content, Image } from "./Main.styled";
 import { SearchForm } from "./SearchForm/SearchForm";
-import { SearchElement } from "./SearchElement/SearchElement";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { MainElements } from "./MainElements/MainElements";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserCity } from "../../redux/auth/selectors";
+import { selectInstructorsByCity } from "../../redux/instructors/selectors";
+import { fetchInstructorsByCity } from "../../redux/instructors/operations";
 
 export const Main = () => {
   const [searchParams, setSearchParams] = useState({});
   const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const city = useSelector(selectUserCity);
+  const instructors = useSelector(selectInstructorsByCity);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchInstructorsByCity({ city }));
+  }, [city, dispatch]);
 
   const handleSearch = (params) => {
     setSearchParams(params);
@@ -26,7 +38,12 @@ export const Main = () => {
           </Wrapper>
         </section>
       </Background>
-      <SearchElement searchParams={searchParams} isFormFilled={isFormFilled} />
+      <MainElements
+        elements={instructors}
+        city={city}
+        isFormFilled={isFormFilled}
+        searchParams={searchParams}
+      />
     </>
   );
 };

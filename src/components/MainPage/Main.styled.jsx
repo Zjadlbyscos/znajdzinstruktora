@@ -10,6 +10,7 @@ export const Background = styled.div`
     rgba(50, 17, 86, 1) 74%
   );
   height: 100%;
+  margin-bottom: 50px;
 `;
 
 export const Wrapper = styled.div`
@@ -70,10 +71,4 @@ export const Image = styled.div`
     max-width: 800px;
     height: 1050px;
   }
-`;
-
-export const SearchContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
 `;

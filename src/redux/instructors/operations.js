@@ -22,6 +22,19 @@ export const fetchInstructors = createAsyncThunk(
   }
 );
 
+export const fetchInstructorsByCity = createAsyncThunk(
+  "instructors/fetchInstructorsByCity",
+  async ({ city }, thunkApi) => {
+    try {
+      const response = await axios.get(`/instructors?city=${city}`);
+      console.log(response);
+      return response.data.instructors;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const createInstructorProfile = createAsyncThunk(
   "instructors/createInstructorProfile",
   async (id, thunkAPI) => {
