@@ -18,6 +18,7 @@ import { SocialMedia } from "./Socials/Socials";
 import { UpcomingInstructorEvents } from "./Events/UpcomingInstructorEvents";
 import NoImageSmall from "../../../images/NoImageSmall.png";
 import { RateModal } from "./Rate/RateModal";
+import { InstructorRating } from "./Rate/InstructorRating";
 
 export const ViewInstructorProfile = () => {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ export const ViewInstructorProfile = () => {
       {showRateModal && (
         <RateModal handleClose={closeRateModal} instructor={instructor} />
       )}
+      <InstructorRating />
     </>
   );
 };
