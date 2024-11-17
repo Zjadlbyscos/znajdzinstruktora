@@ -18,7 +18,7 @@ const handleRejected = (state, action) => {
 };
 
 const initialState = {
-  rating: null,
+  rating: [],
   comment: "",
   isLoading: false,
   error: null,
@@ -31,7 +31,7 @@ const rateSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(rateInstructor.fulfilled, (state, action) => {
-        state.rating = action.payload.rating;
+        state.rating = action.payload;
         state.isSuccess = true;
       })
       .addCase(fetchInstructorRating.fulfilled, (state, action) => {
