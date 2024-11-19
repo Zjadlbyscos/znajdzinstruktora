@@ -17,7 +17,7 @@ import { EnvelopeSVG, PhoneSVG } from "../../RenderSvg/RenderSvg";
 import { SocialMedia } from "./Socials/Socials";
 import { UpcomingInstructorEvents } from "./Events/UpcomingInstructorEvents";
 import NoImageSmall from "../../../images/NoImageSmall.png";
-import { RateModal } from "./Rate/RateModal";
+import { RateModal } from "./Rate/Modals/RateModal";
 import { InstructorRating } from "./Rate/InstructorRating";
 
 export const ViewInstructorProfile = () => {

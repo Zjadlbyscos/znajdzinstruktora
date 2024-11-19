@@ -1,6 +1,6 @@
 import ReactStars from "react-rating-stars-component";
 import React from "react";
-import { StarsContainer } from "./RateModal.styled";
+import { StarsContainer } from "./Modals/RateModal.styled";
 
 export const Stars = ({ rating, onRatingChange }) => {
   const handleChange = (newRating) => {

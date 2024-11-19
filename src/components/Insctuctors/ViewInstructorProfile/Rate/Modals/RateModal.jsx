@@ -1,20 +1,20 @@
 import { useEffect, useRef, useState } from "react";
-import useOutsideClick from "../../../../hooks/useOutsideClick";
+import useOutsideClick from "../../../../../hooks/useOutsideClick";
 import {
   CommentInput,
   InstructorName,
   RateModalContainer,
   RateModalForm,
 } from "./RateModal.styled";
-import { Stars } from "./ReactStars";
+import { Stars } from "../ReactStars";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../../../redux/auth/selectors";
-import { rateInstructor } from "../../../../redux/rate/operations";
+import { selectUser } from "../../../../../redux/auth/selectors";
+import { rateInstructor } from "../../../../../redux/rate/operations";
 import {
   CloseButton,
   InfoInput,
-} from "../../../EditInstructorProfile/Calendar/Modals/DateModal.styled";
+} from "../../../../EditInstructorProfile/Calendar/Modals/DateModal.styled";
 
 export const RateModal = ({ handleClose, instructor }) => {
   const { register, handleSubmit, setValue } = useForm();
