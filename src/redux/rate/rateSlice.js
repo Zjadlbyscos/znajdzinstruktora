@@ -19,6 +19,7 @@ const handleRejected = (state, action) => {
 
 const initialState = {
   rating: [],
+  totalPages: 0,
   comment: "",
   isLoading: false,
   error: null,
@@ -35,8 +36,8 @@ const rateSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(fetchInstructorRating.fulfilled, (state, action) => {
-        state.rating = action.payload.rating;
-        state.comment = action.payload.comment;
+        state.rating = action.payload.rating.ratings;
+        state.totalPages = action.payload.rating.pagination.totalPages;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected)

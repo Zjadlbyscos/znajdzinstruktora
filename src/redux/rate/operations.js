@@ -16,9 +16,11 @@ export const rateInstructor = createAsyncThunk(
 
 export const fetchInstructorRating = createAsyncThunk(
   "rate/fetchInstructorRating",
-  async (id, thunkAPI) => {
+  async ({ id, page, limit }, thunkAPI) => {
     try {
-      const response = await axios.get(`/rate/${id}`);
+      const response = await axios.get(
+        `/rate/${id}?page=${page}&limit=${limit}`
+      );
       console.log(response.data, "response");
       return response.data;
     } catch (error) {
