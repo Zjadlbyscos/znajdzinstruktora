@@ -11,16 +11,17 @@ import {
 import NoImageSmall from "../../../../images/NoImageSmall.png";
 import { selectUpcomingInstructorEvents } from "../../../../redux/events/selectors";
 import { usePagination } from "../../../../hooks/usePagination";
+import { useParams } from "react-router-dom";
 
-export const UpcomingInstructorEvents = ({ instructor }) => {
+export const UpcomingInstructorEvents = () => {
   const { limit } = usePagination();
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
   const [loadedEvents, setLoadedEvents] = useState([]);
   const eventsData = useSelector(selectUpcomingInstructorEvents);
+  const { id } = useParams();
 
   const dispatch = useDispatch();
-  const id = instructor._id;
 
   const formattedDate = (date) => {
     const formattedDate = new Date(date);
