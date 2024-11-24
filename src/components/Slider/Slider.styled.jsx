@@ -5,13 +5,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 export const StyledSlider = styled(Slider)`
   .slick-list {
-    margin: 0 auto;
-    padding: 0 10px;
   }
   .slick-track {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
   }
   .slick-prev,
   .slick-next {
