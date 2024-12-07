@@ -12,9 +12,10 @@ export const StyledSlider = styled(Slider)`
   .slick-next {
     top: 100%;
     transform: translateY(-50%);
-    width: 28px;
-    height: 28px;
-    background-color: var(--button-primary);
+    &:hover {
+      color: black;
+    }
+
     @media (min-width: 680px) {
       width: 35px;
       height: 35px;
@@ -25,7 +26,6 @@ export const StyledSlider = styled(Slider)`
     }
 
     .--fc-more-link-text-color {
-      color: white;
     }
   }
   .slick-prev {
@@ -59,8 +59,7 @@ export const StyledSlider = styled(Slider)`
   }
   .slick-next::before,
   .slick-prev::before {
-    @media (min-width: 1024px) {
-      font-size: 25px;
-    }
+    font-size: 32px;
+    color: var(--button-primary);
   }
 `;
