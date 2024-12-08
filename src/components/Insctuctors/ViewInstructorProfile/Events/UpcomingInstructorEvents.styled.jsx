@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const UpcomingEventsWrapper = styled.div`
   margin-top: 30px;
+  text-align: center;
 `;
 
 export const EventList = styled.ul`
