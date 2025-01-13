@@ -18,3 +18,9 @@ export const Stars = ({ rating, onRatingChange }) => {
     </StarsContainer>
   );
 };
+
+export const RatingStar = () => {
+  return (
+    <ReactStars count={1} size={26} color={"#ffd700"} edit={false}></ReactStars>
+  );
+};

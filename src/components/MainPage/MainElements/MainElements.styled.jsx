@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
 export const PageContainer = styled.div`
-  margin-right: 25px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 20px;
   h2 {
     @media (min-width: 768px) {
       margin-left: 30px;
@@ -32,7 +30,8 @@ export const SearchImg = styled.img`
 `;
 
 export const StyledElement = styled.div`
-  width: 100%;
+  display: flex;
+  gap: 20px;
   max-width: 300px;
   height: 300px;
   &:hover {

@@ -113,7 +113,7 @@ section {
 /* Desktop */
 @media (min-width: 1024px) {
   body {
-    font-size: 16px;
+    font-size: 24px;
   }
 
   section {
@@ -133,7 +133,7 @@ section {
 }
 
 .cls-1 {
-  fill:#FBFAFA;
+  fill: #fbfafa;
 }
 
 .cls-1,
@@ -142,16 +142,19 @@ section {
 }
 
 .cls-2 {
-  fill: #FBFAFA;
+  fill: #fbfafa;
 }
 .cls-3 {
-  fill: #FBFAFA;
+  fill: #fbfafa;
 }
 
 .header {
-  background: rgb(97,46,125);
-  background: linear-gradient(90deg, rgba(97,46,125,1) 31%, rgba(50,17,86,1) 74%);
- 
+  background: rgb(97, 46, 125);
+  background: linear-gradient(
+    90deg,
+    rgba(97, 46, 125, 1) 31%,
+    rgba(50, 17, 86, 1) 74%
+  );
 }
 .line {
   border-bottom: 1.5px solid var(--background-4);

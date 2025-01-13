@@ -10,6 +10,11 @@ export const RatingContainer = styled.div`
   text-align: center;
 `;
 
+export const RateContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const StyledElement = styled.div`
   max-width: 300px;
   height: 280px;
@@ -39,7 +44,7 @@ export const StyledComment = styled.p``;
 export const StyledRating = styled.div`
   font-size: 1.3rem;
   font-weight: 600;
-  margin: 10px 15px;
+  margin: 5px;
 `;
 
 export const StyledUser = styled.p`

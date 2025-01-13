@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { selectRating } from "../../../../redux/rate/selectors";
 import { useParams } from "react-router-dom";
 import {
+  RateContainer,
   RatingContainer,
   RatingWrapper,
   StyledCard,
@@ -15,12 +16,27 @@ import {
 import { CommentModal } from "./Modals/CommentModal";
 import { sliderSettings } from "../../../../hooks/sliderSettings";
 import { StyledSlider } from "../../../Slider/Slider.styled";
+import { RatingStar } from "./ReactStars";
 
 export const InstructorRating = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const rating = useSelector(selectRating);
-  const maxLength = 150;
+  const [maxLength, setMaxLength] = useState(0);
+  console.log(maxLength);
+
+  useEffect(() => {
+    const handleLengthChange = () => {
+      if (window.innerWidth < 600) {
+        setMaxLength(200);
+      } else {
+        setMaxLength(160);
+      }
+    };
+    window.addEventListener("resize", handleLengthChange);
+    handleLengthChange();
+    return () => window.removeEventListener("resize", handleLengthChange);
+  }, []);
 
   const [selectedRate, setSelectedRate] = useState(null);
 
@@ -52,7 +68,10 @@ export const InstructorRating = () => {
               ).toLocaleDateString();
               return (
                 <StyledElement key={rate._id}>
-                  <StyledRating>{rate.rating}</StyledRating>
+                  <RateContainer>
+                    <StyledRating>{rate.rating}</StyledRating>
+                    <RatingStar />
+                  </RateContainer>
                   <StyledCard>
                     <StyledUser>{rate.userFullName}</StyledUser>
                     <p>{formattedDate}</p>

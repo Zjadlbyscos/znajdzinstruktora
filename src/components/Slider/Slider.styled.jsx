@@ -8,6 +8,9 @@ export const StyledSlider = styled(Slider)`
   }
   .slick-track {
   }
+  .slick-slide {
+    padding: 0 10px;
+  }
   .slick-prev,
   .slick-next {
     top: 100%;

@@ -37,6 +37,15 @@ export const CommentContainer = styled.div`
   text-align: center;
 `;
 
+export const CommentRating = styled.div`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  & p {
+    margin-top: 5px;
+  }
+`;
+
 export const Comment = styled.p`
   padding: 20px;
 `;

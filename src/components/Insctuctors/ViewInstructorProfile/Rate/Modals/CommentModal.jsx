@@ -3,7 +3,9 @@ import {
   Comment,
   CommentContainer,
   CommentModalWrapper,
+  CommentRating,
 } from "./CommentModal.styled";
+import { RatingStar } from "../ReactStars";
 
 export const CommentModal = ({ handleClose, rate, date }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,7 +21,10 @@ export const CommentModal = ({ handleClose, rate, date }) => {
     <CommentModalWrapper className={isVisible ? "visible" : "hidden"}>
       <button onClick={handleClose}>X</button>
       <CommentContainer>
-        <p>{rate.rating}</p>
+        <CommentRating>
+          <p>{rate.rating}</p>
+          <RatingStar />
+        </CommentRating>
         <p>{rate.userFullName}</p>
         <p>{formattedDate}</p>
         <Comment>{rate.comment}</Comment>
