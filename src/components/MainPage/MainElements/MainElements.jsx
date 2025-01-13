@@ -1,7 +1,4 @@
 import { Link } from "react-router-dom";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsLoading,
@@ -20,6 +17,7 @@ import {
 } from "./MainElements.styled";
 import NoImageSmall from "../../../images/NoImageSmall.png";
 import { sliderSettings } from "../../../hooks/sliderSettings";
+import { StyledSlider } from "../../Slider/Slider.styled";
 
 export const MainElements = ({
   searchParams,
@@ -44,7 +42,7 @@ export const MainElements = ({
           <h2>{title}</h2>
 
           <SearchElementWrapper>
-            <Slider {...sliderSettings}>
+            <StyledSlider {...sliderSettings}>
               {items.map((el) => (
                 <StyledElement key={el._id}>
                   <Link to={`/instruktorzy/${el._id}`}>
@@ -59,7 +57,7 @@ export const MainElements = ({
                   </Link>
                 </StyledElement>
               ))}
-            </Slider>
+            </StyledSlider>
           </SearchElementWrapper>
         </PageContainer>
       );

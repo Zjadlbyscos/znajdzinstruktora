@@ -14,7 +14,6 @@ export const fetchInstructors = createAsyncThunk(
       }).toString();
 
       const response = await axios.get(`/instructors?${query}`);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -27,7 +26,6 @@ export const fetchInstructorsByCity = createAsyncThunk(
   async ({ city }, thunkApi) => {
     try {
       const response = await axios.get(`/instructors?city=${city}`);
-      console.log(response);
       return response.data.instructors;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

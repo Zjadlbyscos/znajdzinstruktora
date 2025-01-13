@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   BioContainer,
   Contact,
@@ -16,25 +16,40 @@ import { selectInstructor } from "../../../redux/instructors/selectors";
 import { EnvelopeSVG, PhoneSVG } from "../../RenderSvg/RenderSvg";
 import { SocialMedia } from "./Socials/Socials";
 import { UpcomingInstructorEvents } from "./Events/UpcomingInstructorEvents";
+import NoImageSmall from "../../../images/NoImageSmall.png";
+import { RateModal } from "./Rate/Modals/RateModal";
+import { InstructorRating } from "./Rate/InstructorRating";
 
 export const ViewInstructorProfile = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const instructor = useSelector(selectInstructor);
+  const [showRateModal, setShowRateModal] = useState(false);
 
   useEffect(() => {
     dispatch(getInstructorById(id));
   }, [dispatch, id]);
+
+  const imgSrc = instructor.image || NoImageSmall;
+
+  const openRateModal = () => {
+    setShowRateModal(true);
+  };
+
+  const closeRateModal = () => {
+    setShowRateModal(false);
+  };
 
   return (
     <>
       <InstructorProfileWrapper>
         <Profile>
           <ImageContainer>
-            <img src={instructor.image} alt="instructor" />
             <h2>{instructor.fullName}</h2>
+            <img src={imgSrc} alt="instructor" />
           </ImageContainer>
           <BioContainer>
+            <button onClick={openRateModal}>Oceń mnie!</button>
             <p>{instructor.bio}</p>
           </BioContainer>
           <ContactHeader>Kontakt</ContactHeader>
@@ -56,6 +71,10 @@ export const ViewInstructorProfile = () => {
         </Profile>
       </InstructorProfileWrapper>
       <UpcomingInstructorEvents instructor={instructor} />
+      {showRateModal && (
+        <RateModal handleClose={closeRateModal} instructor={instructor} />
+      )}
+      <InstructorRating />
     </>
   );
 };

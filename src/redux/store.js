@@ -16,6 +16,7 @@ import { instructorsReducer } from "./instructors/instructorsSlice";
 import { eventsReducer } from "./events/eventsSlice";
 import { facilitiesReducer } from "./facilities/facilitiesSlice";
 import { searchReducer } from "./search/searchSlice";
+import { rateReducer } from "./rate/rateSlice";
 
 const authPersistConfig = {
   key: "auth",
@@ -30,6 +31,7 @@ export const store = configureStore({
     events: eventsReducer,
     facilities: facilitiesReducer,
     search: searchReducer,
+    rate: rateReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

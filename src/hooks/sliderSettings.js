@@ -1,11 +1,13 @@
 export const sliderSettings = {
   dots: false,
-  infinite: false,
   lazyLoad: true,
-  speed: 500,
+  speed: 2000,
   slidesToShow: 6,
-  slidesToScroll: 6,
+  slidesToScroll: 1,
   rows: 1,
+  swipeToSlide: true,
+  autoplay: true,
+  autoplaySpeed: 5000,
   responsive: [
     {
       breakpoint: 1024,
