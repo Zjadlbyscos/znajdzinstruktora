@@ -8,7 +8,7 @@ export const SearchWrapper = styled.form`
   border-radius: 35px;
   background-color: var(--text-color-3);
   button {
-    padding: 16px;
+    padding: 12px;
   }
 `;
 
@@ -19,9 +19,8 @@ export const FieldContainer = styled.div`
 export const InputLabel = styled.label``;
 
 export const StyledSelect = styled.select`
-  padding: 16px;
   border: 0px solid #ccc;
-  width: 120px;
+  width: 100px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -35,10 +34,15 @@ export const StyledSelect = styled.select`
     outline: none;
     border-color: var(--primary-color);
   }
+  @media screen and (min-width: 480px) {
+    width: 120px;
+  }
   @media screen and (min-width: 768px) {
+    font-size: 16px;
     width: 180px;
   }
   @media screen and (min-width: 1024px) {
+    font-size: 20px;
     width: 200px;
   }
 `;
@@ -49,21 +53,31 @@ export const DateInput = styled.div`
   background-color: var(--text-color-3);
   border: 0px solid var(--text-color-3);
   border-radius: 4px;
+  z-index: 11;
   input {
     border: 0px solid #ccc;
-    padding: 8px;
-    width: 100px;
+    width: 80px;
     background-color: var(--text-color-3) !important;
     border-radius: 35px;
     cursor: pointer;
     &:focus {
       outline: none;
     }
+    @media screen and (min-width: 480px) {
+      width: 100px;
+      padding: 6px;
+    }
     @media screen and (min-width: 768px) {
       width: 120px;
+      padding: 8px;
     }
     @media screen and (min-width: 1024px) {
       width: 140px;
+    }
+  }
+  .react-datepicker {
+    font-size: 14px;
+    @media screen and (min-width: 768px) {
     }
   }
   .react-datepicker-wrapper {
