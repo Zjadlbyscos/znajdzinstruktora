@@ -32,10 +32,10 @@ export const StyledSlider = styled(Slider)`
     }
   }
   .slick-prev {
-    left: calc(10% - 10px);
+    left: calc(10% - 20px);
   }
   .slick-next {
-    right: calc(10% - 10px);
+    right: calc(10% - 5px);
   }
   @media (min-width: 680px) {
     .slick-prev {
@@ -50,7 +50,7 @@ export const StyledSlider = styled(Slider)`
       left: calc(5% - 35px);
     }
     .slick-next {
-      right: calc(5% - 70px);
+      right: calc(5% - 35px);
     }
   }
   .slick-arrow {

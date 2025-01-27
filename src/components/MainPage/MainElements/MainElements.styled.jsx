@@ -21,9 +21,11 @@ export const SearchElementWrapper = styled.div`
 export const SearchImg = styled.img`
   display: block;
   width: 100%;
-  height: 300px;
   object-fit: cover;
   border-radius: 15px;
+  @media screen and (min-width: 480px) {
+    height: 300px;
+  }
   @media (min-width: 1024px) {
     height: 360px;
   }
@@ -31,9 +33,7 @@ export const SearchImg = styled.img`
 
 export const StyledElement = styled.div`
   display: flex;
-  gap: 20px;
   max-width: 300px;
-  height: 300px;
   &:hover {
     transition: 250ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -42,7 +42,7 @@ export const StyledElement = styled.div`
 
 export const StyledBio = styled.p`
   color: var(--text-color-white);
-  padding: 20px 24px;
+  padding: 40px 48px;
   position: absolute;
   transform: translateY(100%);
   opacity: 0;
@@ -68,5 +68,12 @@ export const StyledCaption = styled.div`
   color: white;
   text-align: center;
   @media (min-width: 768px) {
+  }
+  p {
+    font-size: 14px;
+    font-weight: 600;
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
+    }
   }
 `;
