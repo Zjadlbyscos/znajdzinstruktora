@@ -47,7 +47,14 @@ export const EventForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
+
+  @media screen and (min-width: 768px) {
+    h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+  }
 `;
 
 export const InfoInput = styled.input`
