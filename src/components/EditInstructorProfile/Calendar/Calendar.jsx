@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import pl from "@fullcalendar/core/locales/pl";
 import { DateModal } from "./Modals/DateModal";
 import { EditDateModal } from "./Modals/EditEventModal";
+import { calendarConfig } from "../../../hooks/calendarConfig";
 import { CalendarContainer, EventContentContainer } from "./Calendar.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectInstructorEvents } from "../../../redux/events/selectors";
@@ -67,25 +64,25 @@ export const Calendar = () => {
     setCurrentEvent(updatedEvent);
   };
 
-  const handleSave = async (preparedData) => {
+  const handleSave = (preparedData) => {
     try {
-      await dispatch(createNewEvent(preparedData));
-      await dispatch(fetchInstructorEvents(instructorId));
+      dispatch(createNewEvent(preparedData));
+      dispatch(fetchInstructorEvents(instructorId));
       closeDateModal();
     } catch (error) {
       console.error("Failed to save the event:", error);
     }
   };
 
-  const handleEventDrop = async (info) => {
+  const handleEventDrop = (info) => {
     const eventId = info.event.id;
     const updatedEventData = {
       start: info.event.startStr,
       end: info.event.endStr,
     };
     try {
-      await dispatch(updateEventInfo({ eventId, data: updatedEventData }));
-      await dispatch(fetchInstructorEvents(instructorId));
+      dispatch(updateEventInfo({ eventId, data: updatedEventData }));
+      dispatch(fetchInstructorEvents(instructorId));
     } catch (error) {
       console.error("Failed to update the event:", error);
     }
@@ -95,19 +92,7 @@ export const Calendar = () => {
     <>
       <CalendarContainer>
         <FullCalendar
-          plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
-          headerToolbar={{
-            left: "prev, today",
-            center: "title",
-            right: "next",
-          }}
-          initialView="timeGridWeek"
-          locales={[pl]}
-          locale="pl"
-          editable={true}
-          droppable={true}
-          selectable={true}
-          selectMirror={true}
+          {...calendarConfig()}
           select={openDateModal}
           events={formattedEvents}
           eventContent={eventContent}

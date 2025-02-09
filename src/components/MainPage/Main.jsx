@@ -1,4 +1,14 @@
-import { Background, Wrapper, Content, Image } from "./Main.styled";
+import {
+  Background,
+  Wrapper,
+  Content,
+  Image,
+  Text,
+  DroppingText,
+  DynamicWord,
+  StaticText,
+  DynamicWordsContainer,
+} from "./Main.styled";
 import { SearchForm } from "./SearchForm/SearchForm";
 import { useEffect, useState } from "react";
 import { MainElements } from "./MainElements/MainElements";
@@ -22,13 +32,21 @@ export const Main = () => {
   const handleSearch = (params) => {
     setSearchParams(params);
   };
+
   return (
     <>
       <Background>
         <section>
           <Wrapper>
             <Content>
-              <p>ZNAJDŹ ZAJĘCIA DLA SIEBIE</p>
+              <DroppingText>
+                <StaticText>ZNAJDŹ DLA SIEBIE</StaticText>
+                <DynamicWordsContainer>
+                  <div>INSTRUKTORA</div>
+                  <div>ZAJĘCIA</div>
+                  <div>NOWE MOŻLIWOŚCI</div>
+                </DynamicWordsContainer>
+              </DroppingText>
               <SearchForm
                 onSearch={handleSearch}
                 onFormFilled={setIsFormFilled}

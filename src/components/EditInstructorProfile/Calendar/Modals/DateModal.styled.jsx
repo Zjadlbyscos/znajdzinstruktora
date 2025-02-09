@@ -4,7 +4,7 @@ export const DateModalContainer = styled.div`
   flex-direction: column;
   position: absolute;
   top: 30%;
-  left: 35%;
+  left: 5%;
   padding: 30px;
   border-radius: 25px;
   z-index: 1;
@@ -44,10 +44,17 @@ export const CloseButton = styled.button`
 
 export const EventForm = styled.form`
   margin-top: 50px;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+
+  @media screen and (min-width: 768px) {
+    h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+  }
 `;
 
 export const InfoInput = styled.input`
@@ -56,4 +63,5 @@ export const InfoInput = styled.input`
   border-radius: 8px;
   width: 100%;
   height: 125px;
+  resize: none;
 `;

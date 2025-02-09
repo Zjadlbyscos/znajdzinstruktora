@@ -20,7 +20,7 @@ export const Header = () => {
   const [isOpen, setOpen] = useState(false);
   const [isUserModalOpen, setUserModalOpen] = useState(false);
 
-  const toggle = (setState) => () => setState(prev => !prev);
+  const toggle = (setState) => () => setState((prev) => !prev);
 
   return (
     <section className="header">
@@ -45,14 +45,12 @@ export const Header = () => {
             toggle={toggle(setOpen)}
             direction="right"
             label="Show menu"
-            color="#f3f3f3"
+            color={isOpen ? "black" : "white"}
             rounded
           />
         </HamburgerStyle>
 
-        {isOpen && (
-          <HamburgerMenu  handleCloseMenu={toggle(setOpen)} />
-        )}
+        {isOpen && <HamburgerMenu handleCloseMenu={toggle(setOpen)} />}
       </HeaderContainer>
     </section>
   );

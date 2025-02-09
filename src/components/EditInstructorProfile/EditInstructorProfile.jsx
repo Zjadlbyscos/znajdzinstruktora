@@ -54,7 +54,6 @@ export const InstructorProfile = () => {
   });
   const dispatch = useDispatch();
   const [preview, setPreview] = useState(null);
-  const { firstName, lastName } = user;
   const { classLevel, languages } = editProfileConfig();
 
   const id = user.instructorId;
@@ -132,11 +131,6 @@ export const InstructorProfile = () => {
             )}
           </ProfilePictureLabel>
           <InfoWrapper>
-            <UserName>
-              {firstName}
-              {lastName}
-            </UserName>
-
             <TextArea
               id="bio"
               {...register("bio")}

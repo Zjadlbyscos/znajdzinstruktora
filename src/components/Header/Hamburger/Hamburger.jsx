@@ -11,7 +11,7 @@ export const HamburgerMenu = ({ openState, handleCloseMenu }) => {
   const menuRef = useRef();
   useOutsideClick(menuRef, handleCloseMenu, openState);
 
-  const handleClick = (event) => {
+  const handleClick = () => {
     handleCloseMenu();
   };
 

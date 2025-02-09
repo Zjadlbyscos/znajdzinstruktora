@@ -27,12 +27,12 @@ export const Instructors = () => {
     setCurrentPage(1);
     dispatch(reset());
     setHasMore(true);
-    dispatch(fetchInstructors({ ...filters, page: 1, limit: 2 }));
+    dispatch(fetchInstructors({ ...filters, page: 1, limit: 10 }));
   }, [filters, dispatch]);
 
   useEffect(() => {
     if (currentPage > 1) {
-      dispatch(fetchInstructors({ ...filters, page: currentPage, limit: 2 }));
+      dispatch(fetchInstructors({ ...filters, page: currentPage, limit: 10 }));
     }
   }, [currentPage, filters, dispatch]);
 

@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  height: 660px;
+  height: 620px;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
@@ -36,17 +36,17 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   padding: 20px 0px;
   color: white;
-  font-size: 23px;
+  font-size: 16px;
   font-weight: 600;
   @media screen and (min-width: 768px) {
-    margin-top: 400px;
+    font-size: 20px;
     z-index: 1;
+    margin-top: 560px;
   }
 `;
 export const Image = styled.div`
   position: absolute;
   top: 0px;
-  /* margin-top: -30px; */
   background-image: url(${tlo_telefon});
   background-repeat: no-repeat;
   background-position: center top;
@@ -70,5 +70,65 @@ export const Image = styled.div`
   @media screen and (min-width: 1440px) {
     max-width: 800px;
     height: 1050px;
+  }
+`;
+
+export const DroppingText = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+`;
+
+export const StaticText = styled.span`
+  white-space: nowrap;
+  margin-right: 10px;
+`;
+
+export const DynamicWordsContainer = styled.span`
+  display: inline-block;
+  height: 36px;
+  position: relative;
+  white-space: nowrap;
+
+  div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(100%);
+    animation: changeWords 9s infinite ease-in-out;
+    color: var(--button-primary);
+  }
+
+  div:nth-child(1) {
+    animation-delay: 0s;
+  }
+  div:nth-child(2) {
+    animation-delay: 3s;
+  }
+  div:nth-child(3) {
+    animation-delay: 6s;
+  }
+
+  @keyframes changeWords {
+    0% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    20% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    40% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
   }
 `;

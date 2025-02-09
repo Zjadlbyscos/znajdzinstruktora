@@ -4,7 +4,7 @@ export const HamburgerContainer = styled.div`
   position: absolute;
   top: -16px;
   right: -32px;
-  z-index: 1000;
+  z-index: 1;
   background-color: var(--background-2);
   width: 75vw;
   height: 100vh;
