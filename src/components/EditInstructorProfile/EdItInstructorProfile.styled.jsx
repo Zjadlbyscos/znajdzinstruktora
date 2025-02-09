@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const EditProfileWrapper = styled.div`
-position: relative;
-margin-top: 50px;
+  position: relative;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   gap: 2vw;
@@ -45,6 +45,7 @@ export const ProfilePictureLabel = styled.label`
   align-items: center;
   justify-content: center;
   color: white;
+  margin-bottom: 15px;
   @media (min-width: 760px) {
     width: 302px;
     height: 426px;
@@ -93,7 +94,10 @@ export const InfoWrapper = styled.div`
   }
 `;
 
-export const UserName = styled.h2``;
+export const UserName = styled.h2`
+  text-align: center;
+  align-items: center;
+`;
 
 export const TextArea = styled.textarea`
   padding: 10px 5px;
@@ -234,9 +238,9 @@ export const Select = styled.select`
 `;
 
 export const ButtonWrapper = styled.div`
-position: absolute;
-top:-50px;
-left: 50%;
+  position: absolute;
+  top: -50px;
+  left: 50%;
   display: flex;
   justify-content: center;
   padding-bottom: 16px;

@@ -64,10 +64,10 @@ export const Calendar = () => {
     setCurrentEvent(updatedEvent);
   };
 
-  const handleSave = async (preparedData) => {
+  const handleSave = (preparedData) => {
     try {
-      await dispatch(createNewEvent(preparedData));
-      await dispatch(fetchInstructorEvents(instructorId));
+      dispatch(createNewEvent(preparedData));
+      dispatch(fetchInstructorEvents(instructorId));
       closeDateModal();
     } catch (error) {
       console.error("Failed to save the event:", error);
